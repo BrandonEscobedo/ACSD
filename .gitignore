@@ -416,3 +416,14 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+
+# Archivos de IDE
+.idea/
+
+# Entornos virtuales
+.venv
+venv/
+lib/
+# Archivos de Python
+__pycache__/
+*.pyc
