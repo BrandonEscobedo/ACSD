@@ -17,7 +17,7 @@ class EstadoContenedor(Enum):
     DESPACHADO = "Despachado"
     REPROGRAMADO = "Reprogramado"
 
-
+ 
 class TipoCarga(Enum):
     """Tipos de carga (opcional para extensión futura)"""
     SECA = "Carga Seca"
