@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "nombre": "Transporte de Ejemplo 1",
+        "contacto": "info@ejemplo1.com",
+        "porcentaje_cumplimiento": 82.5,
+        "porcentaje_puntualidad": 52.78,
+        "disponible": true
+    },
+    {
+        "id": 2,
+        "nombre": "Transporte de Ejemplo 2",       
+        "contacto": "info@ejemplo2.com",
+        "porcentaje_cumplimiento": 93.83,
+        "porcentaje_puntualidad": 80.4,
+        "disponible": true
+    },
+    {
+        "id": 3,
+        "nombre": "Transporte de Ejemplo 3",       
+        "contacto": "info@ejemplo3.com",
+        "porcentaje_cumplimiento": 72.0,
+        "porcentaje_puntualidad": 99.99,
+        "disponible": true
+    }
+]

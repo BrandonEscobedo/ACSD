@@ -17,7 +17,7 @@ class EstadoContenedor(Enum):
     DESPACHADO = "Despachado"
     REPROGRAMADO = "Reprogramado"
 
-
+ 
 class TipoCarga(Enum):
     """Tipos de carga (opcional para extensión futura)"""
     SECA = "Carga Seca"
@@ -25,6 +25,15 @@ class TipoCarga(Enum):
     PELIGROSA = "Peligrosa"
     FRAGIL = "Frágil"
     NODRIZA = "Nodriza"
+
+@dataclass
+class LineasTransportistas:
+    id: int
+    nombre: str
+    disponible: bool
+    porcentaje_cumplimiento: float
+    porcentaje_puntualidad: float
+    contacto: Optional[str] = None
 
 @dataclass
 class Contenedor:
@@ -56,7 +65,10 @@ class Contenedor:
     reprogramaciones: int = 0
     historial_estados: List[tuple] = field(default_factory=list)
     linea_original: Optional[str] = None  
-    
+
+
+
+
     def __post_init__(self):
         """Inicialización adicional después de crear el objeto"""
         if self.linea_original is None:
