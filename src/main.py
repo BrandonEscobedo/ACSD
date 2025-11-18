@@ -35,24 +35,7 @@ ZONAS = {
 TIEMPO_BUQUE_A_PISO = 2.0
 TIEMPO_PISO_A_PATIO = 1.5
 
-st.markdown("""
-<style>
-/*
-Target CUALQUIER SVG que tenga el ID 'stElementToolbarButtonIcon'
-Y que esté DENTRO de un botón con el ID 'stBaseButton-elementToolbar'
-*/
-button[data-testid="stBaseButton-elementToolbar"] svg[data-testid="stElementToolbarButtonIcon"] {
-    /* Hacemos el ícono (el dibujo SVG) un 80% más grande */
-    transform: scale(1.8) !important;
-    transform-origin: center center !important;
-}
 
-/* Y hacemos el ÁREA CLICKEABLE (el botón) más grande */
-button[data-testid="stBaseButton-elementToolbar"] {
-    padding: 0.5rem !important; /* Más relleno = botón más grande */
-}
-</style>
-""", unsafe_allow_html=True)
 def crear_escena_html(contenedores_por_zona, contenedor_activo=None):
     zonas_html = ""
     for zona_nombre, zona_info in ZONAS.items():
@@ -132,64 +115,19 @@ with col2:
         st.session_state['simular'] = False
         st.rerun()
 
-def renderizar_patio(patio, svg_img, ancho=60, alto=45):
-    """
-    patio = matriz [10 columnas][4 pisos]
-    piso 0 = abajo, piso 3 = arriba
-    """
-    html = """
-    <div style="padding:20px;">
-        <h3 style="text-align:center;">🏭 Patio – Vista por Columnas y Pisos</h3>
-        <div style="display:flex; flex-direction:row; gap:15px; justify-content:center;">
-    """
-
-    for col in range(10):
-        html += "<div style='display:flex; flex-direction:column-reverse; gap:8px;'>"
-
-        # pisos 0 a 3 (pero se dibujan de abajo hacia arriba)
-        for piso in range(4):
-            cont = patio[col][piso]
-            if cont is None:
-                html += f"""
-                <div style="
-                    width:{ancho}px; height:{alto}px;
-                    border:2px dashed #999;
-                    border-radius:6px;
-                    background:#f0f0f0;
-                    display:flex; justify-content:center; align-items:center;
-                    font-size:12px; color:#666;">
-                    {piso}
-                </div>
-                """
-            else:
-                html += f"""
-                <div style="
-                    width:{ancho}px; height:{alto}px;
-                    border:3px solid #2E86AB;
-                    border-radius:6px;
-                    background:#d7ecfa;
-                    display:flex; justify-content:center; align-items:center;">
-                    <img src="{svg_img}" style="width:40px;">
-                </div>
-                """
-
-        # etiqueta columna
-        html += f"<div style='text-align:center; font-weight:bold;'>{col}</div>"
-        html += "</div>"
-
-    html += "</div></div>"
-
-    return html
 
 # ==================== ejecutar simulacion ====================
 if st.session_state.get('simular', False):
     with st.spinner("Ejecutando SimPy..."):
         duracion_total = (num_contenedores * intervalo) + 10
         simulador = ejecutar_simulacion(num_contenedores, intervalo, duracion_total)
-        st.subheader("🏭 Estado del Patio (10 columnas × 4 pisos)")
-        html_patio = renderizar_patio(simulador.patio, svg_img)
-        st.markdown(html_patio, unsafe_allow_html=True)
         st.success(f"Simulación terminada: {len(simulador.eventos)} eventos")
+
+    st.metric("Procesados", len(simulador.contenedores))
+    st.metric("Final en Patio", sum(1 for c in simulador.contenedores if c.posicion_actual == "PATIO"))
+    st.metric("Eventos", len(simulador.eventos))
+
+    st.markdown("---")
 
     if st.button("🎬 Reproducir Animación"):
         animar_simulacion(simulador, velocidad_animacion)
