@@ -52,6 +52,7 @@ class Contenedor:
     tiempo_llegada: float
     posicion_actual: str = "BUQUE"
     estado: str = "En Buque"
-
+    columna: int | None = None
+    piso: int | None = None
     def __repr__(self):
         return f"{self.id} [{self.estado}]"

@@ -1,13 +1,10 @@
 import streamlit as st
-import simpy
 import time
 import base64
 from pathlib import Path
 from dataclasses import dataclass
-from typing import List, Dict
-import random
 import pandas as pd
-from models.simulation_models import Contenedor, EventoSimulacion, LineaTransportista 
+from models.simulation_models import  LineaTransportista 
 from simulation.simulation import ejecutar_simulacion, simular_asignacion
 from pathlib import Path
 st.set_page_config(page_title="SimPy + Animación", layout="wide")
@@ -18,14 +15,9 @@ ASSETS_DIR = BASE_DIR / "assets"
 
 svg_path = ASSETS_DIR / "contenedor.svg"
 svg = svg_path.read_text(encoding="utf-8")
-
-try:
-    svg_bytes = Path(svg_path).read_bytes()
-    svg_b64 = base64.b64encode(svg_bytes).decode("utf-8")
-    svg_img = f"data:image/svg+xml;base64,{svg_b64}"
-except FileNotFoundError:
-    svg_img = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect width='100' height='100' fill='%234A90E2'/%3E%3Ctext x='50' y='55' text-anchor='middle' fill='white' font-size='40'%3E📦%3C/text%3E%3C/svg%3E"
-
+svg_bytes = Path(svg_path).read_bytes()
+svg_b64 = base64.b64encode(svg_bytes).decode("utf-8")
+svg_img = f"data:image/svg+xml;base64,{svg_b64}"
 
 LINEAS_DEMO = [
     LineaTransportista(1, "Maersk Logistics", True, 92, 88, "contacto@maersk.com"),
@@ -34,10 +26,6 @@ LINEAS_DEMO = [
     LineaTransportista(4, "ONE Transport", True, 78, 90, "support@one.com"),
 ]
 
-
-
-
-# ==================== CONFIG ZONAS ====================
 ZONAS = {
     "BUQUE": {"x": 0, "y": 60, "color": "#2E86AB", "label": "🚢 Buque"},
     "PISO": {"x": 180, "y": 60, "color": "#A23B72", "label": "📍 Piso"},
@@ -47,10 +35,24 @@ ZONAS = {
 TIEMPO_BUQUE_A_PISO = 2.0
 TIEMPO_PISO_A_PATIO = 1.5
 
+st.markdown("""
+<style>
+/*
+Target CUALQUIER SVG que tenga el ID 'stElementToolbarButtonIcon'
+Y que esté DENTRO de un botón con el ID 'stBaseButton-elementToolbar'
+*/
+button[data-testid="stBaseButton-elementToolbar"] svg[data-testid="stElementToolbarButtonIcon"] {
+    /* Hacemos el ícono (el dibujo SVG) un 80% más grande */
+    transform: scale(1.8) !important;
+    transform-origin: center center !important;
+}
 
-
-
-# ==================== VISUALIZACIÓN ====================
+/* Y hacemos el ÁREA CLICKEABLE (el botón) más grande */
+button[data-testid="stBaseButton-elementToolbar"] {
+    padding: 0.5rem !important; /* Más relleno = botón más grande */
+}
+</style>
+""", unsafe_allow_html=True)
 def crear_escena_html(contenedores_por_zona, contenedor_activo=None):
     zonas_html = ""
     for zona_nombre, zona_info in ZONAS.items():
@@ -108,7 +110,6 @@ def animar_simulacion(simulador, velocidad=0.5):
         time.sleep(velocidad)
 
 
-# ==================== INTERFAZ STREAMLIT ====================
 st.title("🚢 Simulación: Buque → Piso → Patio")
 st.markdown("SimPy + Animación + Asignación de Línea Transportista")
 
@@ -131,19 +132,64 @@ with col2:
         st.session_state['simular'] = False
         st.rerun()
 
+def renderizar_patio(patio, svg_img, ancho=60, alto=45):
+    """
+    patio = matriz [10 columnas][4 pisos]
+    piso 0 = abajo, piso 3 = arriba
+    """
+    html = """
+    <div style="padding:20px;">
+        <h3 style="text-align:center;">🏭 Patio – Vista por Columnas y Pisos</h3>
+        <div style="display:flex; flex-direction:row; gap:15px; justify-content:center;">
+    """
 
-# ==================== EJECUTAR SIMULACIÓN ====================
+    for col in range(10):
+        html += "<div style='display:flex; flex-direction:column-reverse; gap:8px;'>"
+
+        # pisos 0 a 3 (pero se dibujan de abajo hacia arriba)
+        for piso in range(4):
+            cont = patio[col][piso]
+            if cont is None:
+                html += f"""
+                <div style="
+                    width:{ancho}px; height:{alto}px;
+                    border:2px dashed #999;
+                    border-radius:6px;
+                    background:#f0f0f0;
+                    display:flex; justify-content:center; align-items:center;
+                    font-size:12px; color:#666;">
+                    {piso}
+                </div>
+                """
+            else:
+                html += f"""
+                <div style="
+                    width:{ancho}px; height:{alto}px;
+                    border:3px solid #2E86AB;
+                    border-radius:6px;
+                    background:#d7ecfa;
+                    display:flex; justify-content:center; align-items:center;">
+                    <img src="{svg_img}" style="width:40px;">
+                </div>
+                """
+
+        # etiqueta columna
+        html += f"<div style='text-align:center; font-weight:bold;'>{col}</div>"
+        html += "</div>"
+
+    html += "</div></div>"
+
+    return html
+
+# ==================== ejecutar simulacion ====================
 if st.session_state.get('simular', False):
     with st.spinner("Ejecutando SimPy..."):
         duracion_total = (num_contenedores * intervalo) + 10
         simulador = ejecutar_simulacion(num_contenedores, intervalo, duracion_total)
+        st.subheader("🏭 Estado del Patio (10 columnas × 4 pisos)")
+        html_patio = renderizar_patio(simulador.patio, svg_img)
+        st.markdown(html_patio, unsafe_allow_html=True)
         st.success(f"Simulación terminada: {len(simulador.eventos)} eventos")
-
-    st.metric("Procesados", len(simulador.contenedores))
-    st.metric("Final en Patio", sum(1 for c in simulador.contenedores if c.posicion_actual == "PATIO"))
-    st.metric("Eventos", len(simulador.eventos))
-
-    st.markdown("---")
 
     if st.button("🎬 Reproducir Animación"):
         animar_simulacion(simulador, velocidad_animacion)
@@ -158,7 +204,7 @@ if st.session_state.get('simular', False):
         } for e in simulador.eventos])
         st.dataframe(df)
 
-    # ========== ASIGNACIÓN DE LÍNEAS ==========
+    # ========== ASIGNACIÓN DE lineas ==========
     st.header("🚚 Asignación de Línea Transportista")
 
     conts_patio = [c for c in simulador.contenedores if c.posicion_actual == "PATIO"]
