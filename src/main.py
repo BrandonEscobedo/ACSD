@@ -2,7 +2,6 @@ import streamlit as st
 import time
 import base64
 from pathlib import Path
-from dataclasses import dataclass
 import pandas as pd
 from models.simulation_models import LineaTransportista
 from simulation.simulation import ejecutar_simulacion, simular_asignacion
