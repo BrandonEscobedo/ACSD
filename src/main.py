@@ -6,6 +6,9 @@ import pandas as pd
 from models.simulation_models import LineaTransportista
 from simulation.simulation import ejecutar_simulacion, simular_asignacion
 
+# IMPORTACIÓN CLAVE: Importamos el generador de PDF
+from services.pdf_report_generator import generar_reporte_simulacion_pdf 
+
 st.set_page_config(page_title="SimPy + Animación", layout="wide")
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -17,10 +20,10 @@ svg_b64 = base64.b64encode(svg_bytes).decode("utf-8")
 svg_img = f"data:image/svg+xml;base64,{svg_b64}"
 
 LINEAS_DEMO = [
-    LineaTransportista(1, "Maersk Logistics", True, 92, 88, "contacto@maersk.com"),
-    LineaTransportista(2, "Hapag-Lloyd Express", True, 80, 75, "service@hapag.com"),
-    LineaTransportista(3, "MSC Cargo", False, 85, 70, "ops@msc.com"),
-    LineaTransportista(4, "ONE Transport", True, 78, 90, "support@one.com"),
+    LineaTransportista(1, "Maersk Logistics", True, 0.92, 0.88, "contacto@maersk.com"),
+    LineaTransportista(2, "Hapag-Lloyd Express", True, 0.80, 0.75, "service@hapag.com"),
+    LineaTransportista(3, "MSC Cargo", False, 0.85, 0.70, "ops@msc.com"),
+    LineaTransportista(4, "ONE Transport", True, 0.78, 0.90, "support@one.com"),
 ]
 
 TIEMPO_BUQUE_A_PISO = 2.0
@@ -73,8 +76,9 @@ def crear_zona_patio_3d(patio_matriz, contenedor_activo=None, contenedor_selecci
     js_click_handler = """
     <script>
     function selectContainer(containerId) {
+        
         // Enviar mensaje al parent (Streamlit)
-        window.parent.postMessage({
+        /* window.parent.postMessage({
             type: 'streamlit:setComponentValue',
             key: 'selected_container',
             value: containerId
@@ -84,7 +88,8 @@ def crear_zona_patio_3d(patio_matriz, contenedor_activo=None, contenedor_selecci
         localStorage.setItem('selected_container_id', containerId);
         
         // Recargar para actualizar Streamlit
-        window.parent.location.reload();
+        window.parent.location.reload(); */
+        console.log("Container clicked: " + containerId);
     }
     </script>
     """
@@ -97,27 +102,23 @@ def crear_zona_patio_3d(patio_matriz, contenedor_activo=None, contenedor_selecci
         border-radius: 20px; margin: 20px 0; padding: 20px;
         box-shadow: 0 6px 12px rgba(0,0,0,0.15);">
         
-        <!-- Encabezado -->
         <div style="position: absolute; left: 20px; top: 20px;
             font-weight: bold; font-size: 28px; color: #F18F01;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.1);">
             🏭 Patio de Almacenamiento
         </div>
         
-        <!-- Contador total -->
         <div style="position:absolute; top:20px; right:20px;
             background:#F18F01; color:white; padding:8px 16px;
             border-radius:20px; font-weight:bold; font-size:16px;">
             {sum(1 for col in patio_matriz for cnt in col if cnt is not None)} 📦
         </div>
         
-        <!-- Instrucción -->
         <div style="position:absolute; left:20px; top:60px;
             font-size:12px; color:#666; font-style:italic;">
-            💡 Haz click en cualquier contenedor para ver su información
+            💡 Selección de contenedor en panel lateral
         </div>
         
-        <!-- Grid de Columnas y Pisos -->
         <div style="margin-top: 100px; display: flex; justify-content: center; gap: 8px;">
     """
     
@@ -125,7 +126,6 @@ def crear_zona_patio_3d(patio_matriz, contenedor_activo=None, contenedor_selecci
     for col_idx in range(NUM_COLUMNAS):
         html += f"""
         <div style="display: flex; flex-direction: column-reverse; align-items: center; gap: 4px;">
-            <!-- Etiqueta de columna -->
             <div style="background: #333; color: white; padding: 4px 8px; 
                 border-radius: 4px; font-size: 10px; font-weight: bold;">
                 C{col_idx}
@@ -182,7 +182,6 @@ def crear_zona_patio_3d(patio_matriz, contenedor_activo=None, contenedor_selecci
                     <img src="{svg_img}" style="width: 35px; height: 35px; 
                         filter: brightness(1.2); pointer-events: none;">
                     
-                    <!-- Label del contenedor -->
                     <div style="position: absolute; top: -8px; right: -8px;
                         background: white; color: #333;
                         padding: 2px 6px; border-radius: 10px;
@@ -192,7 +191,6 @@ def crear_zona_patio_3d(patio_matriz, contenedor_activo=None, contenedor_selecci
                         {contenedor.id.split('-')[1]}
                     </div>
                     
-                    <!-- Tooltip mejorado -->
                     <div style="position: absolute; bottom: 110%; left: 50%;
                         transform: translateX(-50%);
                         background: rgba(0,0,0,0.9); color: white;
@@ -222,7 +220,6 @@ def crear_zona_patio_3d(patio_matriz, contenedor_activo=None, contenedor_selecci
     html += """
         </div>
         
-        <!-- Leyenda -->
         <div style="margin-top: 20px; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
             <div style="display: flex; align-items: center; gap: 6px;">
                 <div style="width: 18px; height: 18px; background: #FF9800; border-radius: 4px;"></div>
@@ -389,37 +386,65 @@ with st.sidebar:
 
 col1, col2 = st.columns([1, 3])
 with col1:
-    if st.button("▶️ Iniciar Simulación", type="primary"):
-        st.session_state['simular'] = True
+    # Si la simulación ya terminó, muestra solo Reiniciar, si no, muestra Iniciar
+    if st.session_state.get('simulador_terminado'):
+         if st.button("🔄 Reiniciar", use_container_width=True, type="secondary"):
+             st.session_state['simular'] = False
+             st.session_state['simulador_terminado'] = None
+             st.rerun()
+    else:
+        if st.button("▶️ Iniciar Simulación", type="primary"):
+            st.session_state['simular'] = True
+            st.session_state['simulador_terminado'] = None
 with col2:
-    if st.button("🔄 Reiniciar"):
-        st.session_state['simular'] = False
-        st.rerun()
+    if st.session_state.get('simular', False) or st.session_state.get('simulador_terminado'):
+        pass
+    else:
+        if st.button("🔄 Reiniciar"):
+            st.session_state['simular'] = False
+            st.session_state['simulador_terminado'] = None
+            st.rerun()
+
+
+# Variable para mantener la referencia al objeto simulador
+simulador_activo = None
 
 # ==================== EJECUTAR SIMULACIÓN ====================
-if st.session_state.get('simular', False):
+if st.session_state.get('simular', False) and not st.session_state.get('simulador_terminado'):
     with st.spinner("🔧 Ejecutando SimPy..."):
         duracion_total = (num_contenedores * intervalo) + 10
-        simulador = ejecutar_simulacion(num_contenedores, intervalo, duracion_total)
-        st.success(f"✅ Simulación terminada: {len(simulador.eventos)} eventos")
+        simulador_activo = ejecutar_simulacion(num_contenedores, intervalo, duracion_total)
+        # Guardar el simulador completo para su posterior uso (reporte, panel interactivo)
+        st.session_state['simulador_terminado'] = simulador_activo
+        st.session_state['simular'] = False
+        st.success(f"✅ Simulación terminada: {len(simulador_activo.eventos)} eventos")
+        
+        # Forzar un rerun para actualizar la interfaz al modo 'terminado'
+        st.rerun() 
+
+# 2. Si la simulación ya terminó, recuperamos el objeto y mostramos el dashboard completo
+if st.session_state.get('simulador_terminado'):
+    simulador_activo = st.session_state['simulador_terminado']
     
     # Métricas
     col1, col2, col3, col4 = st.columns(4)
     with col1:
-        st.metric("Procesados", len(simulador.contenedores))
+        st.metric("Procesados", len(simulador_activo.contenedores))
     with col2:
-        en_patio = sum(1 for c in simulador.contenedores if c.posicion_actual == "PATIO")
+        en_patio = sum(1 for c in simulador_activo.contenedores if c.posicion_actual == "PATIO")
         st.metric("En Patio", en_patio)
     with col3:
         capacidad_usada = (en_patio / 40) * 100
         st.metric("Ocupación", f"{capacidad_usada:.1f}%")
     with col4:
-        st.metric("Eventos", len(simulador.eventos))
+        st.metric("Eventos", len(simulador_activo.eventos))
     
     st.markdown("---")
     
-    # Botón de animación
-    col_btn1, col_btn2, col_btn3 = st.columns(3)
+    # Botón de animación y Panel Interactivo
+    # Añadimos la columna 4 para el botón de descarga PDF
+    col_btn1, col_btn2, col_btn3, col_btn4 = st.columns([1, 1, 1, 1.5])
+    
     with col_btn1:
         if st.button("🎬 Reproducir Animación", type="primary", use_container_width=True):
             st.session_state.animacion_activa = True
@@ -440,13 +465,31 @@ if st.session_state.get('simular', False):
             st.session_state.animacion_activa = False
             st.session_state.contenedor_seleccionado_id = None
             st.rerun()
+
+    # --- NUEVO BOTÓN DE DESCARGA PDF ---
+    with col_btn4:
+        # 1. Llamar a la función, pasando el simulador y las líneas demo
+        pdf_buffer = generar_reporte_simulacion_pdf(
+            simulador_activo, 
+            LINEAS_DEMO
+        )
+        
+        # 2. Usar la descarga de Streamlit
+        st.download_button(
+            label="⬇️ Descargar Reporte (PDF)",
+            data=pdf_buffer,
+            file_name=f"Reporte_Logistica_{time.strftime('%Y%m%d_%H%M%S')}.pdf",
+            mime="application/pdf",
+            type="secondary",
+            use_container_width=True
+        )
     
     st.markdown("---")
     
     # ========== DECIDIR QUÉ MOSTRAR ==========
     if st.session_state.get('animacion_activa', False):
         # Ejecutar animación
-        animar_simulacion(simulador, velocidad_animacion)
+        animar_simulacion(simulador_activo, velocidad_animacion)
         # Después de terminar, mostrar panel interactivo
         st.session_state.mostrar_panel_interactivo = True
         st.session_state.animacion_activa = False
@@ -467,7 +510,7 @@ if st.session_state.get('simular', False):
                 st.session_state.contenedor_seleccionado_id = None
             
             # Contenedores en el patio
-            conts_patio = [c for c in simulador.contenedores if c.posicion_actual == "PATIO"]
+            conts_patio = [c for c in simulador_activo.contenedores if c.posicion_actual == "PATIO"]
             
             # Selector de contenedor con botones en grid
             if conts_patio:
@@ -517,7 +560,7 @@ if st.session_state.get('simular', False):
                 contenedor_sel = next((c for c in conts_patio 
                                       if c.id == st.session_state.contenedor_seleccionado_id), None)
             
-            html_patio = crear_zona_patio_3d(simulador.patio, None, contenedor_sel)
+            html_patio = crear_zona_patio_3d(simulador_activo.patio, None, contenedor_sel)
             st.html(html_patio)
             
             # Info rápida
@@ -569,7 +612,7 @@ if st.session_state.get('simular', False):
                 # ========== ANÁLISIS DE LÍNEA ==========
                 st.markdown("### 🚚 Análisis de Línea Transportista")
                 
-                if st.button("🚚 Asignar Línea de Transporte", type="primary", use_container_width=True):
+                if st.button("🚚 Asignar Línea de Transporte", type="primary", use_container_width=True, key="btn_asignar"):
                     with st.spinner("Analizando líneas disponibles..."):
                         mejor, resultados = simular_asignacion(contenedor_sel, LINEAS_DEMO)
                         
@@ -620,7 +663,7 @@ if st.session_state.get('simular', False):
             "Acción": e.accion,
             "Origen": e.origen,
             "Destino": e.destino
-        } for e in simulador.eventos])
+        } for e in simulador_activo.eventos])
         st.dataframe(df, use_container_width=True)
 
 else:
