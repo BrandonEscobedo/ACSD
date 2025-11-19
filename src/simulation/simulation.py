@@ -2,10 +2,22 @@ import simpy
 from dataclasses import dataclass
 from typing import List
 import random
+from pathlib import Path
+from services.visual_service import VisualService
 from models.simulation_models import Contenedor, EventoSimulacion, LineaTransportista
+
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+ASSETS_DIR = BASE_DIR / "assets"
+
+visual_service = VisualService(ASSETS_DIR)
 
 TIEMPO_BUQUE_A_PISO = 2.0
 TIEMPO_PISO_A_PATIO = 1.5
+
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+ASSETS_DIR = BASE_DIR / "assets"
+visual_service = VisualService(ASSETS_DIR)
+
 
 def simular_asignacion(contenedor: Contenedor, lineas: List[LineaTransportista]):
     resultados = []
@@ -50,6 +62,8 @@ def colocar_en_patio(contenedor, patio):
                     contenedor.piso = piso
                     return True
     return False  # patio lleno
+
+
 def retirar_de_patio(contenedor, patio):
     col = contenedor.columna
     piso = contenedor.piso
@@ -64,6 +78,8 @@ def retirar_de_patio(contenedor, patio):
     return True
 
 # ==================== SIMULACIÓN SIMPY ====================
+
+
 class SimuladorContenedores:
     def __init__(self, env):
         self.env = env
@@ -94,7 +110,8 @@ class SimuladorContenedores:
 
         # ================== BUQUE → PISO ==================
         contenedor.estado = "En tránsito a Piso"
-        self.registrar_evento(contenedor, "Iniciando traslado", "BUQUE", "PISO")
+        self.registrar_evento(
+            contenedor, "Iniciando traslado", "BUQUE", "PISO")
         yield self.env.timeout(TIEMPO_BUQUE_A_PISO)
 
         contenedor.posicion_actual = "PISO"
@@ -104,7 +121,8 @@ class SimuladorContenedores:
 
         # ================== PISO → PATIO ==================
         contenedor.estado = "En tránsito a Patio"
-        self.registrar_evento(contenedor, "Iniciando traslado", "PISO", "PATIO")
+        self.registrar_evento(
+            contenedor, "Iniciando traslado", "PISO", "PATIO")
         yield self.env.timeout(TIEMPO_PISO_A_PATIO)
 
         # ---------- AQUI SE AGREGA LA LÓGICA DE PISOS ----------
@@ -121,15 +139,18 @@ class SimuladorContenedores:
             )
         else:
             contenedor.estado = "⚠ Patio lleno — NO SE PUEDE ALMACENAR"
-            self.registrar_evento(contenedor, "Error almacenamiento", "PISO", "PATIO")
+            self.registrar_evento(
+                contenedor, "Error almacenamiento", "PISO", "PATIO")
 
         yield self.env.timeout(0.1)
 
     def generador_contenedores(self, n, intervalo):
         for i in range(n):
+            img_random = visual_service.obtener_imagen_random()
             c = Contenedor(
                 id=f"CNT-{i+1:03d}",
-                tiempo_llegada=self.env.now
+                tiempo_llegada=self.env.now,
+                imagen_src=img_random
             )
             self.contenedores.append(c)
             self.env.process(self.proceso_contenedor(c))
