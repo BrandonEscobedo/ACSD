@@ -26,6 +26,11 @@ class TipoCarga(Enum):
     NODRIZA = "Nodriza"
 
 
+class TamanoContenedor(Enum):
+    VEINTE = 20
+    CUARENTA = 40
+
+
 @dataclass
 class LineaTransportista:
     id: int
@@ -57,6 +62,11 @@ class Contenedor:
     columna: int | None = None
     piso: int | None = None
     imagen_src: str = ""
+    # Nuevos campos solicitados
+    carga_tipo: TipoCarga = TipoCarga.SECA
+    carga_descripcion: Optional[str] = None
+    comprador: Optional[str] = None
+    tamano_pies: int = TamanoContenedor.VEINTE.value
 
     def __repr__(self):
-        return f"{self.id} [{self.estado}]"
+        return f"{self.id} [{self.estado}] (Tamaño: {self.tamano_pies}ft, Carga: {self.carga_tipo.value})"

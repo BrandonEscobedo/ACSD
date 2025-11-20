@@ -4,7 +4,7 @@ from typing import List
 import random
 from pathlib import Path
 from services.visual_service import VisualService
-from models.simulation_models import Contenedor, EventoSimulacion, LineaTransportista
+from models.simulation_models import Contenedor, EventoSimulacion, LineaTransportista, TipoCarga
 import sys # <--- Importar sys
 
 # -------------------------------------------------------------------
@@ -154,10 +154,18 @@ class SimuladorContenedores:
     def generador_contenedores(self, n, intervalo):
         for i in range(n):
             img_random = visual_service.obtener_imagen_random()
+            # Asignar campos adicionales: tipo de carga, comprador y tamaño
+            comprador_random = random.choice(["ACME Corp", "Importadora S.A.", "Distribuciones S.A.", "Cliente X"])
+            tipo_carga_random = random.choice(list(TipoCarga))
+            tamano_random = random.choice([20, 40])
+
             c = Contenedor(
                 id=f"CNT-{i+1:03d}",
                 tiempo_llegada=self.env.now,
-                imagen_src=img_random
+                imagen_src=img_random,
+                carga_tipo=tipo_carga_random,
+                comprador=comprador_random,
+                tamano_pies=tamano_random
             )
             self.contenedores.append(c)
             self.env.process(self.proceso_contenedor(c))

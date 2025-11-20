@@ -30,6 +30,11 @@ class Contenedor:
     tiempo_llegada: float
     posicion_actual: str = "BUQUE"
     estado: str = "En Buque"
+    # Nuevos campos solicitados
+    carga_tipo: Optional[str] = None
+    carga_descripcion: Optional[str] = None
+    comprador: Optional[str] = None
+    tamano_pies: int = 20
 
 @dataclass
 class LineasTransportistas:
@@ -164,7 +169,10 @@ class SimuladorContenedores:
 
     def generador_contenedores(self, num: int, intervalo: float):
         for i in range(num):
-            cont = Contenedor(id=f"CNT-{i+1:03d}", tiempo_llegada=self.env.now)
+            comprador = random.choice(["ACME Corp", "Importadora S.A.", "Distribuciones S.A.", "Cliente X"])
+            carga = random.choice(["Carga Seca", "Refrigerada", "Peligrosa", "Frágil"]) 
+            tamano = random.choice([20, 40])
+            cont = Contenedor(id=f"CNT-{i+1:03d}", tiempo_llegada=self.env.now, carga_tipo=carga, comprador=comprador, tamano_pies=tamano)
             self.contenedores.append(cont)
             self.env.process(self.proceso_contenedor(cont))
             yield self.env.timeout(intervalo)
@@ -355,6 +363,6 @@ if sim_result:
 
 if not sim_result:
     st.markdown("### 👀 Vista previa del sistema")
-    preview_conts = [Contenedor(f"CNT-{i+1:03d}", 0) for i in range(3)]
+    preview_conts = [Contenedor(f"CNT-{i+1:03d}", 0, carga_tipo=random.choice(["Carga Seca","Refrigerada"]), comprador="Demo", tamano_pies=20) for i in range(3)]
     preview = {"BUQUE": preview_conts[:1], "PISO": preview_conts[1:2], "PATIO": preview_conts[2:]}
     st.components.v1.html(crear_escena_html(preview), height=420)

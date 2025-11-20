@@ -1,26 +1,146 @@
 [
     {
         "id": 1,
-        "nombre": "Transporte de Ejemplo 1",
-        "contacto": "info@ejemplo1.com",
-        "porcentaje_cumplimiento": 82.5,
-        "porcentaje_puntualidad": 52.78,
-        "disponible": true
+        "nombre": "CLAUDIA NAYELI AVILA RODRIGUEZ",
+        "disponible": true,
+        "porcentaje_cumplimiento": 90,
+        "porcentaje_puntualidad": 85,
+        "contacto": "claudia.avila@example.com"
     },
     {
         "id": 2,
-        "nombre": "Transporte de Ejemplo 2",       
-        "contacto": "info@ejemplo2.com",
-        "porcentaje_cumplimiento": 93.83,
-        "porcentaje_puntualidad": 80.4,
-        "disponible": true
+        "nombre": "AUTO TRANSPORTES NAVA DEL PACIFICO",
+        "disponible": true,
+        "porcentaje_cumplimiento": 88,
+        "porcentaje_puntualidad": 80,
+        "contacto": "contacto@navapacifico.com"
     },
     {
         "id": 3,
-        "nombre": "Transporte de Ejemplo 3",       
-        "contacto": "info@ejemplo3.com",
-        "porcentaje_cumplimiento": 72.0,
-        "porcentaje_puntualidad": 99.99,
-        "disponible": true
+        "nombre": "JUAN MANUEL PADILLA MARTINEZ",
+        "disponible": false,
+        "porcentaje_cumplimiento": 82,
+        "porcentaje_puntualidad": 78,
+        "contacto": "juan.padilla@example.com"
+    },
+    {
+        "id": 4,
+        "nombre": "LOGÍSTICA Y TRASLADOS BG-TC SA DE CV",
+        "disponible": true,
+        "porcentaje_cumplimiento": 87,
+        "porcentaje_puntualidad": 83,
+        "contacto": "contacto@bgtc.com"
+    },
+    {
+        "id": 5,
+        "nombre": "EXPRESS TRANSOCEÁNICOS, S.A. DE C.V.",
+        "disponible": true,
+        "porcentaje_cumplimiento": 85,
+        "porcentaje_puntualidad": 80,
+        "contacto": "info@transoceanicos.com"
+    },
+    {
+        "id": 6,
+        "nombre": "Felipe de Jesus Bejarano Sanchez",
+        "disponible": false,
+        "porcentaje_cumplimiento": 78,
+        "porcentaje_puntualidad": 75,
+        "contacto": "felipe.bejarano@example.com"
+    },
+    {
+        "id": 7,
+        "nombre": "MEVICH GRUPO EMPRESARIAL",
+        "disponible": true,
+        "porcentaje_cumplimiento": 90,
+        "porcentaje_puntualidad": 88,
+        "contacto": "contacto@mevich.com"
+    },
+    {
+        "id": 8,
+        "nombre": "LOGISTICA Y TRASLADOS BG-TC SA DE CV",
+        "disponible": true,
+        "porcentaje_cumplimiento": 87,
+        "porcentaje_puntualidad": 83,
+        "contacto": "contacto@bgtc.com"
+    },
+    {
+        "id": 9,
+        "nombre": "GRUPO MOC SA DE CV",
+        "disponible": false,
+        "porcentaje_cumplimiento": 81,
+        "porcentaje_puntualidad": 77,
+        "contacto": "contacto@grupomoc.com"
+    },
+    {
+        "id": 10,
+        "nombre": "TRANSPORTES MONTERREY SA DE CV",
+        "disponible": true,
+        "porcentaje_cumplimiento": 89,
+        "porcentaje_puntualidad": 85,
+        "contacto": "contacto@transportesmonterrey.com"
+    },
+    {
+        "id": 11,
+        "nombre": "EFREN BUCIO GALEANA",
+        "disponible": true,
+        "porcentaje_cumplimiento": 82,
+        "porcentaje_puntualidad": 79,
+        "contacto": "efren.bucio@example.com"
+    },
+    {
+        "id": 12,
+        "nombre": "MONTERREY",
+        "disponible": true,
+        "porcentaje_cumplimiento": 75,
+        "porcentaje_puntualidad": 70,
+        "contacto": "info@monterrey.com"
+    },
+    {
+        "id": 13,
+        "nombre": "AUTO EXPRESS TOSCANO",
+        "disponible": true,
+        "porcentaje_cumplimiento": 84,
+        "porcentaje_puntualidad": 80,
+        "contacto": "contacto@toscano.com"
+    },
+    {
+        "id": 14,
+        "nombre": "Nestor Jesús Espinoza Hueso",
+        "disponible": false,
+        "porcentaje_cumplimiento": 79,
+        "porcentaje_puntualidad": 74,
+        "contacto": "nestor.espinoza@example.com"
+    },
+    {
+        "id": 15,
+        "nombre": "SOLUCIONES LOGISTICAS Q DE MEXICO",
+        "disponible": true,
+        "porcentaje_cumplimiento": 86,
+        "porcentaje_puntualidad": 82,
+        "contacto": "contacto@slqm.com"
+    },
+    {
+        "id": 16,
+        "nombre": "TRANSPORTES MONTERREY",
+        "disponible": true,
+        "porcentaje_cumplimiento": 88,
+        "porcentaje_puntualidad": 84,
+        "contacto": "info@transportesmonterrey.com"
+    },
+    {
+        "id": 17,
+        "nombre": "TRAK TRANSPORTACIONES S.A. DE C.V.",
+        "disponible": true,
+        "porcentaje_cumplimiento": 83,
+        "porcentaje_puntualidad": 78,
+        "contacto": "contacto@trak.com"
+    },
+    {
+        "id": 18,
+        "nombre": "CORPORATIVO INTEGRAL DE TRANSPORTE INTERNACIONAL SA DE CV",
+        "disponible": false,
+        "porcentaje_cumplimiento": 80,
+        "porcentaje_puntualidad": 76,
+        "contacto": "contacto@citi.com"
     }
 ]

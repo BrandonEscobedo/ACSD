@@ -21,7 +21,7 @@ else:
 
 ASSETS_DIR = BASE_RESOURCES_PATH / "assets"
 # El archivo JSON fue copiado a la subcarpeta 'data' del ejecutable.
-JSON_PATH = BASE_RESOURCES_PATH / "data" / "lineas_transportistas.json"
+JSON_PATH = BASE_RESOURCES_PATH / "src" / "data" / "lineas_transportistas.json"
 
 # ==================== FIN CONFIGURACIÓN DE RUTAS ====================
 
@@ -90,27 +90,9 @@ try:
     linea_servicio = LineaTransportistaServicio(str(JSON_PATH))
     LINEAS_DEMO = linea_servicio.listar_lineas()
     if not LINEAS_DEMO:
-        st.warning("⚠️ No se pudieron cargar las líneas del JSON. Usando valores por defecto.")
-        LINEAS_DEMO = [
-            LineaTransportista(1, "CLAUDIA NAYELI AVILA RODRIGUEZ", True, 90, 85, "claudia.avila@example.com"),
-            LineaTransportista(2, "AUTO TRANSPORTES NAVA DEL PACIFICO", True, 88, 80, "contacto@navapacifico.com"),
-            LineaTransportista(3, "JUAN MANUEL PADILLA MARTINEZ", False, 82, 78, "juan.padilla@example.com"),
-            LineaTransportista(4, "LOGÍSTICA Y TRASLADOS BG-TC SA DE CV", True, 87, 83, "contacto@bgtc.com"),
-            LineaTransportista(5, "EXPRESS TRANSOCEÁNICOS, S.A. DE C.V.", True, 85, 80, "info@transoceanicos.com"),
-            LineaTransportista(6, "Felipe de Jesus Bejarano Sanchez", False, 78, 75, "felipe.bejarano@example.com"),
-            LineaTransportista(7, "MEVICH GRUPO EMPRESARIAL", True, 90, 88, "contacto@mevich.com"),
-            LineaTransportista(8, "LOGISTICA Y TRASLADOS BG-TC SA DE CV", True, 87, 83, "contacto@bgtc.com"),
-            LineaTransportista(9, "GRUPO MOC SA DE CV", False, 81, 77, "contacto@grupomoc.com"),
-            LineaTransportista(10, "TRANSPORTES MONTERREY SA DE CV", True, 89, 85, "contacto@transportesmonterrey.com"),
-            LineaTransportista(11, "EFREN BUCIO GALEANA", True, 82, 79, "efren.bucio@example.com"),
-            LineaTransportista(12, "MONTERREY", True, 75, 70, "info@monterrey.com"),
-            LineaTransportista(13, "AUTO EXPRESS TOSCANO", True, 84, 80, "contacto@toscano.com"),
-            LineaTransportista(14, "Nestor Jesús Espinoza Hueso", False, 79, 74, "nestor.espinoza@example.com"),
-            LineaTransportista(15, "SOLUCIONES LOGISTICAS Q DE MEXICO", True, 86, 82, "contacto@slqm.com"),
-            LineaTransportista(16, "TRANSPORTES MONTERREY", True, 88, 84, "info@transportesmonterrey.com"),
-            LineaTransportista(17, "TRAK TRANSPORTACIONES S.A. DE C.V.", True, 83, 78, "contacto@trak.com"),
-            LineaTransportista(18, "CORPORATIVO INTEGRAL DE TRANSPORTE INTERNACIONAL SA DE CV", False, 80, 76, "contacto@citi.com"),
-        ]
+        st.warning("⚠️ No se pudieron cargar las líneas del JSON. Asegúrate de que 'src/data/lineas_transportistas.json' contiene datos.")
+        st.warning(JSON_PATH)
+        LINEAS_DEMO = []
 
 except Exception as e:
     # Esto atraparía FileNotFoundError si la ruta de PyInstaller falla catastróficamente
@@ -197,7 +179,7 @@ def crear_zona_patio_3d(patio_matriz, contenedor_activo=None, contenedor_selecci
 
     html = f"""
     {js_click_handler}
-    <div style="position: relative; width: 100%; min-height: 550px;
+    <div style="position: relative; width: 80%; min-height:300px;
         border: 4px solid #F18F01;
         background: linear-gradient(135deg, #F18F0122 0%, #F18F0144 100%);
         border-radius: 20px; margin: 20px 0; padding: 20px;
@@ -397,7 +379,23 @@ def animar_simulacion(simulador, velocidad_inicial=0.5):
 
 
 # ==================== INTERFAZ ====================
-st.title("🚢 Simulación: Buque → Piso → Patio 3D")
+# Logo justo encima del título (alineado al centro)
+try:
+    logo_path = ASSETS_DIR / "logos" / "LogoQuo.png"
+    if logo_path.exists():
+        logo_b64 = base64.b64encode(logo_path.read_bytes()).decode("utf-8")
+        st.markdown(
+            f"""
+            <div style='text-align:center; margin-top:8px; margin-bottom:6px;'>
+                <img src='data:image/png;base64,{logo_b64}' style='height:72px; max-width:90%;' />
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+except Exception:
+    pass
+
+st.title("Simulación: Buque → Piso → Patio 3D")
 
 with st.sidebar:
     st.header("⚙️ Configuración")
@@ -557,12 +555,15 @@ if st.session_state.get('simular', False) and st.session_state.simulador_persist
                     padding: 20px; border-radius: 15px; color: white;
                     box-shadow: 0 4px 8px rgba(0,0,0,0.2); margin-bottom: 20px;">
                     <h3 style="margin: 0 0 15px 0;">📦 {contenedor_sel.id}</h3>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                        <div><div style="font-size: 12px; opacity: 0.9;">Posición</div><div style="font-size: 18px; font-weight: bold;">C{contenedor_sel.columna}, P{contenedor_sel.piso}</div></div>
-                        <div><div style="font-size: 12px; opacity: 0.9;">Estado</div><div style="font-size: 14px; font-weight: bold;">{contenedor_sel.estado}</div></div>
-                        <div><div style="font-size: 12px; opacity: 0.9;">Tiempo Llegada</div><div style="font-size: 16px;">{contenedor_sel.tiempo_llegada:.2f}u</div></div>
-                        <div><div style="font-size: 12px; opacity: 0.9;">Posición Actual</div><div style="font-size: 16px;">{contenedor_sel.posicion_actual}</div></div>
-                    </div>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                                <div><div style="font-size: 12px; opacity: 0.9;">Posición</div><div style="font-size: 18px; font-weight: bold;">C{contenedor_sel.columna}, P{contenedor_sel.piso}</div></div>
+                                <div><div style="font-size: 12px; opacity: 0.9;">Estado</div><div style="font-size: 14px; font-weight: bold;">{contenedor_sel.estado}</div></div>
+                                <div><div style="font-size: 12px; opacity: 0.9;">Tiempo Llegada</div><div style="font-size: 16px;">{contenedor_sel.tiempo_llegada:.2f}u</div></div>
+                                <div><div style="font-size: 12px; opacity: 0.9;">Posición Actual</div><div style="font-size: 16px;">{contenedor_sel.posicion_actual}</div></div>
+                                <div><div style="font-size: 12px; opacity: 0.9;">Carga</div><div style="font-size: 14px; font-weight: bold;">{getattr(contenedor_sel, 'carga_tipo', '') if getattr(contenedor_sel, 'carga_tipo', None) else ''}</div></div>
+                                <div><div style="font-size: 12px; opacity: 0.9;">Comprador</div><div style="font-size: 14px;">{getattr(contenedor_sel, 'comprador', 'N/A') or 'N/A'}</div></div>
+                                <div><div style="font-size: 12px; opacity: 0.9;">Tamaño</div><div style="font-size: 14px; font-weight: bold;">{getattr(contenedor_sel, 'tamano_pies', '')} ft</div></div>
+                            </div>
                 </div>
                 """, unsafe_allow_html=True)
 
@@ -600,6 +601,10 @@ if st.session_state.get('simular', False) and st.session_state.simulador_persist
                     st.subheader("📊 Resultados por Línea")
                     df_resultados = pd.DataFrame(resultados)
                     st.dataframe(df_resultados, use_container_width=True)
+                    # Botón para solicitar despacho de carga (agregado solicitado)
+                    if st.button("despacho de carga", use_container_width=True, key=f"despacho_{contenedor_sel.id}"):
+                        st.session_state['despacho_solicitado'] = contenedor_sel.id
+                        st.success(f"✅ Despacho de carga solicitado para {contenedor_sel.id}")
                     
                     if mejor:
                         st.success(f"⭐ **Línea Recomendada:** {mejor['línea']}")
