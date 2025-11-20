@@ -419,6 +419,8 @@ FodyWeavers.xsd
 *.msm
 *.msp
 
+# === CUSTOM USER ADDITIONS ===
+
 # Archivos de IDE
 .idea/
 
@@ -426,6 +428,12 @@ FodyWeavers.xsd
 .venv
 venv/
 lib/
-# Archivos de Python
+
+# Archivos de Python (Extra cleanup)
 __pycache__/
 *.pyc
+
+### PyInstaller (Carpetas pesadas del exe) ###
+build/
+dist/
+*.spec

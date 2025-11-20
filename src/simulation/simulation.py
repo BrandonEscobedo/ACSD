@@ -5,19 +5,26 @@ import random
 from pathlib import Path
 from services.visual_service import VisualService
 from models.simulation_models import Contenedor, EventoSimulacion, LineaTransportista
+import sys # <--- Importar sys
 
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
+# -------------------------------------------------------------------
+# LÓGICA DE RUTA CORREGIDA
+if getattr(sys, 'frozen', False):
+    # En el .exe, los assets están en la raíz del directorio temporal.
+    BASE_DIR = Path(getattr(sys, '_MEIPASS', Path('.')))
+else:
+    # En desarrollo, la base es la carpeta raíz del proyecto (un nivel arriba de simulation/)
+    BASE_DIR = Path(__file__).resolve().parent.parent.parent
+
 ASSETS_DIR = BASE_DIR / "assets"
+# -------------------------------------------------------------------
 
 visual_service = VisualService(ASSETS_DIR)
 
 TIEMPO_BUQUE_A_PISO = 2.0
 TIEMPO_PISO_A_PATIO = 1.5
 
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
-ASSETS_DIR = BASE_DIR / "assets"
-visual_service = VisualService(ASSETS_DIR)
-
+# ==================== Funciones de Asignación y Patio (SIN CAMBIOS) ====================
 
 def simular_asignacion(contenedor: Contenedor, lineas: List[LineaTransportista]):
     resultados = []
@@ -77,7 +84,7 @@ def retirar_de_patio(contenedor, patio):
     contenedor.piso = None
     return True
 
-# ==================== SIMULACIÓN SIMPY ====================
+# ==================== SIMULACIÓN SIMPY (SIN CAMBIOS) ====================
 
 
 class SimuladorContenedores:

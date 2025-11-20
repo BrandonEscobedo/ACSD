@@ -5,11 +5,27 @@ from pathlib import Path
 import pandas as pd
 from models.simulation_models import LineaTransportista
 from simulation.simulation import ejecutar_simulacion, simular_asignacion
+from services.linea_transportista_service import LineaTransportistaServicio # Nuevo import
+import sys  # Importado para PyInstaller
+
+# ==================== CONFIGURACIÓN DE RUTAS ====================
+
+# Determina la ruta base de los recursos, ya sea en el entorno
+# empaquetado (_MEIPASS) o en desarrollo.
+if getattr(sys, 'frozen', False):
+    # En el .exe, los recursos se copian a la raíz de _MEIPASS.
+    BASE_RESOURCES_PATH = Path(getattr(sys, '_MEIPASS', Path('.')))
+else:
+    # En desarrollo, la base es la carpeta raíz del proyecto (un nivel arriba de src/)
+    BASE_RESOURCES_PATH = Path(__file__).resolve().parent.parent
+
+ASSETS_DIR = BASE_RESOURCES_PATH / "assets"
+# El archivo JSON fue copiado a la subcarpeta 'data' del ejecutable.
+JSON_PATH = BASE_RESOURCES_PATH / "data" / "lineas_transportistas.json"
+
+# ==================== FIN CONFIGURACIÓN DE RUTAS ====================
 
 st.set_page_config(page_title="SimPy + Animación", layout="wide")
-
-BASE_DIR = Path(__file__).resolve().parent.parent
-ASSETS_DIR = BASE_DIR / "assets"
 
 # ==================== ASSETS Y CONFIGURACIÓN GLOBAL ====================
 
@@ -18,18 +34,27 @@ OPCIONES_VELOCIDAD = [0.1, 0.3, 0.5, 0.8, 1.0, 1.5, 2.0]
 # --- CARGA DE IMAGEN CONTENEDOR ---
 try:
     archivos_svg = list(ASSETS_DIR.glob("*.svg"))
-    if archivos_svg:
-        svg_path = archivos_svg[0]
-        svg_bytes = svg_path.read_bytes()
-        svg_b64 = base64.b64encode(svg_bytes).decode("utf-8")
-        svg_img = f"data:image/svg+xml;base64,{svg_b64}"
-    else:
+    svg_img = "" # Inicializar
+    
+    # Intentamos cargar el primer SVG válido
+    for svg_path in archivos_svg:
+        try:
+            svg_bytes = svg_path.read_bytes()
+            if svg_bytes:
+                svg_b64 = base64.b64encode(svg_bytes).decode("utf-8")
+                svg_img = f"data:image/svg+xml;base64,{svg_b64}"
+                break
+        except Exception:
+            continue
+            
+    if not svg_img:
         svg_img = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCI+PHJlY3Qgd2lkdGg9IjUwIiBoZWlnaHQ9IjUwIiBmaWxsPSIjY2NjIi8+PC9zdmc+"
+        
 except Exception as e:
     print(f"⚠️ Advertencia: No se pudo cargar imagen default ({e})")
     svg_img = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCI+PHJlY3Qgd2lkdGg9IjUwIiBoZWlnaHQ9IjUwIiBmaWxsPSIjY2NjIi8+PC9zdmc+"
 
-# --- CARGA DEL LOADER ANIMADO ---
+# --- CARGA DEL LOADER ANIMADO (Sin cambios) ---
 loader_svg = """
 <svg version="1.1" id="L2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
   viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
@@ -59,19 +84,29 @@ loader_svg = """
 loader_b64 = base64.b64encode(loader_svg.encode('utf-8')).decode("utf-8")
 loader_img = f"data:image/svg+xml;base64,{loader_b64}"
 
-# -------------------------------------------------------------------
+# --- CARGA DE LÍNEAS TRANSPORTISTAS USANDO EL SERVICIO ---
+try:
+    # Usamos la ruta JSON corregida (JSON_PATH)
+    linea_servicio = LineaTransportistaServicio(str(JSON_PATH))
+    LINEAS_DEMO = linea_servicio.listar_lineas()
+    if not LINEAS_DEMO:
+        st.warning("⚠️ No se pudieron cargar las líneas del JSON. Usando valores por defecto.")
+        LINEAS_DEMO = [
+            LineaTransportista(1, "Maersk Logistics", True, 92, 88, "contacto@maersk.com"),
+            LineaTransportista(2, "Hapag-Lloyd Express", True, 80, 75, "service@hapag.com"),
+            LineaTransportista(3, "MSC Cargo", False, 85, 70, "ops@msc.com"),
+            LineaTransportista(4, "ONE Transport", True, 78, 90, "support@one.com"),
+        ]
+except Exception as e:
+    # Esto atraparía FileNotFoundError si la ruta de PyInstaller falla catastróficamente
+    st.error(f"Error fatal al cargar servicio de líneas: {e}")
+    LINEAS_DEMO = []
 
-LINEAS_DEMO = [
-    LineaTransportista(1, "Maersk Logistics", True, 92, 88, "contacto@maersk.com"),
-    LineaTransportista(2, "Hapag-Lloyd Express", True, 80, 75, "service@hapag.com"),
-    LineaTransportista(3, "MSC Cargo", False, 85, 70, "ops@msc.com"),
-    LineaTransportista(4, "ONE Transport", True, 78, 90, "support@one.com"),
-]
 
 TIEMPO_BUQUE_A_PISO = 2.0
 TIEMPO_PISO_A_PATIO = 1.5
 
-# ==================== FUNCIONES DE UTILERÍA ====================
+# ==================== FUNCIONES DE UTILERÍA (SIN CAMBIOS) ====================
 
 def mostrar_loader_overlay(mensaje="Cargando..."):
     html_loader = f"""
@@ -145,12 +180,6 @@ def crear_zona_patio_3d(patio_matriz, contenedor_activo=None, contenedor_selecci
     </script>
     """
 
-    # CAMBIOS REALIZADOS:
-    # 1. overflow-x: auto -> Habilita scroll horizontal DENTRO del borde si no cabe.
-    # 2. min-height aumentado a 550px para acomodar el tamaño extra.
-    # 3. min-width: max-content en el flex container interno para evitar que se aplasten.
-    # 4. width/height de celdas aumentados de 45px a 60px.
-
     html = f"""
     {js_click_handler}
     <div style="position: relative; width: 100%; min-height: 550px;
@@ -186,7 +215,6 @@ def crear_zona_patio_3d(patio_matriz, contenedor_activo=None, contenedor_selecci
             is_active = (contenedor_activo and contenedor and contenedor.id == contenedor_activo.id)
             is_selected = (contenedor_seleccionado and contenedor and contenedor.id == contenedor_seleccionado.id)
 
-            # TAMAÑO AUMENTADO A 60px (Antes 45px)
             if contenedor is None:
                 html += f"""
                 <div style="width: 60px; height: 60px; 
@@ -218,7 +246,6 @@ def crear_zona_patio_3d(patio_matriz, contenedor_activo=None, contenedor_selecci
 
                 bg_color = "transparent"
 
-                # TAMAÑO AUMENTADO A 60px (Caja) y 50px (Imagen)
                 html += f"""
                 <div onclick="selectContainer('{contenedor.id}')"
                     style="position: relative; width: 60px; height: 60px; 
@@ -298,18 +325,12 @@ def animar_simulacion(simulador, velocidad_inicial=0.5):
     # ==============================================================================
     #  CORRECCIÓN DE ELEMENTOS DESAPARECIDOS: RECONSTRUCCIÓN DE ESTADO (FAST-FORWARD)
     # ==============================================================================
-    # Antes de empezar el bucle visible, procesamos TODOS los eventos pasados 
-    # instantáneamente para llenar las variables contenedores_por_zona y patio_temporal.
-    # Esto evita que al pausar/cambiar velocidad, los contenedores viejos desaparezcan.
     
     if st.session_state.evento_actual > 0:
         for i in range(st.session_state.evento_actual):
-            # Obtenemos el evento pasado
             evt_pasado = simulador.eventos[i]
-            # Buscamos el contenedor
             c_pasado = next(c for c in simulador.contenedores if c.id == evt_pasado.contenedor_id)
             
-            # Aplicamos la misma lógica de movimiento pero SIN sleep y SIN renderizar
             for zona in contenedores_por_zona.values():
                 if c_pasado in zona: zona.remove(c_pasado)
             
@@ -393,7 +414,6 @@ with col2:
         st.session_state['simular'] = False
         st.session_state.simulador_persistente = None
         st.session_state['mostrar_loader'] = False
-        # Limpiar también estados de asignación
         if 'asignacion_resultados' in st.session_state: del st.session_state['asignacion_resultados']
         st.rerun()
 
@@ -413,7 +433,7 @@ if st.session_state.get('mostrar_loader', False):
 if st.session_state.get('simular', False) and st.session_state.simulador_persistente:
     
     simulador = st.session_state.simulador_persistente
-    st.success(f"✅ Simulación terminada: {len(simulador.eventos)} eventos")
+    st.success(f"✅ Simulación terminada: {len(simulador.eventos)} eventos. Líneas cargadas: {len(LINEAS_DEMO)}")
 
     col1, col2, col3, col4 = st.columns(4)
     with col1: st.metric("Procesados", len(simulador.contenedores))
@@ -592,3 +612,39 @@ else:
     st.markdown("### 👀 Vista Previa del Patio")
     patio_vacio = [[None for _ in range(4)] for _ in range(10)]
     st.html(crear_zona_patio_3d(patio_vacio))
+    
+if __name__ == '__main__':
+    import sys
+    import os
+    
+    # Verificamos si estamos corriendo en modo servidor de Streamlit
+    if not st.runtime.exists():
+        try:
+            from streamlit.web import cli as st_cli
+            
+            # Lógica para encontrar el archivo main.py
+            if getattr(sys, 'frozen', False):
+                # Si es un .exe, el archivo estará en la carpeta temporal (_MEIPASS)
+                # Nota: Asumiremos que copiaremos main.py a la raíz del paquete
+                script_path = os.path.join(sys._MEIPASS, "main.py")
+            else:
+                # En desarrollo, usamos la ruta normal
+                script_path = __file__
+            
+            # Configuramos los argumentos para simular "streamlit run ..."
+            # Agregamos flags para evitar advertencias extras
+            sys.argv = [
+                "streamlit", 
+                "run", 
+                script_path, 
+                "--global.developmentMode=false", 
+                "--server.headless=true"
+            ]
+            
+            print(f"🚀 Iniciando Streamlit desde: {script_path}")
+            st_cli.main()
+            
+        except Exception as e:
+            print(f"Error fatal al iniciar Streamlit: {e}")
+            # Mantiene la consola abierta si hay error para poder leerlo
+            input("Presiona Enter para salir...")
