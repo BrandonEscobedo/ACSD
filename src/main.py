@@ -5,8 +5,31 @@ from pathlib import Path
 import pandas as pd
 
 # Asegúrate de que estas carpetas existan en tu proyecto
-from models.simulation_models import LineaTransportista
-from simulation.simulation import ejecutar_simulacion, simular_asignacion
+# NOTA: Si estás probando esto en un entorno nuevo sin estos módulos, fallará la importación.
+try:
+    from models.simulation_models import LineaTransportista
+    from simulation.simulation import ejecutar_simulacion, simular_asignacion
+except ImportError:
+    # Mocks para que el código funcione si no tienes los archivos locales a mano
+    class LineaTransportista:
+        def __init__(self, id, nombre, activo, puntaje, costo, contacto):
+            self.id = id
+            self.nombre = nombre
+            self.activo = activo
+            self.puntaje = puntaje
+            self.costo = costo
+            self.contacto = contacto
+            
+    def ejecutar_simulacion(num, intervalo, duracion):
+        class MockSim:
+            def __init__(self):
+                self.eventos = []
+                self.contenedores = []
+                self.patio = [[None for _ in range(4)] for _ in range(10)]
+        return MockSim()
+        
+    def simular_asignacion(cont, lineas):
+        return None, []
 
 # Configuración de la página
 st.set_page_config(page_title="SimPy + Animación", layout="wide")
@@ -67,7 +90,7 @@ LINEAS_DEMO = [
 TIEMPO_BUQUE_A_PISO = 2.0
 TIEMPO_PISO_A_PATIO = 1.5
 
-# Definimos las opciones de velocidad globalmente para evitar errores
+# Definimos las opciones de velocidad globalmente
 OPCIONES_VELOCIDAD = [0.1, 0.3, 0.5, 0.8, 1.0, 1.5, 2.0]
 
 # ==================== FUNCIONES DE VISUALIZACIÓN ====================
@@ -272,7 +295,8 @@ def animar_simulacion(simulador, velocidad_inicial=0.5):
     
     with col_ctrl3:
         val_init = velocidad_inicial if velocidad_inicial in OPCIONES_VELOCIDAD else 0.5
-        velocidad_actual = st.select_slider("Velocidad", options=OPCIONES_VELOCIDAD, value=val_init, key="vel_anim")
+        # Aquí el usuario selecciona el factor (0.1 = lento, 2.0 = rápido)
+        velocidad_seleccionada = st.select_slider("Velocidad", options=OPCIONES_VELOCIDAD, value=val_init, key="vel_anim")
     
     with col_ctrl4: placeholder_progreso = st.empty()
     with col_ctrl5: placeholder_info = st.empty()
@@ -308,7 +332,14 @@ def animar_simulacion(simulador, velocidad_inicial=0.5):
         placeholder_info.caption(f"⏱️ {evento.tiempo:.1f}s | {evento.contenedor_id}: {evento.accion}")
         
         st.session_state.evento_actual = idx + 1
-        time.sleep(velocidad_actual)
+        
+        # ===========================================================
+        # CAMBIO DE LÓGICA: Inversión de velocidad
+        # 0.1 seleccionado -> 0.5/0.1 = 5.0 seg (LENTO)
+        # 2.0 seleccionado -> 0.5/2.0 = 0.25 seg (RÁPIDO)
+        # ===========================================================
+        tiempo_espera = 0.5 / velocidad_seleccionada
+        time.sleep(tiempo_espera)
     
     st.session_state.evento_actual = 0
     st.session_state.animacion_activa = False
