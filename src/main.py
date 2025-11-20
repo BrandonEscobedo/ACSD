@@ -92,11 +92,26 @@ try:
     if not LINEAS_DEMO:
         st.warning("⚠️ No se pudieron cargar las líneas del JSON. Usando valores por defecto.")
         LINEAS_DEMO = [
-            LineaTransportista(1, "Maersk Logistics", True, 92, 88, "contacto@maersk.com"),
-            LineaTransportista(2, "Hapag-Lloyd Express", True, 80, 75, "service@hapag.com"),
-            LineaTransportista(3, "MSC Cargo", False, 85, 70, "ops@msc.com"),
-            LineaTransportista(4, "ONE Transport", True, 78, 90, "support@one.com"),
+            LineaTransportista(1, "CLAUDIA NAYELI AVILA RODRIGUEZ", True, 90, 85, "claudia.avila@example.com"),
+            LineaTransportista(2, "AUTO TRANSPORTES NAVA DEL PACIFICO", True, 88, 80, "contacto@navapacifico.com"),
+            LineaTransportista(3, "JUAN MANUEL PADILLA MARTINEZ", False, 82, 78, "juan.padilla@example.com"),
+            LineaTransportista(4, "LOGÍSTICA Y TRASLADOS BG-TC SA DE CV", True, 87, 83, "contacto@bgtc.com"),
+            LineaTransportista(5, "EXPRESS TRANSOCEÁNICOS, S.A. DE C.V.", True, 85, 80, "info@transoceanicos.com"),
+            LineaTransportista(6, "Felipe de Jesus Bejarano Sanchez", False, 78, 75, "felipe.bejarano@example.com"),
+            LineaTransportista(7, "MEVICH GRUPO EMPRESARIAL", True, 90, 88, "contacto@mevich.com"),
+            LineaTransportista(8, "LOGISTICA Y TRASLADOS BG-TC SA DE CV", True, 87, 83, "contacto@bgtc.com"),
+            LineaTransportista(9, "GRUPO MOC SA DE CV", False, 81, 77, "contacto@grupomoc.com"),
+            LineaTransportista(10, "TRANSPORTES MONTERREY SA DE CV", True, 89, 85, "contacto@transportesmonterrey.com"),
+            LineaTransportista(11, "EFREN BUCIO GALEANA", True, 82, 79, "efren.bucio@example.com"),
+            LineaTransportista(12, "MONTERREY", True, 75, 70, "info@monterrey.com"),
+            LineaTransportista(13, "AUTO EXPRESS TOSCANO", True, 84, 80, "contacto@toscano.com"),
+            LineaTransportista(14, "Nestor Jesús Espinoza Hueso", False, 79, 74, "nestor.espinoza@example.com"),
+            LineaTransportista(15, "SOLUCIONES LOGISTICAS Q DE MEXICO", True, 86, 82, "contacto@slqm.com"),
+            LineaTransportista(16, "TRANSPORTES MONTERREY", True, 88, 84, "info@transportesmonterrey.com"),
+            LineaTransportista(17, "TRAK TRANSPORTACIONES S.A. DE C.V.", True, 83, 78, "contacto@trak.com"),
+            LineaTransportista(18, "CORPORATIVO INTEGRAL DE TRANSPORTE INTERNACIONAL SA DE CV", False, 80, 76, "contacto@citi.com"),
         ]
+
 except Exception as e:
     # Esto atraparía FileNotFoundError si la ruta de PyInstaller falla catastróficamente
     st.error(f"Error fatal al cargar servicio de líneas: {e}")
@@ -302,6 +317,8 @@ def animar_simulacion(simulador, velocidad_inicial=0.5):
         else:
             if st.button("⏸️ Pausar", use_container_width=True):
                 st.session_state.animacion_pausada = True
+                st.session_state.mostrar_panel_interactivo = True
+                st.session_state.animacion_activa = False
                 st.rerun()
     with col_ctrl2:
         if st.button("⏹️ Detener", use_container_width=True):
@@ -446,7 +463,7 @@ if st.session_state.get('simular', False) and st.session_state.simulador_persist
 
     col_btn1, col_btn2, col_btn3 = st.columns(3)
     with col_btn1:
-        if st.button("🎬 Reproducir Animación", type="primary", use_container_width=True):
+        if st.button("Monitoreo de contenedores", type="primary", use_container_width=True):
             st.session_state.animacion_activa = True
             st.session_state.animacion_pausada = False
             st.session_state.evento_actual = 0
@@ -454,13 +471,13 @@ if st.session_state.get('simular', False) and st.session_state.simulador_persist
             st.rerun()
 
     with col_btn2:
-        if st.button("📸 Ver Panel Interactivo", use_container_width=True):
+        if st.button("Contenedores y transporte", use_container_width=True):
             st.session_state.mostrar_panel_interactivo = True
             st.session_state.animacion_activa = False
             st.rerun()
 
     with col_btn3:
-        if st.button("🔄 Reset Vista", use_container_width=True):
+        if st.button("Reiniciar vista", use_container_width=True):
             st.session_state.mostrar_panel_interactivo = False
             st.session_state.animacion_activa = False
             st.session_state.contenedor_seleccionado_id = None
