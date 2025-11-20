@@ -12,7 +12,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 ASSETS_DIR = BASE_DIR / "assets"
 
 # --- BLOQUE DE CARGA DE IMAGEN POR DEFECTO (A PRUEBA DE ERRORES) ---
-# Esto evita que el programa truene si borraste 'contenedor.svg'
 try:
     # 1. Busca todos los SVGs en la carpeta assets
     archivos_svg = list(ASSETS_DIR.glob("*.svg"))
@@ -24,11 +23,10 @@ try:
         svg_b64 = base64.b64encode(svg_bytes).decode("utf-8")
         svg_img = f"data:image/svg+xml;base64,{svg_b64}"
     else:
-        # Si no hay ni uno, usa este cuadrado gris genérico (para no tronar)
+        # Si no hay ni uno, usa este cuadrado gris genérico
         svg_img = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCI+PHJlY3Qgd2lkdGg9IjUwIiBoZWlnaHQ9IjUwIiBmaWxsPSIjY2NjIi8+PC9zdmc+"
 
 except Exception as e:
-    # Si pasa cualquier cosa rara, usa el cuadrado gris
     print(f"⚠️ Advertencia: No se pudo cargar imagen default ({e})")
     svg_img = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCI+PHJlY3Qgd2lkdGg9IjUwIiBoZWlnaHQ9IjUwIiBmaWxsPSIjY2NjIi8+PC9zdmc+"
 # -------------------------------------------------------------------
@@ -425,22 +423,37 @@ with st.sidebar:
     st.markdown("### 🏭 Capacidad del Patio")
     st.info("📦 10 columnas × 4 pisos = 40 contenedores")
 
+# --- CORRECCIÓN DE PERSISTENCIA AQUÍ ---
+# Inicializar la variable de estado si no existe
+if 'simulador_persistente' not in st.session_state:
+    st.session_state.simulador_persistente = None
+
+if 'simular' not in st.session_state:
+    st.session_state.simular = False
+
 col1, col2 = st.columns([1, 3])
 with col1:
     if st.button("▶️ Iniciar Simulación", type="primary"):
         st.session_state['simular'] = True
+        with st.spinner("🔧 Ejecutando SimPy..."):
+            # AQUÍ SE GENERA UNA SOLA VEZ
+            duracion_total = (num_contenedores * intervalo) + 10
+            st.session_state.simulador_persistente = ejecutar_simulacion(
+                num_contenedores, intervalo, duracion_total)
+            st.session_state.evento_actual = 0  # Resetear animación si se inicia de nuevo
+
 with col2:
     if st.button("🔄 Reiniciar"):
         st.session_state['simular'] = False
+        st.session_state.simulador_persistente = None  # Borrar datos viejos
         st.rerun()
 
-# ==================== EJECUTAR SIMULACIÓN ====================
-if st.session_state.get('simular', False):
-    with st.spinner("🔧 Ejecutando SimPy..."):
-        duracion_total = (num_contenedores * intervalo) + 10
-        simulador = ejecutar_simulacion(
-            num_contenedores, intervalo, duracion_total)
-        st.success(f"✅ Simulación terminada: {len(simulador.eventos)} eventos")
+# ==================== USAR DATOS PERSISTENTES ====================
+if st.session_state.get('simular', False) and st.session_state.simulador_persistente:
+    
+    # Usamos la variable guardada en lugar de ejecutar de nuevo
+    simulador = st.session_state.simulador_persistente
+    st.success(f"✅ Simulación terminada: {len(simulador.eventos)} eventos")
 
     # Métricas
     col1, col2, col3, col4 = st.columns(4)
@@ -514,45 +527,60 @@ if st.session_state.get('simular', False):
             if conts_patio:
                 st.markdown("####  Selección Rápida")
 
+                # ------------------------------------------------------------------
+                # CORRECCIÓN DE SINCRONIZACIÓN BOTÓN <-> DROPDOWN
+                # ------------------------------------------------------------------
+
+                # 1. Preparamos la lista de opciones PARA AMBOS (Botones y Selectbox)
+                lista_opciones_dropdown = ["-- Ninguno --"] + [
+                    f"{c.id} (C{c.columna}, P{c.piso})" for c in conts_patio
+                ]
+
+                # 2. Callback para botones
+                def on_click_boton(id_cnt, str_para_dropdown):
+                    st.session_state.contenedor_seleccionado_id = id_cnt
+                    st.session_state.select_contenedor_key = str_para_dropdown
+
                 # Crear grid de botones para selección rápida
                 cols_btns = st.columns(5)
-                # Mostrar primeros 20
-                for idx, cnt in enumerate(conts_patio[:20]):
+                
+                # --- VERIFICACIÓN FINAL: NO HAY [:20] ---
+                for idx, cnt in enumerate(conts_patio):
                     with cols_btns[idx % 5]:
-                        if st.button(
+                        # Calculamos el string exacto que aparecería en el dropdown
+                        str_valor_dropdown = f"{cnt.id} (C{cnt.columna}, P{cnt.piso})"
+
+                        st.button(
                             f"{cnt.id.split('-')[1]}",
                             key=f"btn_{cnt.id}",
                             help=f"{cnt.id} - C{cnt.columna}, P{cnt.piso}",
                             use_container_width=True,
-                            type="primary" if st.session_state.contenedor_seleccionado_id == cnt.id else "secondary"
-                        ):
-                            st.session_state.contenedor_seleccionado_id = cnt.id
-                            st.rerun()
+                            type="primary" if st.session_state.contenedor_seleccionado_id == cnt.id else "secondary",
+                            on_click=on_click_boton,
+                            args=(cnt.id, str_valor_dropdown)
+                        )
 
                 st.markdown("---")
 
-                # Dropdown tradicional como alternativa
-                with st.expander(" Selector por Lista", expanded=False):
-                    opciones = [
-                        "-- Ninguno --"] + [f"{c.id} (C{c.columna}, P{c.piso})" for c in conts_patio]
-                    seleccion = st.selectbox(
-                        "Buscar contenedor:",
-                        opciones,
-                        key="select_contenedor",
-                        index=0 if not st.session_state.contenedor_seleccionado_id else
-                        next((i+1 for i, c in enumerate(conts_patio)
-                              if c.id == st.session_state.contenedor_seleccionado_id), 0)
-                    )
-
+                # 3. Callback para Selectbox
+                def on_change_dropdown():
+                    seleccion = st.session_state.select_contenedor_key
                     if seleccion != "-- Ninguno --":
-                        new_id = seleccion.split()[0]
-                        if new_id != st.session_state.contenedor_seleccionado_id:
-                            st.session_state.contenedor_seleccionado_id = new_id
-                            st.rerun()
+                        nuevo_id = seleccion.split()[0]
+                        st.session_state.contenedor_seleccionado_id = nuevo_id
                     else:
-                        if st.session_state.contenedor_seleccionado_id is not None:
-                            st.session_state.contenedor_seleccionado_id = None
-                            st.rerun()
+                        st.session_state.contenedor_seleccionado_id = None
+
+                with st.expander(" Selector por Lista", expanded=False):
+                    if "select_contenedor_key" not in st.session_state:
+                        st.session_state.select_contenedor_key = "-- Ninguno --"
+
+                    st.selectbox(
+                        "Buscar contenedor:",
+                        options=lista_opciones_dropdown,
+                        key="select_contenedor_key",
+                        on_change=on_change_dropdown
+                    )
 
             # Renderizar patio con contenedor seleccionado
             contenedor_sel = None
