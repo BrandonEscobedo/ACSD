@@ -11,31 +11,59 @@ st.set_page_config(page_title="SimPy + Animación", layout="wide")
 BASE_DIR = Path(__file__).resolve().parent.parent
 ASSETS_DIR = BASE_DIR / "assets"
 
-# --- BLOQUE DE CARGA DE IMAGEN POR DEFECTO (A PRUEBA DE ERRORES) ---
-try:
-    # 1. Busca todos los SVGs en la carpeta assets
-    archivos_svg = list(ASSETS_DIR.glob("*.svg"))
+# ==================== ASSETS Y CONFIGURACIÓN GLOBAL ====================
 
+OPCIONES_VELOCIDAD = [0.1, 0.3, 0.5, 0.8, 1.0, 1.5, 2.0]
+
+# --- CARGA DE IMAGEN CONTENEDOR ---
+try:
+    archivos_svg = list(ASSETS_DIR.glob("*.svg"))
     if archivos_svg:
-        # Si encuentra alguno (el que sea), usa el primero como default
         svg_path = archivos_svg[0]
         svg_bytes = svg_path.read_bytes()
         svg_b64 = base64.b64encode(svg_bytes).decode("utf-8")
         svg_img = f"data:image/svg+xml;base64,{svg_b64}"
     else:
-        # Si no hay ni uno, usa este cuadrado gris genérico
         svg_img = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCI+PHJlY3Qgd2lkdGg9IjUwIiBoZWlnaHQ9IjUwIiBmaWxsPSIjY2NjIi8+PC9zdmc+"
-
 except Exception as e:
     print(f"⚠️ Advertencia: No se pudo cargar imagen default ({e})")
     svg_img = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCI+PHJlY3Qgd2lkdGg9IjUwIiBoZWlnaHQ9IjUwIiBmaWxsPSIjY2NjIi8+PC9zdmc+"
+
+# --- CARGA DEL LOADER ANIMADO ---
+loader_svg = """
+<svg version="1.1" id="L2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+  viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+  <circle fill="none" stroke="#fff" stroke-width="4" stroke-miterlimit="10" cx="50" cy="50" r="48"/>
+  <line fill="none" stroke-linecap="round" stroke="#fff" stroke-width="4" stroke-miterlimit="10" x1="50" y1="50" x2="85" y2="50.5">
+    <animateTransform 
+       attributeName="transform" 
+       attributeType="XML" 
+       type="rotate"
+       from="0 50 50"
+       to="360 50 50"
+       dur="2s" 
+       repeatCount="indefinite" />
+  </line>
+  <line fill="none" stroke-linecap="round" stroke="#fff" stroke-width="4" stroke-miterlimit="10" x1="50" y1="50" x2="49.5" y2="72">
+    <animateTransform 
+       attributeName="transform" 
+       attributeType="XML" 
+       type="rotate"
+       from="0 50 50"
+       to="360 50 50"
+       dur="2s" 
+       repeatCount="indefinite" />
+  </line>
+</svg>
+"""
+loader_b64 = base64.b64encode(loader_svg.encode('utf-8')).decode("utf-8")
+loader_img = f"data:image/svg+xml;base64,{loader_b64}"
+
 # -------------------------------------------------------------------
 
 LINEAS_DEMO = [
-    LineaTransportista(1, "Maersk Logistics", True,
-                       92, 88, "contacto@maersk.com"),
-    LineaTransportista(2, "Hapag-Lloyd Express", True,
-                       80, 75, "service@hapag.com"),
+    LineaTransportista(1, "Maersk Logistics", True, 92, 88, "contacto@maersk.com"),
+    LineaTransportista(2, "Hapag-Lloyd Express", True, 80, 75, "service@hapag.com"),
     LineaTransportista(3, "MSC Cargo", False, 85, 70, "ops@msc.com"),
     LineaTransportista(4, "ONE Transport", True, 78, 90, "support@one.com"),
 ]
@@ -43,9 +71,32 @@ LINEAS_DEMO = [
 TIEMPO_BUQUE_A_PISO = 2.0
 TIEMPO_PISO_A_PATIO = 1.5
 
+# ==================== FUNCIONES DE UTILERÍA ====================
+
+def mostrar_loader_overlay(mensaje="Cargando..."):
+    html_loader = f"""
+    <div id="loader-overlay" style="
+        position: fixed;
+        top: 0; left: 0;
+        width: 100vw; height: 100vh;
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(8px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 99999;
+        color: white;
+        font-size: 24px;
+        text-shadow: 0 0 10px rgba(0,255,255,0.5);
+    ">
+        <img src="{loader_img}" style="width: 120px; height: 120px; margin-bottom: 20px;">
+        <p style="font-weight: bold;">{mensaje}</p>
+    </div>
+    """
+    st.markdown(html_loader, unsafe_allow_html=True)
 
 def crear_zona_buque_piso(zona_nombre, zona_info, contenedores):
-    """Crea HTML para zonas BUQUE y PISO (sin estructura de matriz)"""
     html = f"""
     <div style="position: relative; width: 100%; height: 200px;
         border: 4px solid {zona_info['color']};
@@ -63,12 +114,8 @@ def crear_zona_buque_piso(zona_nombre, zona_info, contenedores):
             {len(contenedores)} 📦
         </div>
     """
-
     for idx, cnt in enumerate(contenedores[:15]):
-        # Usar imagen del contenedor o la default si no tiene
-        src_final = cnt.imagen_src if hasattr(
-            cnt, 'imagen_src') and cnt.imagen_src else svg_img
-
+        src_final = cnt.imagen_src if hasattr(cnt, 'imagen_src') and cnt.imagen_src else svg_img
         html += f"""
         <img src="{src_final}" style="
             position:absolute; left:{200 + idx*60}px; top:50%;
@@ -77,34 +124,22 @@ def crear_zona_buque_piso(zona_nombre, zona_info, contenedores):
             transition:all .4s ease;
             filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));">
         """
-
     html += "</div>"
     return html
 
-
 def crear_zona_patio_3d(patio_matriz, contenedor_activo=None, contenedor_seleccionado=None):
-    """
-    Crea visualización 3D del patio con columnas y pisos
-    patio_matriz: lista de listas [columna][piso] = Contenedor o None
-    """
     NUM_COLUMNAS = 10
     NUM_PISOS = 4
 
-    # Generar script JavaScript para manejar clicks
     js_click_handler = """
     <script>
     function selectContainer(containerId) {
-        // Enviar mensaje al parent (Streamlit)
         window.parent.postMessage({
             type: 'streamlit:setComponentValue',
             key: 'selected_container',
             value: containerId
         }, '*');
-        
-        // Guardar en localStorage para persistencia
         localStorage.setItem('selected_container_id', containerId);
-        
-        // Recargar para actualizar Streamlit
         window.parent.location.reload();
     }
     </script>
@@ -130,15 +165,9 @@ def crear_zona_patio_3d(patio_matriz, contenedor_activo=None, contenedor_selecci
             {sum(1 for col in patio_matriz for cnt in col if cnt is not None)} 📦
         </div>
         
-        <div style="position:absolute; left:20px; top:60px;
-            font-size:12px; color:#666; font-style:italic;">
-            💡 Haz click en cualquier contenedor para ver su información
-        </div>
-        
         <div style="margin-top: 100px; display: flex; justify-content: center; gap: 8px;">
     """
 
-    # Iterar por cada columna
     for col_idx in range(NUM_COLUMNAS):
         html += f"""
         <div style="display: flex; flex-direction: column-reverse; align-items: center; gap: 4px;">
@@ -147,21 +176,13 @@ def crear_zona_patio_3d(patio_matriz, contenedor_activo=None, contenedor_selecci
                 C{col_idx}
             </div>
         """
-
-        # Iterar por cada piso (de abajo hacia arriba)
         for piso_idx in range(NUM_PISOS):
-            contenedor = patio_matriz[col_idx][piso_idx] if col_idx < len(
-                patio_matriz) else None
+            contenedor = patio_matriz[col_idx][piso_idx] if col_idx < len(patio_matriz) else None
 
-            # Verificar si es el contenedor activo o seleccionado
-            is_active = (contenedor_activo and contenedor and
-                         contenedor.id == contenedor_activo.id)
-            is_selected = (contenedor_seleccionado and contenedor and
-                           contenedor.id == contenedor_seleccionado.id)
+            is_active = (contenedor_activo and contenedor and contenedor.id == contenedor_activo.id)
+            is_selected = (contenedor_seleccionado and contenedor and contenedor.id == contenedor_seleccionado.id)
 
-            # Colores según estado
             if contenedor is None:
-                # Espacio vacío
                 html += f"""
                 <div style="width: 45px; height: 45px; 
                     border: 2px dashed #ccc; border-radius: 6px;
@@ -172,29 +193,24 @@ def crear_zona_patio_3d(patio_matriz, contenedor_activo=None, contenedor_selecci
                 </div>
                 """
             else:
-                # Contenedor presente
-                src_patio = contenedor.imagen_src if hasattr(
-                    contenedor, 'imagen_src') and contenedor.imagen_src else svg_img
+                src_patio = contenedor.imagen_src if hasattr(contenedor, 'imagen_src') and contenedor.imagen_src else svg_img
 
                 if is_selected:
-                    border_style = "3px solid #FF9800"    # Marco NARANJA grueso
+                    border_style = "3px solid #FF9800"
                     shadow = "0 0 15px rgba(255,152,0,0.8)"
                     scale = "1.2"
                     z_index = "10"
-
                 elif is_active:
-                    border_style = "3px solid #4CAF50"    # Marco VERDE grueso
+                    border_style = "3px solid #4CAF50"
                     shadow = "0 0 15px rgba(76,175,80,0.8)"
                     scale = "1.15"
                     z_index = "5"
                 else:
-                    # Marco AZUL (Almacenado)
                     border_style = "2px solid #2196F3"
                     shadow = "0 3px 6px rgba(0,0,0,0.2)"
                     scale = "1.0"
                     z_index = "1"
 
-                # IMPORTANTE: Fondo transparente para que se vea tu imagen
                 bg_color = "transparent"
 
                 html += f"""
@@ -221,96 +237,28 @@ def crear_zona_patio_3d(patio_matriz, contenedor_activo=None, contenedor_selecci
                         pointer-events: none;">
                         {contenedor.id.split('-')[1]}
                     </div>
-                    
-                    <div style="position: absolute; bottom: 110%; left: 50%;
-                        transform: translateX(-50%);
-                        background: rgba(0,0,0,0.9); color: white;
-                        padding: 8px 12px; border-radius: 8px;
-                        font-size: 11px; white-space: nowrap;
-                        opacity: 0; pointer-events: none;
-                        transition: opacity 0.2s;
-                        z-index: 1000;">
-                        <strong>{contenedor.id}</strong><br>
-                        📍 C{col_idx}, P{piso_idx}<br>
-                        🖱️ Click para detalles
-                        <div style="position: absolute; top: 100%; left: 50%;
-                            transform: translateX(-50%);
-                            border: 5px solid transparent;
-                            border-top-color: rgba(0,0,0,0.9);"></div>
-                    </div>
                 </div>
-                <style>
-                    div[onclick]:hover > div:last-child {{
-                        opacity: 1 !important;
-                    }}
-                </style>
                 """
-
-        html += "</div>"  # Cerrar columna
-
-    html += """
-        </div>
-        
-        <div style="margin-top: 20px; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
-            <div style="display: flex; align-items: center; gap: 6px;">
-                <div style="width: 18px; height: 18px; background: transparent; border: 2px solid #FF9800; border-radius: 4px;"></div>
-                <span style="font-size: 12px;">Seleccionado</span>
-            </div>
-            <div style="display: flex; align-items: center; gap: 6px;">
-                <div style="width: 18px; height: 18px; background: transparent; border: 2px solid #4CAF50; border-radius: 4px;"></div>
-                <span style="font-size: 12px;">Activo</span>
-            </div>
-            <div style="display: flex; align-items: center; gap: 6px;">
-                <div style="width: 18px; height: 18px; background: transparent; border: 2px solid #2196F3; border-radius: 4px;"></div>
-                <span style="font-size: 12px;">Almacenado</span>
-            </div>
-            <div style="display: flex; align-items: center; gap: 6px;">
-                <div style="width: 18px; height: 18px; border: 2px dashed #ccc; border-radius: 4px;"></div>
-                <span style="font-size: 12px;">Vacío</span>
-            </div>
-        </div>
-    </div>
-    """
-
+        html += "</div>"
+    html += "</div></div>"
     return html
 
-
 def crear_escena_html_completa(contenedores_por_zona, patio_matriz, contenedor_activo=None, contenedor_seleccionado=None):
-    """Crea la escena completa con las 3 zonas"""
     ZONAS = {
         "BUQUE": {"color": "#2E86AB", "label": "🚢 Buque"},
         "PISO": {"color": "#A23B72", "label": "📍 Piso"},
     }
-
     html = "<div style='padding: 20px;'>"
-
-    # Zona BUQUE
-    html += crear_zona_buque_piso("BUQUE",
-                                  ZONAS["BUQUE"], contenedores_por_zona.get("BUQUE", []))
-
-    # Zona PISO
-    html += crear_zona_buque_piso("PISO",
-                                  ZONAS["PISO"], contenedores_por_zona.get("PISO", []))
-
-    # Zona PATIO (con visualización 3D) - ahora acepta contenedor_seleccionado
-    html += crear_zona_patio_3d(patio_matriz,
-                                contenedor_activo, contenedor_seleccionado)
-
+    html += crear_zona_buque_piso("BUQUE", ZONAS["BUQUE"], contenedores_por_zona.get("BUQUE", []))
+    html += crear_zona_buque_piso("PISO", ZONAS["PISO"], contenedores_por_zona.get("PISO", []))
+    html += crear_zona_patio_3d(patio_matriz, contenedor_activo, contenedor_seleccionado)
     html += "</div>"
     return html
 
-
-def animar_simulacion(simulador, velocidad=0.5):
-    """Anima la simulación mostrando el patio 3D con controles compactos"""
-
-    # Barra de controles compacta en la parte superior
+def animar_simulacion(simulador, velocidad_inicial=0.5):
     st.markdown("### 🎬 Visualización en Tiempo Real")
+    col_ctrl1, col_ctrl2, col_ctrl3, col_ctrl4, col_ctrl5 = st.columns([1, 1, 1, 2, 2])
 
-    # Controles en una fila horizontal
-    col_ctrl1, col_ctrl2, col_ctrl3, col_ctrl4, col_ctrl5 = st.columns([
-                                                                       1, 1, 1, 2, 2])
-
-    # Botones de control
     if 'animacion_pausada' not in st.session_state:
         st.session_state.animacion_pausada = False
 
@@ -323,111 +271,108 @@ def animar_simulacion(simulador, velocidad=0.5):
             if st.button("⏸️ Pausar", use_container_width=True):
                 st.session_state.animacion_pausada = True
                 st.rerun()
-
     with col_ctrl2:
         if st.button("⏹️ Detener", use_container_width=True):
             st.session_state.animacion_activa = False
             st.rerun()
-
+    
     with col_ctrl3:
-        # Selector de velocidad compacto
-        velocidad_actual = st.select_slider(
-            "Velocidad",
-            options=[0.1, 0.3, 0.5, 0.8, 1.0, 1.5, 2.0],
-            value=velocidad,
-            key="vel_anim"
-        )
+        val_init = velocidad_inicial if velocidad_inicial in OPCIONES_VELOCIDAD else 0.5
+        velocidad_seleccionada = st.select_slider("Velocidad", options=OPCIONES_VELOCIDAD, value=val_init, key="vel_anim")
 
-    # Placeholders para progreso e info en las columnas restantes
-    with col_ctrl4:
-        placeholder_progreso = st.empty()
-
-    with col_ctrl5:
-        placeholder_info = st.empty()
-
-    # Visualización a pantalla completa
+    placeholder_progreso = col_ctrl4.empty()
+    placeholder_info = col_ctrl5.empty()
     placeholder_escena = st.empty()
 
     contenedores_por_zona = {"BUQUE": [], "PISO": [], "PATIO": []}
     patio_temporal = [[None for _ in range(4)] for _ in range(10)]
 
-    # Guardar el estado actual en session_state
     if 'evento_actual' not in st.session_state:
         st.session_state.evento_actual = 0
 
-    for idx, evento in enumerate(simulador.eventos[st.session_state.evento_actual:],
-                                 start=st.session_state.evento_actual):
+    # ==============================================================================
+    #  CORRECCIÓN DE ELEMENTOS DESAPARECIDOS: RECONSTRUCCIÓN DE ESTADO (FAST-FORWARD)
+    # ==============================================================================
+    # Antes de empezar el bucle visible, procesamos TODOS los eventos pasados 
+    # instantáneamente para llenar las variables contenedores_por_zona y patio_temporal.
+    # Esto evita que al pausar/cambiar velocidad, los contenedores viejos desaparezcan.
+    
+    if st.session_state.evento_actual > 0:
+        for i in range(st.session_state.evento_actual):
+            # Obtenemos el evento pasado
+            evt_pasado = simulador.eventos[i]
+            # Buscamos el contenedor
+            c_pasado = next(c for c in simulador.contenedores if c.id == evt_pasado.contenedor_id)
+            
+            # Aplicamos la misma lógica de movimiento pero SIN sleep y SIN renderizar
+            for zona in contenedores_por_zona.values():
+                if c_pasado in zona: zona.remove(c_pasado)
+            
+            if evt_pasado.destino in contenedores_por_zona:
+                contenedores_por_zona[evt_pasado.destino].append(c_pasado)
+                if evt_pasado.destino == "PATIO" and c_pasado.columna is not None and c_pasado.piso is not None:
+                    patio_temporal[c_pasado.columna][c_pasado.piso] = c_pasado
 
-        # Verificar si se debe detener
-        if not st.session_state.get('animacion_activa', True):
-            break
+    # ==============================================================================
+    #  BUCLE DE ANIMACIÓN VISIBLE (Desde el evento actual en adelante)
+    # ==============================================================================
 
-        # Verificar pausa
+    for idx, evento in enumerate(simulador.eventos[st.session_state.evento_actual:], start=st.session_state.evento_actual):
+        if not st.session_state.get('animacion_activa', True): break
         while st.session_state.animacion_pausada:
             time.sleep(0.5)
-            if not st.session_state.get('animacion_activa', True):
-                break
+            if not st.session_state.get('animacion_activa', True): break
 
-        cont = next(c for c in simulador.contenedores if c.id ==
-                    evento.contenedor_id)
-
-        # Actualizar zonas
+        cont = next(c for c in simulador.contenedores if c.id == evento.contenedor_id)
+        
+        # 1. Quitar de zona anterior
         for zona in contenedores_por_zona.values():
-            if cont in zona:
-                zona.remove(cont)
-
+            if cont in zona: zona.remove(cont)
+        
+        # 2. Poner en zona nueva
         if evento.destino in contenedores_por_zona:
             contenedores_por_zona[evento.destino].append(cont)
-
             if evento.destino == "PATIO" and cont.columna is not None and cont.piso is not None:
                 patio_temporal[cont.columna][cont.piso] = cont
 
-        # Actualizar visualización a pantalla completa
-        html = crear_escena_html_completa(
-            contenedores_por_zona, patio_temporal, cont)
+        # 3. Renderizar
+        html = crear_escena_html_completa(contenedores_por_zona, patio_temporal, cont)
         placeholder_escena.html(html)
-
-        # Actualizar info en barra superior
+        
         progreso = (idx + 1) / len(simulador.eventos) * 100
-        placeholder_progreso.progress(
-            progreso / 100, text=f"Evento {idx + 1}/{len(simulador.eventos)}")
-        placeholder_info.caption(
-            f"⏱️ {evento.tiempo:.1f}s | {evento.contenedor_id}: {evento.accion}")
-
-        # Guardar estado actual
+        placeholder_progreso.progress(progreso / 100, text=f"Evento {idx + 1}/{len(simulador.eventos)}")
+        placeholder_info.caption(f"⏱️ {evento.tiempo:.1f}s | {evento.contenedor_id}: {evento.accion}")
+        
         st.session_state.evento_actual = idx + 1
+        
+        # Control de velocidad
+        tiempo_espera = 0.5 / velocidad_seleccionada
+        time.sleep(tiempo_espera)
 
-        time.sleep(velocidad_actual)
-
-    # Limpiar estado al finalizar
     st.session_state.evento_actual = 0
     st.session_state.animacion_activa = False
 
 
 # ==================== INTERFAZ ====================
 st.title("🚢 Simulación: Buque → Piso → Patio 3D")
-st.markdown("**SimPy + Visualización de Columnas y Pisos**")
 
 with st.sidebar:
     st.header("⚙️ Configuración")
     num_contenedores = st.slider("Número de contenedores", 1, 40, 15)
     intervalo = st.slider("Intervalo entre llegadas", 0.5, 5.0, 1.5)
-    velocidad_animacion = st.slider("Velocidad de animación", 0.1, 2.0, 0.3)
-
+    velocidad_animacion = st.select_slider(
+        "Velocidad de animación", 
+        options=OPCIONES_VELOCIDAD, 
+        value=0.3
+    )
     st.markdown("---")
-    st.markdown("### 📊 Tiempos del Sistema")
     st.info(f"⏱️ Buque → Piso: {TIEMPO_BUQUE_A_PISO}u")
     st.info(f"⏱️ Piso → Patio: {TIEMPO_PISO_A_PATIO}u")
-
-    st.markdown("---")
-    st.markdown("### 🏭 Capacidad del Patio")
     st.info("📦 10 columnas × 4 pisos = 40 contenedores")
 
-# --- CORRECCIÓN DE PERSISTENCIA AQUÍ ---
-# Inicializar la variable de estado si no existe
+# Estado inicial
 if 'simulador_persistente' not in st.session_state:
     st.session_state.simulador_persistente = None
-
 if 'simular' not in st.session_state:
     st.session_state.simular = False
 
@@ -435,43 +380,45 @@ col1, col2 = st.columns([1, 3])
 with col1:
     if st.button("▶️ Iniciar Simulación", type="primary"):
         st.session_state['simular'] = True
-        with st.spinner("🔧 Ejecutando SimPy..."):
-            # AQUÍ SE GENERA UNA SOLA VEZ
-            duracion_total = (num_contenedores * intervalo) + 10
-            st.session_state.simulador_persistente = ejecutar_simulacion(
-                num_contenedores, intervalo, duracion_total)
-            st.session_state.evento_actual = 0  # Resetear animación si se inicia de nuevo
+        st.session_state['mostrar_loader'] = True
+        st.rerun()
 
 with col2:
     if st.button("🔄 Reiniciar"):
         st.session_state['simular'] = False
-        st.session_state.simulador_persistente = None  # Borrar datos viejos
+        st.session_state.simulador_persistente = None
+        st.session_state['mostrar_loader'] = False
+        # Limpiar también estados de asignación
+        if 'asignacion_resultados' in st.session_state: del st.session_state['asignacion_resultados']
         st.rerun()
 
-# ==================== USAR DATOS PERSISTENTES ====================
+# ==================== LÓGICA PRINCIPAL CON LOADER ====================
+
+# 1. Si hay que mostrar loader (INICIO), lo mostramos
+if st.session_state.get('mostrar_loader', False):
+    mostrar_loader_overlay("Calculando simulación...")
+    duracion_total = (num_contenedores * intervalo) + 10
+    st.session_state.simulador_persistente = ejecutar_simulacion(num_contenedores, intervalo, duracion_total)
+    st.session_state.evento_actual = 0
+    time.sleep(1)
+    st.session_state['mostrar_loader'] = False
+    st.rerun()
+
+# 2. Si ya tenemos datos persistentes, mostramos la interfaz
 if st.session_state.get('simular', False) and st.session_state.simulador_persistente:
     
-    # Usamos la variable guardada en lugar de ejecutar de nuevo
     simulador = st.session_state.simulador_persistente
     st.success(f"✅ Simulación terminada: {len(simulador.eventos)} eventos")
 
-    # Métricas
     col1, col2, col3, col4 = st.columns(4)
-    with col1:
-        st.metric("Procesados", len(simulador.contenedores))
-    with col2:
-        en_patio = sum(
-            1 for c in simulador.contenedores if c.posicion_actual == "PATIO")
-        st.metric("En Patio", en_patio)
-    with col3:
-        capacidad_usada = (en_patio / 40) * 100
-        st.metric("Ocupación", f"{capacidad_usada:.1f}%")
-    with col4:
-        st.metric("Eventos", len(simulador.eventos))
+    with col1: st.metric("Procesados", len(simulador.contenedores))
+    en_patio = sum(1 for c in simulador.contenedores if c.posicion_actual == "PATIO")
+    with col2: st.metric("En Patio", en_patio)
+    with col3: st.metric("Ocupación", f"{(en_patio / 40) * 100:.1f}%")
+    with col4: st.metric("Eventos", len(simulador.eventos))
 
     st.markdown("---")
 
-    # Botón de animación
     col_btn1, col_btn2, col_btn3 = st.columns(3)
     with col_btn1:
         if st.button("🎬 Reproducir Animación", type="primary", use_container_width=True):
@@ -496,60 +443,34 @@ if st.session_state.get('simular', False) and st.session_state.simulador_persist
 
     st.markdown("---")
 
-    # ========== DECIDIR QUÉ MOSTRAR ==========
     if st.session_state.get('animacion_activa', False):
-        # Ejecutar animación
         animar_simulacion(simulador, velocidad_animacion)
-        # Después de terminar, mostrar panel interactivo
         st.session_state.mostrar_panel_interactivo = True
         st.session_state.animacion_activa = False
         st.rerun()
 
-    # ========== VISTA ESTÁTICA INTERACTIVA ==========
     if st.session_state.get('mostrar_panel_interactivo', True):
-        # Modo estático interactivo
-
-        # ========== LAYOUT CON COLUMNAS: PATIO + PANEL LATERAL ==========
         col_patio, col_panel = st.columns([3, 1])
 
         with col_patio:
             st.markdown("### 🏭 Estado del Patio (Interactivo)")
-
-            # Inicializar contenedor seleccionado en session_state
             if 'contenedor_seleccionado_id' not in st.session_state:
                 st.session_state.contenedor_seleccionado_id = None
 
-            # Contenedores en el patio
-            conts_patio = [
-                c for c in simulador.contenedores if c.posicion_actual == "PATIO"]
+            conts_patio = [c for c in simulador.contenedores if c.posicion_actual == "PATIO"]
 
-            # Selector de contenedor con botones en grid
             if conts_patio:
                 st.markdown("####  Selección Rápida")
+                lista_opciones_dropdown = ["-- Ninguno --"] + [f"{c.id} (C{c.columna}, P{c.piso})" for c in conts_patio]
 
-                # ------------------------------------------------------------------
-                # CORRECCIÓN DE SINCRONIZACIÓN BOTÓN <-> DROPDOWN
-                # ------------------------------------------------------------------
-
-                # 1. Preparamos la lista de opciones PARA AMBOS (Botones y Selectbox)
-                lista_opciones_dropdown = ["-- Ninguno --"] + [
-                    f"{c.id} (C{c.columna}, P{c.piso})" for c in conts_patio
-                ]
-
-                # 2. Callback para botones
                 def on_click_boton(id_cnt, str_para_dropdown):
                     st.session_state.contenedor_seleccionado_id = id_cnt
                     st.session_state.select_contenedor_key = str_para_dropdown
 
-                # Crear grid de botones para selección rápida
                 cols_btns = st.columns(5)
-                
-                # --- VERIFICACIÓN FINAL: NO HAY [:20] ---
                 for idx, cnt in enumerate(conts_patio):
                     with cols_btns[idx % 5]:
-                        # Calculamos el string exacto que aparecería en el dropdown
                         str_valor_dropdown = f"{cnt.id} (C{cnt.columna}, P{cnt.piso})"
-
                         st.button(
                             f"{cnt.id.split('-')[1]}",
                             key=f"btn_{cnt.id}",
@@ -562,153 +483,107 @@ if st.session_state.get('simular', False) and st.session_state.simulador_persist
 
                 st.markdown("---")
 
-                # 3. Callback para Selectbox
                 def on_change_dropdown():
                     seleccion = st.session_state.select_contenedor_key
                     if seleccion != "-- Ninguno --":
-                        nuevo_id = seleccion.split()[0]
-                        st.session_state.contenedor_seleccionado_id = nuevo_id
+                        st.session_state.contenedor_seleccionado_id = seleccion.split()[0]
                     else:
                         st.session_state.contenedor_seleccionado_id = None
 
                 with st.expander(" Selector por Lista", expanded=False):
                     if "select_contenedor_key" not in st.session_state:
                         st.session_state.select_contenedor_key = "-- Ninguno --"
+                    st.selectbox("Buscar contenedor:", options=lista_opciones_dropdown, key="select_contenedor_key", on_change=on_change_dropdown)
 
-                    st.selectbox(
-                        "Buscar contenedor:",
-                        options=lista_opciones_dropdown,
-                        key="select_contenedor_key",
-                        on_change=on_change_dropdown
-                    )
-
-            # Renderizar patio con contenedor seleccionado
             contenedor_sel = None
             if st.session_state.contenedor_seleccionado_id:
-                contenedor_sel = next((c for c in conts_patio
-                                       if c.id == st.session_state.contenedor_seleccionado_id), None)
+                contenedor_sel = next((c for c in conts_patio if c.id == st.session_state.contenedor_seleccionado_id), None)
 
-            html_patio = crear_zona_patio_3d(
-                simulador.patio, None, contenedor_sel)
+            html_patio = crear_zona_patio_3d(simulador.patio, None, contenedor_sel)
             st.html(html_patio)
 
-            # Info rápida
             col_a, col_b, col_c = st.columns(3)
-            with col_a:
-                st.metric("Total en Patio", len(conts_patio))
-            with col_b:
-                ocupacion_pct = (len(conts_patio) / 40) * 100
-                st.metric("Ocupación", f"{ocupacion_pct:.1f}%")
-            with col_c:
-                disponibles = 40 - len(conts_patio)
-                st.metric("Disponibles", disponibles)
+            with col_a: st.metric("Total en Patio", len(conts_patio))
+            with col_b: st.metric("Ocupación", f"{(len(conts_patio) / 40) * 100:.1f}%")
+            with col_c: st.metric("Disponibles", 40 - len(conts_patio))
 
         with col_panel:
             st.markdown("###  Información del Contenedor")
-
             if st.session_state.contenedor_seleccionado_id and contenedor_sel:
-                # ========== TARJETA DE INFORMACIÓN ==========
                 st.markdown(f"""
                 <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
                     padding: 20px; border-radius: 15px; color: white;
                     box-shadow: 0 4px 8px rgba(0,0,0,0.2); margin-bottom: 20px;">
                     <h3 style="margin: 0 0 15px 0;">📦 {contenedor_sel.id}</h3>
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                        <div>
-                            <div style="font-size: 12px; opacity: 0.9;">Posición</div>
-                            <div style="font-size: 18px; font-weight: bold;">
-                                Columna {contenedor_sel.columna}, Piso {contenedor_sel.piso}
-                            </div>
-                        </div>
-                        <div>
-                            <div style="font-size: 12px; opacity: 0.9;">Estado</div>
-                            <div style="font-size: 14px; font-weight: bold;">
-                                {contenedor_sel.estado}
-                            </div>
-                        </div>
-                        <div>
-                            <div style="font-size: 12px; opacity: 0.9;">Tiempo Llegada</div>
-                            <div style="font-size: 16px;">{contenedor_sel.tiempo_llegada:.2f}u</div>
-                        </div>
-                        <div>
-                            <div style="font-size: 12px; opacity: 0.9;">Posición Actual</div>
-                            <div style="font-size: 16px;">{contenedor_sel.posicion_actual}</div>
-                        </div>
+                        <div><div style="font-size: 12px; opacity: 0.9;">Posición</div><div style="font-size: 18px; font-weight: bold;">C{contenedor_sel.columna}, P{contenedor_sel.piso}</div></div>
+                        <div><div style="font-size: 12px; opacity: 0.9;">Estado</div><div style="font-size: 14px; font-weight: bold;">{contenedor_sel.estado}</div></div>
+                        <div><div style="font-size: 12px; opacity: 0.9;">Tiempo Llegada</div><div style="font-size: 16px;">{contenedor_sel.tiempo_llegada:.2f}u</div></div>
+                        <div><div style="font-size: 12px; opacity: 0.9;">Posición Actual</div><div style="font-size: 16px;">{contenedor_sel.posicion_actual}</div></div>
                     </div>
                 </div>
                 """, unsafe_allow_html=True)
 
-                # ========== ANÁLISIS DE LÍNEA ==========
                 st.markdown("###  Análisis de Línea Transportista")
 
+                # 1. Botón activa estado de carga
                 if st.button(" Asignar Línea de Transporte", type="primary", use_container_width=True):
-                    with st.spinner("Analizando líneas disponibles..."):
-                        mejor, resultados = simular_asignacion(
-                            contenedor_sel, LINEAS_DEMO)
+                    st.session_state['cargando_asignacion'] = True
+                    st.rerun()
 
-                        st.subheader("📊 Resultados por Línea")
-                        df_resultados = pd.DataFrame(resultados)
-                        st.dataframe(df_resultados, use_container_width=True)
+                # 2. Si está en carga, muestra loader y calcula
+                if st.session_state.get('cargando_asignacion', False):
+                    mostrar_loader_overlay("Analizando líneas de transporte...")
+                    time.sleep(2) # Simular tiempo de análisis
+                    
+                    mejor, resultados = simular_asignacion(contenedor_sel, LINEAS_DEMO)
+                    
+                    # Guardamos resultado vinculado al contenedor ID
+                    st.session_state.asignacion_resultados = {
+                        'id_contenedor': contenedor_sel.id,
+                        'mejor': mejor,
+                        'resultados': resultados
+                    }
+                    st.session_state['cargando_asignacion'] = False
+                    st.rerun()
 
-                        if mejor:
-                            st.success(
-                                f"⭐ **Línea Recomendada:** {mejor['línea']}")
+                # 3. Si hay resultados guardados para ESTE contenedor, los mostramos
+                if 'asignacion_resultados' in st.session_state and \
+                   st.session_state.asignacion_resultados.get('id_contenedor') == contenedor_sel.id:
+                    
+                    res_data = st.session_state.asignacion_resultados
+                    mejor = res_data['mejor']
+                    resultados = res_data['resultados']
 
-                            col_a, col_b, col_c = st.columns(3)
-                            with col_a:
-                                st.metric(
-                                    "🎯 Puntaje", f"{mejor['puntaje']:.2f}")
-                            with col_b:
-                                st.metric("✅ Cumplimiento",
-                                          f"{mejor['cumplimiento']}%")
-                            with col_c:
-                                st.metric("⏱️ Lead Time",
-                                          f"{mejor['lead_time']:.1f}h")
+                    st.subheader("📊 Resultados por Línea")
+                    df_resultados = pd.DataFrame(resultados)
+                    st.dataframe(df_resultados, use_container_width=True)
+                    
+                    if mejor:
+                        st.success(f"⭐ **Línea Recomendada:** {mejor['línea']}")
+                        col_a, col_b, col_c = st.columns(3)
+                        with col_a: st.metric("🎯 Puntaje", f"{mejor['puntaje']:.2f}")
+                        with col_b: st.metric("✅ Cumplimiento", f"{mejor['cumplimiento']}%")
+                        with col_c: st.metric("⏱️ Lead Time", f"{mejor['lead_time']:.1f}h")
+                        st.info(f"📞 **Contacto:** {mejor['contacto']}")
+                        
+                        import plotly.express as px
+                        st.markdown("#### 📈 Comparación de Puntajes")
+                        fig = px.bar(df_resultados, x='línea', y='puntaje', color='puntaje', title='Puntaje por Línea')
+                        st.plotly_chart(fig, use_container_width=True)
 
-                            st.info(f"📞 **Contacto:** {mejor['contacto']}")
-
-                            # Gráfico comparativo
-                            st.markdown("#### 📈 Comparación de Puntajes")
-                            import plotly.express as px
-                            fig = px.bar(df_resultados, x='línea', y='puntaje',
-                                         color='puntaje',
-                                         color_continuous_scale='Viridis',
-                                         title='Puntaje por Línea Transportista')
-                            st.plotly_chart(fig, use_container_width=True)
             else:
-                st.info(
-                    " Selecciona un contenedor del patio para ver su información y asignar línea")
+                st.info(" Selecciona un contenedor del patio para ver su información y asignar línea")
+                st.markdown("""<div style="text-align: center; padding: 40px; background: #f0f0f0; border-radius: 15px; margin-top: 20px;"><div style="font-size: 80px;">📦</div><p style="color: #666;">Selecciona un contenedor</p></div>""", unsafe_allow_html=True)
 
-                # Placeholder visual
-                st.markdown("""
-                <div style="text-align: center; padding: 40px; background: #f0f0f0; 
-                    border-radius: 15px; margin-top: 20px;">
-                    <div style="font-size: 80px;">📦</div>
-                    <p style="color: #666; margin-top: 20px;">
-                        Selecciona un contenedor<br>para ver sus detalles
-                    </p>
-                </div>
-                """, unsafe_allow_html=True)
-
-    # Tabla de eventos
     with st.expander("📊 Ver Tabla de Eventos"):
-        df = pd.DataFrame([{
-            "Tiempo": f"{e.tiempo:.2f}",
-            "Contenedor": e.contenedor_id,
-            "Acción": e.accion,
-            "Origen": e.origen,
-            "Destino": e.destino
-        } for e in simulador.eventos])
+        df = pd.DataFrame([{ "Tiempo": f"{e.tiempo:.2f}", "Contenedor": e.contenedor_id, "Acción": e.accion, "Origen": e.origen, "Destino": e.destino } for e in simulador.eventos])
         st.dataframe(df, use_container_width=True)
 
 else:
     st.info(" Configura los parámetros en el sidebar y presiona **Iniciar Simulación**")
-
-    # Inicializar el estado para mostrar panel por defecto
     if 'mostrar_panel_interactivo' not in st.session_state:
         st.session_state.mostrar_panel_interactivo = False
-
-    # Vista previa estática del patio
     st.markdown("### 👀 Vista Previa del Patio")
     patio_vacio = [[None for _ in range(4)] for _ in range(10)]
     st.html(crear_zona_patio_3d(patio_vacio))
