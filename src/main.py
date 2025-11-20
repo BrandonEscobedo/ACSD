@@ -145,34 +145,38 @@ def crear_zona_patio_3d(patio_matriz, contenedor_activo=None, contenedor_selecci
     </script>
     """
 
+    # CAMBIOS REALIZADOS:
+    # 1. overflow-x: auto -> Habilita scroll horizontal DENTRO del borde si no cabe.
+    # 2. min-height aumentado a 550px para acomodar el tamaño extra.
+    # 3. min-width: max-content en el flex container interno para evitar que se aplasten.
+    # 4. width/height de celdas aumentados de 45px a 60px.
+
     html = f"""
     {js_click_handler}
-    <div style="position: relative; width: 100%; min-height: 500px;
+    <div style="position: relative; width: 100%; min-height: 550px;
         border: 4px solid #F18F01;
         background: linear-gradient(135deg, #F18F0122 0%, #F18F0144 100%);
         border-radius: 20px; margin: 20px 0; padding: 20px;
-        box-shadow: 0 6px 12px rgba(0,0,0,0.15);">
-        
-        <div style="position: absolute; left: 20px; top: 20px;
-            font-weight: bold; font-size: 28px; color: #F18F01;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);">
-            🏭 Patio de Almacenamiento
+        box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        overflow-x: auto;"> <div style="position: sticky; left: 0; top: 0; z-index: 20;">
+            <div style="font-weight: bold; font-size: 28px; color: #F18F01;
+                text-shadow: 2px 2px 4px rgba(0,0,0,0.1); display: inline-block;">
+                🏭 Patio de Almacenamiento
+            </div>
+            <div style="float: right; background:#F18F01; color:white; padding:8px 16px;
+                border-radius:20px; font-weight:bold; font-size:16px;">
+                {sum(1 for col in patio_matriz for cnt in col if cnt is not None)} 📦
+            </div>
         </div>
         
-        <div style="position:absolute; top:20px; right:20px;
-            background:#F18F01; color:white; padding:8px 16px;
-            border-radius:20px; font-weight:bold; font-size:16px;">
-            {sum(1 for col in patio_matriz for cnt in col if cnt is not None)} 📦
-        </div>
-        
-        <div style="margin-top: 100px; display: flex; justify-content: center; gap: 8px;">
+        <div style="margin-top: 60px; display: flex; justify-content: center; gap: 12px; min-width: max-content; padding-bottom: 20px;">
     """
 
     for col_idx in range(NUM_COLUMNAS):
         html += f"""
-        <div style="display: flex; flex-direction: column-reverse; align-items: center; gap: 4px;">
+        <div style="display: flex; flex-direction: column-reverse; align-items: center; gap: 6px;">
             <div style="background: #333; color: white; padding: 4px 8px; 
-                border-radius: 4px; font-size: 10px; font-weight: bold;">
+                border-radius: 4px; font-size: 12px; font-weight: bold;">
                 C{col_idx}
             </div>
         """
@@ -182,13 +186,14 @@ def crear_zona_patio_3d(patio_matriz, contenedor_activo=None, contenedor_selecci
             is_active = (contenedor_activo and contenedor and contenedor.id == contenedor_activo.id)
             is_selected = (contenedor_seleccionado and contenedor and contenedor.id == contenedor_seleccionado.id)
 
+            # TAMAÑO AUMENTADO A 60px (Antes 45px)
             if contenedor is None:
                 html += f"""
-                <div style="width: 45px; height: 45px; 
-                    border: 2px dashed #ccc; border-radius: 6px;
+                <div style="width: 60px; height: 60px; 
+                    border: 2px dashed #ccc; border-radius: 8px;
                     background: rgba(255,255,255,0.3);
                     display: flex; align-items: center; justify-content: center;
-                    font-size: 9px; color: #999;">
+                    font-size: 11px; color: #999;">
                     P{piso_idx}
                 </div>
                 """
@@ -198,12 +203,12 @@ def crear_zona_patio_3d(patio_matriz, contenedor_activo=None, contenedor_selecci
                 if is_selected:
                     border_style = "3px solid #FF9800"
                     shadow = "0 0 15px rgba(255,152,0,0.8)"
-                    scale = "1.2"
+                    scale = "1.15"
                     z_index = "10"
                 elif is_active:
                     border_style = "3px solid #4CAF50"
                     shadow = "0 0 15px rgba(76,175,80,0.8)"
-                    scale = "1.15"
+                    scale = "1.10"
                     z_index = "5"
                 else:
                     border_style = "2px solid #2196F3"
@@ -213,26 +218,26 @@ def crear_zona_patio_3d(patio_matriz, contenedor_activo=None, contenedor_selecci
 
                 bg_color = "transparent"
 
+                # TAMAÑO AUMENTADO A 60px (Caja) y 50px (Imagen)
                 html += f"""
                 <div onclick="selectContainer('{contenedor.id}')"
-                    style="position: relative; width: 45px; height: 45px; 
-                    background: {bg_color}; border-radius: 6px;
+                    style="position: relative; width: 60px; height: 60px; 
+                    background: {bg_color}; border-radius: 8px;
                     transform: scale({scale});
                     border: {border_style};       
-                    border-radius: 8px;
                     transition: all 0.3s ease;
                     box-shadow: {shadow};
                     display: flex; align-items: center; justify-content: center;
-                    cursor: pointer;">
+                    cursor: pointer; z-index: {z_index};">
                     
-                    <img src="{src_patio}" style="width: 38px; height: 38px; 
+                    <img src="{src_patio}" style="width: 50px; height: 50px; 
                         filter: brightness(1.1) drop-shadow(0 2px 4px rgba(0,0,0,0.3)); 
                         pointer-events: none;">
                     
-                    <div style="position: absolute; top: -8px; right: -8px;
+                    <div style="position: absolute; top: -10px; right: -10px;
                         background: white; color: #333;
-                        padding: 2px 6px; border-radius: 10px;
-                        font-size: 9px; font-weight: bold;
+                        padding: 2px 8px; border-radius: 10px;
+                        font-size: 10px; font-weight: bold;
                         box-shadow: 0 2px 4px rgba(0,0,0,0.2);
                         pointer-events: none;">
                         {contenedor.id.split('-')[1]}
