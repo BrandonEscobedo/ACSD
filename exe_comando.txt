@@ -1,0 +1,1 @@
+pyinstaller src/main.py --name "SimuladorContenedores" --onefile --collect-all streamlit --collect-all plotly --collect-all jsonschema --add-data "assets;assets" --add-data "src/data/lineas_transportistas.json;data" --add-data "src/main.py;."
