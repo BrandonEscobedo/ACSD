@@ -6,6 +6,7 @@ import pandas as pd
 from models.simulation_models import LineaTransportista
 from simulation.simulation import ejecutar_simulacion, simular_asignacion
 from services.linea_transportista_service import LineaTransportistaServicio # Nuevo import
+from services.pdf_report_generator import generar_reporte_despacho_pdf
 import sys  # Importado para PyInstaller
 
 # ==================== CONFIGURACIÓN DE RUTAS ====================
@@ -599,12 +600,60 @@ if st.session_state.get('simular', False) and st.session_state.simulador_persist
                     resultados = res_data['resultados']
 
                     st.subheader("📊 Resultados por Línea")
-                    df_resultados = pd.DataFrame(resultados)
-                    st.dataframe(df_resultados, use_container_width=True)
-                    # Botón para solicitar despacho de carga (agregado solicitado)
-                    if st.button("despacho de carga", use_container_width=True, key=f"despacho_{contenedor_sel.id}"):
-                        st.session_state['despacho_solicitado'] = contenedor_sel.id
-                        st.success(f"✅ Despacho de carga solicitado para {contenedor_sel.id}")
+                    
+                    # Ordenar resultados por puntaje descendente y agregar ranking
+                    resultados_ordenados = sorted(resultados, key=lambda x: x['puntaje'], reverse=True)
+                    
+                    # Agregar columna de ranking
+                    for idx, resultado in enumerate(resultados_ordenados, 1):
+                        resultado['ranking'] = idx
+                        if idx == 1:
+                            resultado['recomendación'] = '⭐ RECOMENDADA'
+                        elif idx == 2:
+                            resultado['recomendación'] = '🥈 Segunda opción'
+                        elif idx == 3:
+                            resultado['recomendación'] = '🥉 Tercera opción'
+                        else:
+                            resultado['recomendación'] = f'#{idx}'
+                    
+                    df_resultados = pd.DataFrame(resultados_ordenados)
+                    
+                    # Reordenar columnas para mejor visualización
+                    columnas_orden = ['ranking', 'recomendación', 'línea', 'puntaje', 'cumplimiento', 
+                                     'puntualidad', 'lead_time', 'reprogramaciones', 'espera_promedio',
+                                     'estado_documental', 'probabilidad_sin_eir', 'observaciones', 'contacto']
+                    
+                    # Filtrar solo las columnas que existen
+                    columnas_existentes = [col for col in columnas_orden if col in df_resultados.columns]
+                    df_resultados = df_resultados[columnas_existentes]
+                    
+                    # Formatear columnas numéricas
+                    df_resultados['puntaje'] = df_resultados['puntaje'].apply(lambda x: f"{x:.2f}")
+                    df_resultados['lead_time'] = df_resultados['lead_time'].apply(lambda x: f"{x:.1f}h")
+                    df_resultados['espera_promedio'] = df_resultados['espera_promedio'].apply(lambda x: f"{x:.1f}h")
+                    df_resultados['probabilidad_sin_eir'] = df_resultados['probabilidad_sin_eir'].apply(lambda x: f"{x:.1f}%")
+                    
+                    st.dataframe(df_resultados, use_container_width=True, hide_index=True)
+                    
+                    # Botón para solicitar despacho de carga
+                    if st.button("🚚 Despacho de Carga", use_container_width=True, type="primary", key=f"despacho_{contenedor_sel.id}"):
+                        # Generar el PDF
+                        pdf_buffer = generar_reporte_despacho_pdf(contenedor_sel, mejor)
+                        
+                        # Crear nombre de archivo con timestamp
+                        from datetime import datetime
+                        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+                        nombre_archivo = f"Despacho_{contenedor_sel.id}_{timestamp}.pdf"
+                        
+                        # Botón de descarga
+                        st.download_button(
+                            label="📥 Descargar Reporte de Despacho",
+                            data=pdf_buffer,
+                            file_name=nombre_archivo,
+                            mime="application/pdf",
+                            use_container_width=True
+                        )
+                        st.success(f"✅ Reporte de despacho generado para {contenedor_sel.id}")
                     
                     if mejor:
                         st.success(f"⭐ **Línea Recomendada:** {mejor['línea']}")
@@ -612,11 +661,28 @@ if st.session_state.get('simular', False) and st.session_state.simulador_persist
                         with col_a: st.metric("🎯 Puntaje", f"{mejor['puntaje']:.2f}")
                         with col_b: st.metric("✅ Cumplimiento", f"{mejor['cumplimiento']}%")
                         with col_c: st.metric("⏱️ Lead Time", f"{mejor['lead_time']:.1f}h")
+                        
+                        col_d, col_e = st.columns(2)
+                        with col_d: st.metric("📋 Estado EIR", mejor['estado_documental'])
+                        with col_e: st.metric("⚠️ Riesgo sin EIR", f"{mejor['probabilidad_sin_eir']:.1f}%")
+                        
                         st.info(f"📞 **Contacto:** {mejor['contacto']}")
+                        st.caption(f"ℹ️ {mejor['observaciones']}")
                         
                         import plotly.express as px
                         st.markdown("#### 📈 Comparación de Puntajes")
-                        fig = px.bar(df_resultados, x='línea', y='puntaje', color='puntaje', title='Puntaje por Línea')
+                        
+                        # Usar los datos ordenados para el gráfico
+                        fig = px.bar(
+                            df_resultados, 
+                            x='línea', 
+                            y='puntaje', 
+                            color='puntaje',
+                            title='Puntaje por Línea (Ordenado de Mayor a Menor)',
+                            labels={'puntaje': 'Puntaje', 'línea': 'Línea Transportista'},
+                            text='recomendación'
+                        )
+                        fig.update_traces(textposition='outside')
                         st.plotly_chart(fig, use_container_width=True)
 
             else:
