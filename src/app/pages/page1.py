@@ -10,7 +10,7 @@ COSTO_POR_HORA_FIJO = 2.08
 st.set_page_config(layout="wide", page_title="MySSD")
 
 with st.sidebar:
-    st.title("Panel de Configuración")
+    st.title("Panel de  Configuración")
     
     st.header("Parámetros Globales del Escenario")
     
