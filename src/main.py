@@ -396,7 +396,7 @@ try:
 except Exception:
     pass
 
-st.title("Simulación: Buque → Piso → Patio 3D")
+st.title("Buque → Piso → Patio 3D")
 
 with st.sidebar:
     st.header("⚙️ Configuración")
@@ -697,7 +697,7 @@ else:
     st.info(" Configura los parámetros en el sidebar y presiona **Iniciar Simulación**")
     if 'mostrar_panel_interactivo' not in st.session_state:
         st.session_state.mostrar_panel_interactivo = False
-    st.markdown("### 👀 Vista Previa del Patio")
+    st.markdown("Vista Previa del Patio")
     patio_vacio = [[None for _ in range(4)] for _ in range(10)]
     st.html(crear_zona_patio_3d(patio_vacio))
     
