@@ -18,14 +18,13 @@ export default function ZonaBuquePiso({ zona, label, color, contenedores, active
       }}>
         {label}
       </span>
-
       <div style={{
         position: 'absolute', top: '12px', right: '12px',
         background: color, color: '#fff',
         borderRadius: '20px', padding: '4px 12px',
         fontWeight: 700, fontSize: '14px',
       }}>
-        {contenedores.length} 📦
+        {contenedores.length} 
       </div>
 
       <div style={{
