@@ -9,35 +9,24 @@ from services.linea_transportista_service import LineaTransportistaServicio # Nu
 from services.pdf_report_generator import generar_reporte_despacho_pdf
 import sys  # Importado para PyInstaller
 
-# ==================== CONFIGURACIÓN DE RUTAS ====================
-
-# Determina la ruta base de los recursos, ya sea en el entorno
-# empaquetado (_MEIPASS) o en desarrollo.
 if getattr(sys, 'frozen', False):
-    # En el .exe, los recursos se copian a la raíz de _MEIPASS.
     BASE_RESOURCES_PATH = Path(getattr(sys, '_MEIPASS', Path('.')))
 else:
-    # En desarrollo, la base es la carpeta raíz del proyecto (un nivel arriba de src/)
     BASE_RESOURCES_PATH = Path(__file__).resolve().parent.parent
 
 ASSETS_DIR = BASE_RESOURCES_PATH / "assets"
-# El archivo JSON fue copiado a la subcarpeta 'data' del ejecutable.
 JSON_PATH = BASE_RESOURCES_PATH / "src" / "data" / "lineas_transportistas.json"
 
-# ==================== FIN CONFIGURACIÓN DE RUTAS ====================
 
 st.set_page_config(page_title="SimPy + Animación", layout="wide")
 
-# ==================== ASSETS Y CONFIGURACIÓN GLOBAL ====================
 
 OPCIONES_VELOCIDAD = [0.1, 0.3, 0.5, 0.8, 1.0, 1.5, 2.0]
 
-# --- CARGA DE IMAGEN CONTENEDOR ---
 try:
     archivos_svg = list(ASSETS_DIR.glob("*.svg"))
-    svg_img = "" # Inicializar
+    svg_img = "" 
     
-    # Intentamos cargar el primer SVG válido
     for svg_path in archivos_svg:
         try:
             svg_bytes = svg_path.read_bytes()
@@ -52,10 +41,9 @@ try:
         svg_img = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCI+PHJlY3Qgd2lkdGg9IjUwIiBoZWlnaHQ9IjUwIiBmaWxsPSIjY2NjIi8+PC9zdmc+"
         
 except Exception as e:
-    print(f"⚠️ Advertencia: No se pudo cargar imagen default ({e})")
+    print(f"Advertencia: No se pudo cargar imagen default ({e})")
     svg_img = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCI+PHJlY3Qgd2lkdGg9IjUwIiBoZWlnaHQ9IjUwIiBmaWxsPSIjY2NjIi8+PC9zdmc+"
 
-# --- CARGA DEL LOADER ANIMADO (Sin cambios) ---
 loader_svg = """
 <svg version="1.1" id="L2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
   viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
@@ -85,18 +73,15 @@ loader_svg = """
 loader_b64 = base64.b64encode(loader_svg.encode('utf-8')).decode("utf-8")
 loader_img = f"data:image/svg+xml;base64,{loader_b64}"
 
-# --- CARGA DE LÍNEAS TRANSPORTISTAS USANDO EL SERVICIO ---
 try:
-    # Usamos la ruta JSON corregida (JSON_PATH)
     linea_servicio = LineaTransportistaServicio(str(JSON_PATH))
     LINEAS_DEMO = linea_servicio.listar_lineas()
     if not LINEAS_DEMO:
-        st.warning("⚠️ No se pudieron cargar las líneas del JSON. Asegúrate de que 'src/data/lineas_transportistas.json' contiene datos.")
+        st.warning("No se pudieron cargar las líneas del JSON. Asegúrate de que el json de lineas de transporte tiene contenido.")
         st.warning(JSON_PATH)
         LINEAS_DEMO = []
 
 except Exception as e:
-    # Esto atraparía FileNotFoundError si la ruta de PyInstaller falla catastróficamente
     st.error(f"Error fatal al cargar servicio de líneas: {e}")
     LINEAS_DEMO = []
 
@@ -104,7 +89,6 @@ except Exception as e:
 TIEMPO_BUQUE_A_PISO = 2.0
 TIEMPO_PISO_A_PATIO = 1.5
 
-# ==================== FUNCIONES DE UTILERÍA (SIN CAMBIOS) ====================
 
 def mostrar_loader_overlay(mensaje="Cargando..."):
     html_loader = f"""
@@ -716,11 +700,9 @@ if __name__ == '__main__':
                 # Nota: Asumiremos que copiaremos main.py a la raíz del paquete
                 script_path = os.path.join(sys._MEIPASS, "main.py")
             else:
-                # En desarrollo, usamos la ruta normal
                 script_path = __file__
-            
-            # Configuramos los argumentos para simular "streamlit run ..."
-            # Agregamos flags para evitar advertencias extras
+
+       
             sys.argv = [
                 "streamlit", 
                 "run", 
@@ -729,7 +711,7 @@ if __name__ == '__main__':
                 "--server.headless=true"
             ]
             
-            print(f"🚀 Iniciando Streamlit desde: {script_path}")
+            print(f"Iniciando Streamlit desde: {script_path}")
             st_cli.main()
             
         except Exception as e:
