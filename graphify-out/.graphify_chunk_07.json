@@ -1,0 +1,110 @@
+{
+  "nodes": [
+    {
+      "id": "asset:container-verde.svg",
+      "label": "Green Container Icon (container-verde.svg)",
+      "file_type": "image",
+      "source_file": "C:\\Users\\brand\\Desktop\\python\\ACSD\\assets\\container-verde.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "concept:shipping-container-icon",
+      "label": "Shipping Container UI Icon",
+      "file_type": "image",
+      "source_file": "C:\\Users\\brand\\Desktop\\python\\ACSD\\assets\\container-verde.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "design:green-palette",
+      "label": "Green Color Palette (#4BAE4F, #419D45, #388E3C, #1B5E20)",
+      "file_type": "image",
+      "source_file": "C:\\Users\\brand\\Desktop\\python\\ACSD\\assets\\container-verde.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "design:container-corrugated-panels",
+      "label": "Corrugated Vertical Panels (container body ridges)",
+      "file_type": "image",
+      "source_file": "C:\\Users\\brand\\Desktop\\python\\ACSD\\assets\\container-verde.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "design:container-feet",
+      "label": "Two Bottom Feet/Supports (dark green)",
+      "file_type": "image",
+      "source_file": "C:\\Users\\brand\\Desktop\\python\\ACSD\\assets\\container-verde.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "purpose:available-container-status",
+      "label": "UI Indicator: Available/Empty Container Status",
+      "file_type": "rationale",
+      "source_file": "C:\\Users\\brand\\Desktop\\python\\ACSD\\assets\\container-verde.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "asset:container-verde.svg",
+      "target": "concept:shipping-container-icon",
+      "relation": "depicts",
+      "confidence_type": "EXTRACTED",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "asset:container-verde.svg",
+      "target": "design:green-palette",
+      "relation": "uses_colors",
+      "confidence_type": "EXTRACTED",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "asset:container-verde.svg",
+      "target": "design:container-corrugated-panels",
+      "relation": "contains_element",
+      "confidence_type": "EXTRACTED",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "asset:container-verde.svg",
+      "target": "design:container-feet",
+      "relation": "contains_element",
+      "confidence_type": "EXTRACTED",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "asset:container-verde.svg",
+      "target": "purpose:available-container-status",
+      "relation": "likely_represents",
+      "confidence_type": "INFERRED",
+      "confidence_score": 0.75
+    }
+  ],
+  "hyperedges": [],
+  "input_tokens": 18845,
+  "output_tokens": 3325
+}

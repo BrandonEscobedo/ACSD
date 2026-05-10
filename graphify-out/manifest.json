@@ -1,0 +1,254 @@
+{
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\backend\\main.py": {
+    "mtime": 1777272816.4054768,
+    "hash": "b9af4a360e80f6562b48e7432bfb0d45"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\backend\\app\\__init__.py": {
+    "mtime": 1777258847.6093044,
+    "hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\backend\\app\\api\\dependencies.py": {
+    "mtime": 1778450119.2168982,
+    "hash": "2b55204e1092a729d52cb2cad19cc023"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\backend\\app\\api\\__init__.py": {
+    "mtime": 1777258931.169909,
+    "hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\backend\\app\\api\\routers\\assignment.py": {
+    "mtime": 1777258945.3758795,
+    "hash": "9981389a2b198682d850c09b49e79b01"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\backend\\app\\api\\routers\\monitor.py": {
+    "mtime": 1777272808.075719,
+    "hash": "e256272d0e4bf8617a5f4c2118befd0e"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\backend\\app\\api\\routers\\reports.py": {
+    "mtime": 1777258949.1830177,
+    "hash": "07c616d4564ad4c8f848d3deac982918"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\backend\\app\\api\\routers\\simulation.py": {
+    "mtime": 1777258941.9514852,
+    "hash": "c5b15679495b8cd253910f730b9b467d"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\backend\\app\\api\\routers\\__init__.py": {
+    "mtime": 1777258938.6419966,
+    "hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\backend\\app\\api\\schemas\\assignment.py": {
+    "mtime": 1777258937.6063538,
+    "hash": "e3b42630d6a2bdc01fdd59c7eed1cd16"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\backend\\app\\api\\schemas\\monitor.py": {
+    "mtime": 1777272800.638451,
+    "hash": "5fbc6ea8ef52b29518fe75c2c9182514"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\backend\\app\\api\\schemas\\simulation.py": {
+    "mtime": 1777258935.0001493,
+    "hash": "4fc8d7b3f7c8190beb64a2556fea4672"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\backend\\app\\api\\schemas\\__init__.py": {
+    "mtime": 1777258932.187275,
+    "hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\backend\\app\\application\\assignment_use_case.py": {
+    "mtime": 1777258919.8061893,
+    "hash": "69dd3235258e99e2a6126a48929b62bd"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\backend\\app\\application\\report_use_case.py": {
+    "mtime": 1777258921.3688762,
+    "hash": "b921e9551c2877dcb26cd5543ed15a29"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\backend\\app\\application\\simulation_use_case.py": {
+    "mtime": 1777258905.1751146,
+    "hash": "e037d8fdeed2a02f0e56a7466ff7e6fa"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\backend\\app\\application\\__init__.py": {
+    "mtime": 1777258902.5189786,
+    "hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\backend\\app\\domain\\base.py": {
+    "mtime": 1777258849.6729655,
+    "hash": "e9c7a4e8125924f4356c227c32736871"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\backend\\app\\domain\\contenedor.py": {
+    "mtime": 1777258851.7371354,
+    "hash": "7270a09a8b799ba15a4ab59495b79446"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\backend\\app\\domain\\enums.py": {
+    "mtime": 1777258850.6995287,
+    "hash": "054f24a17d190e05cfcf315f91dfc6a3"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\backend\\app\\domain\\evento.py": {
+    "mtime": 1777258853.785067,
+    "hash": "a798a2951e69d7acd66c48df92f45f4d"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\backend\\app\\domain\\linea_transportista.py": {
+    "mtime": 1777258852.7582853,
+    "hash": "30058b936b3be520a4ed1d0ef0d618a7"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\backend\\app\\domain\\__init__.py": {
+    "mtime": 1777258848.644778,
+    "hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\backend\\app\\infrastructure\\__init__.py": {
+    "mtime": 1777258860.882219,
+    "hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\backend\\app\\infrastructure\\repositories\\linea_repository.py": {
+    "mtime": 1777258864.041924,
+    "hash": "e4e88110b2bb26277b6bc55fd22e6c0d"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\backend\\app\\infrastructure\\repositories\\__init__.py": {
+    "mtime": 1777258861.916898,
+    "hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\backend\\app\\infrastructure\\services\\container_monitor.py": {
+    "mtime": 1777272790.2054286,
+    "hash": "74206f9cca81540bec1109b7abd287ba"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\backend\\app\\infrastructure\\services\\pdf_service.py": {
+    "mtime": 1777258894.8433013,
+    "hash": "5570357d7e25a370f756f89cebf8dbf5"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\backend\\app\\infrastructure\\services\\simulation_engine.py": {
+    "mtime": 1777258881.4717236,
+    "hash": "5958c37fa0a4e7a140a40504527a7be3"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\backend\\app\\infrastructure\\services\\visual_service.py": {
+    "mtime": 1777258867.4748025,
+    "hash": "9bad878a6e59c9e603dd63ec943c066c"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\backend\\app\\infrastructure\\services\\websocket_manager.py": {
+    "mtime": 1777272785.9632926,
+    "hash": "a7ee6824be1f7fa45a9067201276971c"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\backend\\app\\infrastructure\\services\\__init__.py": {
+    "mtime": 1777258865.0717802,
+    "hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\frontend\\vite.config.js": {
+    "mtime": 1777272856.6360462,
+    "hash": "2d6f9b57c56e7d921003e6549a5f1021"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\frontend\\src\\App.jsx": {
+    "mtime": 1778450299.925603,
+    "hash": "c9fd2ae09b80ed998111807797325aa2"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\frontend\\src\\main.jsx": {
+    "mtime": 1777258968.0821934,
+    "hash": "e13723e2574429d9a6d849727e3ff695"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\frontend\\src\\api\\client.js": {
+    "mtime": 1777272855.336789,
+    "hash": "067d83e18c7f1087202ff1665a2b3756"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\frontend\\src\\components\\AnimationView.jsx": {
+    "mtime": 1778450299.925603,
+    "hash": "48c58a30948f7083e9814e73cdd742cd"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\frontend\\src\\components\\AssignmentPanel.jsx": {
+    "mtime": 1777274247.5194159,
+    "hash": "8217d65aa62731b8d75bbae43adda06f"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\frontend\\src\\components\\ContainerDetail.jsx": {
+    "mtime": 1778450299.9281144,
+    "hash": "463ab460ab070f05b5192243847f8047"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\frontend\\src\\components\\EventFeed.jsx": {
+    "mtime": 1777274041.256585,
+    "hash": "d12604d5d0683613bbc601f8fb04a63b"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\frontend\\src\\components\\MetricsDashboard.jsx": {
+    "mtime": 1777259006.479115,
+    "hash": "14b771f89f4f3e330cacb70afc45aaa7"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\frontend\\src\\components\\MonitorHeader.jsx": {
+    "mtime": 1777273727.801966,
+    "hash": "55a9b157dba59d3af524975149496649"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\frontend\\src\\components\\RankingTable.jsx": {
+    "mtime": 1777274264.4172788,
+    "hash": "a1308c85a48d6c5f28dbc9765d49257d"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\frontend\\src\\components\\Sidebar.jsx": {
+    "mtime": 1777275123.9285722,
+    "hash": "9cb799307e4fbddae04bfb881c65c4a2"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\frontend\\src\\components\\YardGrid.jsx": {
+    "mtime": 1777274067.0728605,
+    "hash": "31cc2a3db15934ee96f531c0ddadc522"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\frontend\\src\\components\\YardView.jsx": {
+    "mtime": 1777259102.5722876,
+    "hash": "ac9cbf2328b3702c8f853109fc5631c9"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\frontend\\src\\components\\ZonaBuquePiso.jsx": {
+    "mtime": 1778450299.9294653,
+    "hash": "8abb408bacefcf0d94b38f1875eb94a9"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\frontend\\src\\components\\ZoneCard.jsx": {
+    "mtime": 1777274039.0903997,
+    "hash": "e3da0a69681c4017846e5d8750e72c84"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\frontend\\src\\hooks\\useAnimation.js": {
+    "mtime": 1777259123.3844097,
+    "hash": "94a39645a2b36ab5ab4ec53d0b716fbf"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\frontend\\src\\hooks\\useWebSocket.js": {
+    "mtime": 1777272849.2250092,
+    "hash": "4fdfff90079f7713595cf812648780f3"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\src\\main.py": {
+    "mtime": 1778450299.9306068,
+    "hash": "eaf6f2008d64f63408c24d8dca8957a2"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\exe_comando.txt": {
+    "mtime": 1775541299.6597483,
+    "hash": "8bcb0306cdf0edb711df408b96a99347"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\README.md": {
+    "mtime": 1775541299.6558092,
+    "hash": "b712d329e1da4c51f72791ae0570d114"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\requirements.txt": {
+    "mtime": 1778449987.697145,
+    "hash": "31f55077f584ff9a4b642704675908b8"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\backend\\requirements.txt": {
+    "mtime": 1777258956.426196,
+    "hash": "05906dc8c0f8efc4e5075d3a83c0cf21"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\frontend\\index.html": {
+    "mtime": 1777258967.0580547,
+    "hash": "6ae30cf4cd008e7fb2747d26289a215e"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\assets\\container-amarillo.svg": {
+    "mtime": 1775541299.6570454,
+    "hash": "f7c4b81b445c747f4495dbd51a1a439e"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\assets\\container-azul fuerte.svg": {
+    "mtime": 1775541299.657491,
+    "hash": "62574324cfdad6b6c4a7b9e068a96697"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\assets\\container-azul.svg": {
+    "mtime": 1775541299.657491,
+    "hash": "ea59fefe2db342e8e90f7e6bd0cbbca6"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\assets\\container-cafe.svg": {
+    "mtime": 1775541299.6583323,
+    "hash": "3d0cc7834d0f8207169900e432634484"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\assets\\container-rojo.svg": {
+    "mtime": 1775541299.6588,
+    "hash": "85b7f32856dcc4433e01a3843fbbdce5"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\assets\\container-verde.svg": {
+    "mtime": 1775541299.6588,
+    "hash": "f51a0da117bb2ac6ada133e42cdbb1ed"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\assets\\logos\\LogoQuo.png": {
+    "mtime": 1775541299.6597483,
+    "hash": "fe2bd315f7c14b9d0195344f5a926c42"
+  }
+}

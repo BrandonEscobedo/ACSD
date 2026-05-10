@@ -1,0 +1,553 @@
+{
+  "nodes": [
+    {
+      "id": "exe_comando_pyinstaller_build",
+      "label": "PyInstaller Build Command",
+      "file_type": "document",
+      "source_file": "exe_comando.txt",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "exe_comando_simulador_contenedores_exe",
+      "label": "SimuladorContenedores Executable",
+      "file_type": "document",
+      "source_file": "exe_comando.txt",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "readme_myssd_front",
+      "label": "MySSD_FRONT Project",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "readme_python_310",
+      "label": "Python 3.10.8 Environment",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "readme_setup_instructions",
+      "label": "Project Setup Instructions",
+      "file_type": "rationale",
+      "source_file": "README.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "requirements_root",
+      "label": "Root Python Requirements",
+      "file_type": "document",
+      "source_file": "requirements.txt",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "requirements_streamlit",
+      "label": "streamlit",
+      "file_type": "document",
+      "source_file": "requirements.txt",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "requirements_pandas",
+      "label": "pandas",
+      "file_type": "document",
+      "source_file": "requirements.txt",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "requirements_requests",
+      "label": "requests",
+      "file_type": "document",
+      "source_file": "requirements.txt",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "requirements_simpy",
+      "label": "simpy",
+      "file_type": "document",
+      "source_file": "requirements.txt",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "requirements_numpy",
+      "label": "numpy",
+      "file_type": "document",
+      "source_file": "requirements.txt",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "requirements_plotly",
+      "label": "plotly",
+      "file_type": "document",
+      "source_file": "requirements.txt",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "requirements_reportlab",
+      "label": "reportlab",
+      "file_type": "document",
+      "source_file": "requirements.txt",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "backend_requirements",
+      "label": "Backend Python Requirements",
+      "file_type": "document",
+      "source_file": "backend/requirements.txt",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "backend_requirements_fastapi",
+      "label": "fastapi",
+      "file_type": "document",
+      "source_file": "backend/requirements.txt",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "backend_requirements_uvicorn",
+      "label": "uvicorn[standard]",
+      "file_type": "document",
+      "source_file": "backend/requirements.txt",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "backend_requirements_python_multipart",
+      "label": "python-multipart",
+      "file_type": "document",
+      "source_file": "backend/requirements.txt",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "index_html_frontend_entry",
+      "label": "Frontend HTML Entry",
+      "file_type": "code",
+      "source_file": "frontend/index.html",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "index_html_main_jsx",
+      "label": "main.jsx Module Entry",
+      "file_type": "code",
+      "source_file": "frontend/index.html",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "index_html_root_div",
+      "label": "Root Mount Div",
+      "file_type": "code",
+      "source_file": "frontend/index.html",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "exe_comando_lineas_transportistas_data",
+      "label": "lineas_transportistas.json Data",
+      "file_type": "document",
+      "source_file": "exe_comando.txt",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "exe_comando_assets_folder",
+      "label": "Assets Folder",
+      "file_type": "document",
+      "source_file": "exe_comando.txt",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "exe_comando_pyinstaller_build",
+      "target": "exe_comando_simulador_contenedores_exe",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "exe_comando.txt",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "exe_comando_pyinstaller_build",
+      "target": "requirements_streamlit",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "exe_comando.txt",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "exe_comando_pyinstaller_build",
+      "target": "requirements_plotly",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "exe_comando.txt",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "exe_comando_pyinstaller_build",
+      "target": "exe_comando_assets_folder",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "exe_comando.txt",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "exe_comando_pyinstaller_build",
+      "target": "exe_comando_lineas_transportistas_data",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "exe_comando.txt",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "readme_myssd_front",
+      "target": "readme_python_310",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "readme_myssd_front",
+      "target": "requirements_root",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "readme_setup_instructions",
+      "target": "readme_myssd_front",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "requirements_root",
+      "target": "requirements_streamlit",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "requirements.txt",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "requirements_root",
+      "target": "requirements_pandas",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "requirements.txt",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "requirements_root",
+      "target": "requirements_requests",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "requirements.txt",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "requirements_root",
+      "target": "requirements_simpy",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "requirements.txt",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "requirements_root",
+      "target": "requirements_numpy",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "requirements.txt",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "requirements_root",
+      "target": "requirements_plotly",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "requirements.txt",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "requirements_root",
+      "target": "requirements_reportlab",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "requirements.txt",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "backend_requirements",
+      "target": "backend_requirements_fastapi",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/requirements.txt",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "backend_requirements",
+      "target": "backend_requirements_uvicorn",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/requirements.txt",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "backend_requirements",
+      "target": "requirements_simpy",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/requirements.txt",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "backend_requirements",
+      "target": "requirements_reportlab",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/requirements.txt",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "backend_requirements",
+      "target": "requirements_pandas",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/requirements.txt",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "backend_requirements",
+      "target": "backend_requirements_python_multipart",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/requirements.txt",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "index_html_frontend_entry",
+      "target": "index_html_main_jsx",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "frontend/index.html",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "index_html_frontend_entry",
+      "target": "index_html_root_div",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "frontend/index.html",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "index_html_main_jsx",
+      "target": "index_html_root_div",
+      "relation": "shares_data_with",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "frontend/index.html",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "backend_requirements",
+      "target": "requirements_root",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "backend/requirements.txt",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "readme_myssd_front",
+      "target": "index_html_frontend_entry",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.65,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "simulator_python_stack",
+      "label": "Simulator Python Stack",
+      "nodes": [
+        "requirements_streamlit",
+        "requirements_simpy",
+        "requirements_plotly",
+        "requirements_reportlab"
+      ],
+      "relation": "participate_in",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "requirements.txt"
+    },
+    {
+      "id": "fastapi_backend_stack",
+      "label": "FastAPI Backend Stack",
+      "nodes": [
+        "backend_requirements_fastapi",
+        "backend_requirements_uvicorn",
+        "backend_requirements_python_multipart"
+      ],
+      "relation": "form",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "backend/requirements.txt"
+    },
+    {
+      "id": "pyinstaller_packaging_flow",
+      "label": "PyInstaller Packaging Flow",
+      "nodes": [
+        "exe_comando_pyinstaller_build",
+        "exe_comando_simulador_contenedores_exe",
+        "exe_comando_lineas_transportistas_data",
+        "exe_comando_assets_folder"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "exe_comando.txt"
+    }
+  ],
+  "input_tokens": 19870,
+  "output_tokens": 3506
+}

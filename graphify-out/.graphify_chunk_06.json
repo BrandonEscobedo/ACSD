@@ -1,0 +1,65 @@
+{
+  "nodes": [
+    {
+      "id": "asset:container-rojo.svg",
+      "label": "Red Container Icon (SVG)",
+      "file_type": "image",
+      "source_file": "C:\\Users\\brand\\Desktop\\python\\ACSD\\assets\\container-rojo.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "description": "96x96 SVG icon depicting a shipping container with vertical corrugated panels. Uses red color palette: outer fill #F07171, body fill #FA5151, and inner ribs #F95252. Represents a 'rojo' (red) state container, likely indicating an alert, error, or critical status in the ACSD UI.",
+      "confidence_score": 1.0,
+      "extraction_type": "EXTRACTED"
+    },
+    {
+      "id": "design:red-status-indicator",
+      "label": "Red Container Status Variant",
+      "file_type": "rationale",
+      "source_file": "C:\\Users\\brand\\Desktop\\python\\ACSD\\assets\\container-rojo.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "description": "Filename 'container-rojo' (Spanish for red) suggests a color-coded status icon. In container/logistics UIs, red typically signals critical, error, blocked, or alert state for a shipping container.",
+      "confidence_score": 0.85,
+      "extraction_type": "INFERRED"
+    },
+    {
+      "id": "design:corrugated-container-pattern",
+      "label": "Corrugated Container Visual Pattern",
+      "file_type": "rationale",
+      "source_file": "C:\\Users\\brand\\Desktop\\python\\ACSD\\assets\\container-rojo.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "description": "10 repeated vertical rib paths (translate x: 15,23,31,...,79) at y=32 produce the classic corrugated shipping-container side panels, confirming this is a maritime/intermodal container icon.",
+      "confidence_score": 0.95,
+      "extraction_type": "INFERRED"
+    }
+  ],
+  "edges": [
+    {
+      "source": "asset:container-rojo.svg",
+      "target": "design:red-status-indicator",
+      "relation": "represents",
+      "confidence_score": 0.85,
+      "extraction_type": "INFERRED"
+    },
+    {
+      "source": "asset:container-rojo.svg",
+      "target": "design:corrugated-container-pattern",
+      "relation": "depicts",
+      "confidence_score": 0.95,
+      "extraction_type": "INFERRED"
+    }
+  ],
+  "hyperedges": [],
+  "input_tokens": 18291,
+  "output_tokens": 3227
+}

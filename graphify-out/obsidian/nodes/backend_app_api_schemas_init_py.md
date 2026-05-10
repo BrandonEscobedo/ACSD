@@ -1,0 +1,18 @@
+---
+title: __init__.py
+id: backend_app_api_schemas_init_py
+community: 22
+source_file: backend/app/api/schemas/__init__.py
+source_location: L1
+file_type: code
+tags:
+  - graphify/node
+  - community/22
+  - type/code
+---
+
+# __init__.py
+
+- Source: `backend/app/api/schemas/__init__.py` `L1`
+- Type: `code`
+- Community: [[_COMMUNITY_22|Community 22]]

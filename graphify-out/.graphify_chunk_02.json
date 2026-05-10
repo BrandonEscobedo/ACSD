@@ -1,0 +1,210 @@
+{
+  "nodes": [
+    {
+      "id": "asset:container-amarillo.svg",
+      "label": "Yellow Container Icon (container-amarillo.svg)",
+      "file_type": "image",
+      "source_file": "assets/container-amarillo.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "concept:shipping-container-icon",
+      "label": "Shipping Container Icon (UI symbol)",
+      "file_type": "image",
+      "source_file": "assets/container-amarillo.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "concept:container-color-set",
+      "label": "Container Color-coded Status Set",
+      "file_type": "rationale",
+      "source_file": "assets/container-amarillo.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "color:yellow-olive-#AEAD4B",
+      "label": "Yellow/Olive Fill #AEAD4B",
+      "file_type": "image",
+      "source_file": "assets/container-amarillo.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "color:dark-olive-#939D41",
+      "label": "Dark Olive Inner Fill #939D41",
+      "file_type": "image",
+      "source_file": "assets/container-amarillo.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "color:ridge-#828E38",
+      "label": "Vertical Ridge Color #828E38",
+      "file_type": "image",
+      "source_file": "assets/container-amarillo.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "feature:vertical-ridges",
+      "label": "Vertical Corrugated Ridges (10 bars)",
+      "file_type": "image",
+      "source_file": "assets/container-amarillo.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "feature:top-rail",
+      "label": "Top Rail / Roof Edge",
+      "file_type": "image",
+      "source_file": "assets/container-amarillo.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "feature:bottom-feet",
+      "label": "Bottom Feet / Skids",
+      "file_type": "image",
+      "source_file": "assets/container-amarillo.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "domain:ACSD",
+      "label": "ACSD (Container Tracking Project)",
+      "file_type": "rationale",
+      "source_file": "assets/container-amarillo.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "purpose:status-warning",
+      "label": "Status Indicator: Warning / In-Transit / Pending",
+      "file_type": "rationale",
+      "source_file": "assets/container-amarillo.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "asset:container-amarillo.svg",
+      "target": "concept:shipping-container-icon",
+      "relation": "depicts",
+      "evidence": "SVG renders a side view of an intermodal shipping container with corrugated walls, top rail, and bottom skids at 96x96.",
+      "type": "EXTRACTED",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "asset:container-amarillo.svg",
+      "target": "color:yellow-olive-#AEAD4B",
+      "relation": "uses_fill",
+      "evidence": "Outer body path fill=\"#AEAD4B\" (yellow-olive) \u2014 the file is named container-amarillo (Spanish for yellow).",
+      "type": "EXTRACTED",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "asset:container-amarillo.svg",
+      "target": "color:dark-olive-#939D41",
+      "relation": "uses_fill",
+      "evidence": "Inner panel fill=\"#939D41\" provides a darker recessed look inside the container body.",
+      "type": "EXTRACTED",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "asset:container-amarillo.svg",
+      "target": "color:ridge-#828E38",
+      "relation": "uses_fill",
+      "evidence": "10 identical vertical bar paths use fill=\"#828E38\" for the corrugation ridges.",
+      "type": "EXTRACTED",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "concept:shipping-container-icon",
+      "target": "feature:vertical-ridges",
+      "relation": "has_feature",
+      "evidence": "Ten repeated thin vertical path elements at x=15,23,31,39,47,55,63,71,79 each 35 tall \u2014 represent corrugated container wall ridges.",
+      "type": "EXTRACTED",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "concept:shipping-container-icon",
+      "target": "feature:top-rail",
+      "relation": "has_feature",
+      "evidence": "Top horizontal band (the rectangle drawn by the first outer path) forms the container's top rail.",
+      "type": "INFERRED",
+      "confidence_score": 0.95
+    },
+    {
+      "source": "concept:shipping-container-icon",
+      "target": "feature:bottom-feet",
+      "relation": "has_feature",
+      "evidence": "Two short dark segments (#595E1B) at y=72 separated by a lighter middle (#96A043) represent the container's bottom skids/feet.",
+      "type": "INFERRED",
+      "confidence_score": 0.95
+    },
+    {
+      "source": "asset:container-amarillo.svg",
+      "target": "concept:container-color-set",
+      "relation": "member_of",
+      "evidence": "Filename pattern container-<color>.svg (amarillo=yellow) implies a set of color variants used to indicate different container states.",
+      "type": "INFERRED",
+      "confidence_score": 0.95
+    },
+    {
+      "source": "asset:container-amarillo.svg",
+      "target": "purpose:status-warning",
+      "relation": "represents_status",
+      "evidence": "Yellow color convention in UIs typically denotes warning, caution, or in-progress/pending state for the container.",
+      "type": "INFERRED",
+      "confidence_score": 0.75
+    },
+    {
+      "source": "asset:container-amarillo.svg",
+      "target": "domain:ACSD",
+      "relation": "used_in_project",
+      "evidence": "Asset lives under ACSD/assets and supports the container-tracking UI of the ACSD project.",
+      "type": "INFERRED",
+      "confidence_score": 0.85
+    }
+  ],
+  "hyperedges": [],
+  "input_tokens": 20171,
+  "output_tokens": 3559
+}

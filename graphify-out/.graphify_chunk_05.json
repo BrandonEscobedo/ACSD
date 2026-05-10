@@ -1,0 +1,92 @@
+{
+  "nodes": [
+    {
+      "id": "img:container-cafe.svg",
+      "label": "Container Cafe Icon (SVG)",
+      "file_type": "image",
+      "source_file": "C:\\Users\\brand\\Desktop\\python\\ACSD\\assets\\container-cafe.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "img:container-cafe.svg:body",
+      "label": "Brown Container Body (#AE864B / #9D7241)",
+      "file_type": "image",
+      "source_file": "C:\\Users\\brand\\Desktop\\python\\ACSD\\assets\\container-cafe.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "img:container-cafe.svg:ribs",
+      "label": "Vertical Corrugation Ribs (#8E6338)",
+      "file_type": "image",
+      "source_file": "C:\\Users\\brand\\Desktop\\python\\ACSD\\assets\\container-cafe.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "img:container-cafe.svg:feet",
+      "label": "Container Base Feet / Supports",
+      "file_type": "image",
+      "source_file": "C:\\Users\\brand\\Desktop\\python\\ACSD\\assets\\container-cafe.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "concept:ui-icon-asset",
+      "label": "UI Icon Asset (Cafe Container)",
+      "file_type": "rationale",
+      "source_file": "C:\\Users\\brand\\Desktop\\python\\ACSD\\assets\\container-cafe.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "img:container-cafe.svg",
+      "target": "img:container-cafe.svg:body",
+      "relation": "HAS_PART",
+      "evidence": "EXTRACTED",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "img:container-cafe.svg",
+      "target": "img:container-cafe.svg:ribs",
+      "relation": "HAS_PART",
+      "evidence": "EXTRACTED",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "img:container-cafe.svg",
+      "target": "img:container-cafe.svg:feet",
+      "relation": "HAS_PART",
+      "evidence": "EXTRACTED",
+      "confidence_score": 1.0
+    },
+    {
+      "source": "img:container-cafe.svg",
+      "target": "concept:ui-icon-asset",
+      "relation": "REPRESENTS",
+      "evidence": "INFERRED",
+      "confidence_score": 0.85
+    }
+  ],
+  "hyperedges": [],
+  "input_tokens": 18615,
+  "output_tokens": 3285
+}
