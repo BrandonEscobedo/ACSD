@@ -13,7 +13,7 @@ from app.infrastructure.services.websocket_manager import WebSocketManager
 
 _BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent
 _ASSETS_DIR = _BASE_DIR / "assets"
-_JSON_PATH = _BASE_DIR / "src" / "data" / "lineas_transportistas.json"
+_JSON_PATH = _BASE_DIR / _ASSETS_DIR / "data" / "lineas_transportistas.json"
 
 # Singletons — se crean una sola vez al primer acceso
 _visual_svc: VisualService | None = None
