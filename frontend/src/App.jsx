@@ -62,7 +62,7 @@ export default function App() {
             />
           </div>
 
-          {/* Patio */}
+          {}
           <YardGrid
             patio={patio}
             containers={allContainersList}
@@ -71,7 +71,7 @@ export default function App() {
             onError={handleError}
           />
 
-          {/* Detail panel — slides in when a container is selected */}
+          {}
           {selectedContainer && (
             <div
               className="fade-up"

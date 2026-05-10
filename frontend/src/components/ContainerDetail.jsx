@@ -1,9 +1,9 @@
 const CARGA_ICON = {
-  'Carga Seca':  '📦',
-  'Refrigerada': '❄️',
-  'Peligrosa':   '☢️',
-  'Frágil':      '🫧',
-  'Nodriza':     '🔗',
+  'Carga Seca':  '',
+  'Refrigerada': '',
+  'Peligrosa':   '',
+  'Frágil':      '',
+  'Nodriza':     '',
 }
 
 const ZONE_META = {
@@ -24,7 +24,7 @@ export default function ContainerDetail({ container }) {
         borderRadius: 'var(--radius)',
         color: 'var(--text4)', textAlign: 'center',
       }}>
-        <span style={{ fontSize: '44px', opacity: 0.35 }}>📦</span>
+        <span style={{ fontSize: '44px', opacity: 0.35 }}></span>
         <div>
           <div style={{ fontSize: '14px', fontWeight: 600, color: 'var(--text3)', marginBottom: '4px' }}>
             Sin contenedor seleccionado
@@ -38,7 +38,7 @@ export default function ContainerDetail({ container }) {
   }
 
   const zone  = ZONE_META[container.posicion_actual] ?? { color: 'var(--text4)', label: container.posicion_actual, icon: '📍' }
-  const cargo = CARGA_ICON[container.carga_tipo] ?? '📦'
+  const cargo = CARGA_ICON[container.carga_tipo] ?? ''
 
   return (
     <div className="fade-up" style={{

@@ -55,7 +55,7 @@ export default function AnimationView({
             background: 'var(--color-surface2)',
             padding: '4px 10px', borderRadius: '6px',
           }}>
-            ⏱ {currentEvent.tiempo.toFixed(1)}s &nbsp;|&nbsp; {currentEvent.contenedor_id}: {currentEvent.accion}
+             {currentEvent.tiempo.toFixed(1)}s &nbsp;|&nbsp; {currentEvent.contenedor_id}: {currentEvent.accion}
           </div>
         )}
 
@@ -69,13 +69,13 @@ export default function AnimationView({
       {/* Zonas */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
         <ZonaBuquePiso
-          zona="BUQUE" label="🚢 Buque"
+          zona="BUQUE" label="Buque"
           color="var(--color-buque)"
           contenedores={zones.BUQUE}
           activeId={activeId}
         />
         <ZonaBuquePiso
-          zona="PISO" label="📍 Piso"
+          zona="PISO" label="Piso"
           color="var(--color-piso)"
           contenedores={zones.PISO}
           activeId={activeId}
@@ -93,7 +93,7 @@ export default function AnimationView({
       {simData && (
         <details style={{ marginTop: '4px' }}>
           <summary style={{ cursor: 'pointer', fontSize: '12px', color: 'var(--color-text-muted)', userSelect: 'none' }}>
-            📊 Ver tabla de eventos
+          Ver tabla de eventos
           </summary>
           <div style={{ marginTop: '10px', maxHeight: '260px', overflowY: 'auto' }}>
             <table>
