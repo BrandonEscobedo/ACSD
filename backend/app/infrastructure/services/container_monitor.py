@@ -178,6 +178,26 @@ class ContainerMonitor:
         finally:
             self._advance_tasks.pop(container_id, None)
 
+    async def _auto_advance_staggered(self, container_id: str, index: int, total: int) -> None:
+        """Stagger departures so containers don't all move at once when pre-filled."""
+        stagger = (self.config.buque_time / total) * index
+        try:
+            await asyncio.sleep(stagger)
+            if not self.auto_running:
+                return
+            await asyncio.sleep(self.config.buque_time)
+            if not self.auto_running:
+                return
+            await self.move_to_piso(container_id)
+            await asyncio.sleep(self.config.piso_time)
+            if not self.auto_running:
+                return
+            await self.move_to_patio(container_id)
+        except asyncio.CancelledError:
+            pass
+        finally:
+            self._advance_tasks.pop(container_id, None)
+
     # ── Public operations ─────────────────────────────────────────────────────
 
     async def add_container(self) -> Contenedor:
@@ -200,7 +220,31 @@ class ContainerMonitor:
         if self.auto_running:
             return
         self.auto_running = True
-        self._log("SYSTEM", "Modo automático iniciado", "—", "—")
+
+        # Pre-fill buque if system is fresh (no containers yet)
+        if not self.containers:
+            max_cont = self.config.max_containers if self.config.max_containers > 0 else 40
+            self._log("SYSTEM", f"Cargando {max_cont} contenedores en buque", "\u2014", "\u2014")
+            batch = []
+            for _ in range(max_cont):
+                cont = self._make_container()
+                self._arrive_in_buque(cont)
+                batch.append(cont.id)
+
+            await self._broadcast()
+
+            # Stagger auto-advance so containers don't all move at once
+            for i, cid in enumerate(batch):
+                task = asyncio.create_task(self._auto_advance_staggered(cid, i, max_cont))
+                self._advance_tasks[cid] = task
+        else:
+            self._log("SYSTEM", "Modo automático iniciado", "\u2014", "\u2014")
+            # Create auto-advance for any existing containers not yet advancing
+            for cid in list(self.buque):
+                if cid not in self._advance_tasks:
+                    task = asyncio.create_task(self._auto_advance(cid))
+                    self._advance_tasks[cid] = task
+
         self._auto_task = asyncio.create_task(self._generator_loop())
         await self._broadcast()
 

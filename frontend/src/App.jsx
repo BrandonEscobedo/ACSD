@@ -2,7 +2,8 @@ import { useState } from 'react'
 import { useWebSocket } from './hooks/useWebSocket'
 import MonitorHeader from './components/MonitorHeader'
 import Sidebar from './components/Sidebar'
-import ZoneCard from './components/ZoneCard'
+import ShipCraneView from './components/ShipCraneView'
+import PisoYardView from './components/PisoYardView'
 import YardGrid from './components/YardGrid'
 import ContainerDetail from './components/ContainerDetail'
 import AssignmentPanel from './components/AssignmentPanel'
@@ -44,23 +45,19 @@ export default function App() {
           minWidth: 0,
         }}>
 
-          {/* Zones row */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '16px' }}>
-            <ZoneCard
-              zone="BUQUE"
-              label="Buque"
-              icon="🚢"
-              color="var(--buque)"
+          {/* Zones row — animacion de grua + yard de verificacion */}
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(440px, 1fr))',
+            gap: '16px',
+            marginBottom: '16px',
+          }}>
+            <ShipCraneView
               containers={buque.filter(Boolean)}
-              onError={handleError}
+              autoPlay={state?.auto_running ?? false}
             />
-            <ZoneCard
-              zone="PISO"
-              label="Piso (Verificacion)"
-              icon="📋"
-              color="var(--piso)"
+            <PisoYardView
               containers={piso.filter(Boolean)}
-              onError={handleError}
             />
           </div>
 
