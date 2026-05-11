@@ -45,10 +45,10 @@ export default function App() {
           minWidth: 0,
         }}>
 
-          {/* Zones row — animacion de grua + yard de verificacion */}
+          {/* Zones row — Buque + Piso + Patio juntos */}
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(440px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))',
             gap: '16px',
             marginBottom: '16px',
           }}>
@@ -59,15 +59,15 @@ export default function App() {
             <PisoYardView
               containers={piso.filter(Boolean)}
             />
+            <YardGrid
+              patio={patio}
+              containers={allContainersList}
+              selectedId={selectedId}
+              onSelect={id => setSelectedId(prev => prev === id ? null : id)}
+              onError={handleError}
+              compact
+            />
           </div>
-
-          <YardGrid
-            patio={patio}
-            containers={allContainersList}
-            selectedId={selectedId}
-            onSelect={id => setSelectedId(prev => prev === id ? null : id)}
-            onError={handleError}
-          />
 
           {selectedContainer && (
             <div

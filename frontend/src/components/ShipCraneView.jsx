@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from "react"
+import { advanceContainer } from '../api/client'
 
 const CARGO_COLORS = {
   'Carga Seca':   '#60a5fa',
@@ -11,7 +12,7 @@ const FALLBACK_COLORS = ["#E63946","#457B9D","#F4A261","#2A9D8F","#E9C46A","#6A4
 const CW = 38, CH = 24, PAD_X = 3, PAD_Y = 2
 
 /* ─── layout ─── */
-const CANVAS_W = 620, CANVAS_H = 440
+const CANVAS_W = 700, CANVAS_H = 440
 const SHIP_LEFT = 140, SHIP_RIGHT = 505
 const SHIP_DECK_Y = 240, SHIP_HULL_BOTTOM = 300
 const QUAY_Y = 330
@@ -20,7 +21,7 @@ const S_COLS = 8, S_ROWS = 5
 const STACK_SX = SHIP_LEFT + 12
 const STACK_SY = SHIP_DECK_Y - S_ROWS*(CH+PAD_Y)
 
-const DROP_X = CANVAS_W - 72
+const DROP_X = CANVAS_W - 82
 const DROP_Y = QUAY_Y + 10
 
 function containerColor(cont, index) {
@@ -214,7 +215,20 @@ export default function ShipCraneView({ containers, autoPlay }) {
       const dy = anim.dropTargetY - anim.hookY; anim.hookY += dy*0.12
       anim.containerX = anim.cableX - CW/2
       anim.containerY = anim.hookY
-      if (Math.abs(dy) < 0.6) { anim.hookY = anim.dropTargetY; anim.containerY = anim.hookY; anim.phase = "release"; anim.releaseTimer = 0 }
+      if (Math.abs(dy) < 0.6) {
+        anim.hookY = anim.dropTargetY
+        anim.containerY = anim.hookY
+        anim.phase = "release"
+        anim.releaseTimer = 0
+        // call backend to advance container immediately when we enter release phase
+        if (!anim._advanceCalled) {
+          anim._advanceCalled = true
+          advanceContainer(anim.containerId).catch(err => {
+            console.error('advanceContainer failed', err)
+            try { /* best-effort status update */ window && (window.__ship_error = err.message) } catch(e){}
+          })
+        }
+      }
     } else if (anim.phase === "release") {
       anim.containerY = anim.dropTargetY
       anim.releaseTimer++
@@ -293,14 +307,36 @@ export default function ShipCraneView({ containers, autoPlay }) {
     const ids = new Set(list.map(c => c.id))
     const prevIds = prevIdsRef.current
 
-    // build positioned ship containers
-    const positioned = list.map((cont, i) => {
-      const pos = getShipPosition(i)
-      const c = containerColor(cont, i)
-      return { ...cont, ...pos, color: c, visible: true }
-    })
+    // build positioned ship containers while preserving previous positions
+    const prevMap = new Map(shipRef.current.map(c => [c.id, c]))
+    const occupied = new Set()
+    const positioned = []
 
-    // preserve visibility for containers that were already hidden
+    // first, keep containers that we already know positions for
+    for (const cont of list) {
+      if (prevMap.has(cont.id)) {
+        const p = prevMap.get(cont.id)
+        positioned.push({ ...cont, col: p.col, row: p.row, x: p.x, y: p.y, color: p.color ?? containerColor(cont, 0), visible: p.visible ?? true })
+        occupied.add(`${p.col}-${p.row}`)
+      }
+    }
+
+    // then allocate slots for new containers (first free slot order matches getShipPosition index order)
+    const totalSlots = S_COLS * S_ROWS
+    for (const cont of list) {
+      if (positioned.find(p => p.id === cont.id)) continue
+      for (let idx = 0; idx < totalSlots; idx++) {
+        const pos = getShipPosition(idx)
+        const key = `${pos.col}-${pos.row}`
+        if (occupied.has(key)) continue
+        const c = containerColor(cont, idx)
+        positioned.push({ ...cont, ...pos, color: c, visible: true })
+        occupied.add(key)
+        break
+      }
+    }
+
+    // preserve visibility for containers that were already hidden (best-effort)
     if (prevIds.size > 0) {
       const hiddenIds = new Set(shipRef.current.filter(c => !c.visible).map(c => c.id))
       positioned.forEach(p => { if (hiddenIds.has(p.id)) p.visible = false })
@@ -352,14 +388,19 @@ export default function ShipCraneView({ containers, autoPlay }) {
     }
   }, [])
 
+  // use a shared layout base to make this card match heights with other panels
+  const LAYOUT_BASE = 600
+  const pct = (CANVAS_H / LAYOUT_BASE) * 100
+
   return (
     <div style={{
       display: "flex", flexDirection: "column",
-      width: "100%", maxWidth: CANVAS_W,
-      margin: "0 auto",
+      width: "100%",
     }}>
       <div style={{
         width: "100%",
+        position: "relative",
+        paddingBottom: `${pct}%`,
         borderRadius: "12px 12px 0 0",
         overflow: "hidden",
         border: "1px solid var(--border)",
@@ -371,8 +412,10 @@ export default function ShipCraneView({ containers, autoPlay }) {
           width={CANVAS_W}
           height={CANVAS_H}
           style={{
-            width: "100%", height: "auto",
-            display: "block",
+            position: "absolute",
+            inset: 0,
+            width: "100%",
+            height: "100%",
           }}
         />
       </div>

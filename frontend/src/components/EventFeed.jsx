@@ -32,63 +32,63 @@ export default function EventFeed({ events = [] }) {
     if (listRef.current) listRef.current.scrollTop = 0
   }, [events.length])
 
-  return (
-    <div style={{
-      position: 'fixed',
-      bottom: '20px',
-      right: '20px',
-      width: '340px',
-      maxHeight: '44vh',
-      background: 'var(--surface)',
-      border: '1px solid var(--border)',
-      borderRadius: '14px',
-      overflow: 'hidden',
-      zIndex: 850,
-      display: 'flex',
-      flexDirection: 'column',
-      boxShadow: '0 8px 40px #00000050',
-    }}>
-      {/* Header */}
-      <div style={{
-        padding: '12px 18px',
-        borderBottom: '1px solid var(--border)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        flexShrink: 0,
-        background: 'linear-gradient(90deg, var(--surface2) 0%, var(--surface) 100%)',
-      }}>
-        <div style={{ fontWeight: 700, fontSize: '15px', color: 'var(--text)' }}>
-          {'\uD83D\uDCE1'} Eventos en vivo
-        </div>
-        <div style={{
-          background: 'var(--surface2)',
-          border: '1px solid var(--border)',
-          borderRadius: '6px',
-          padding: '3px 10px',
-          fontSize: '12px',
-          fontWeight: 600,
-          color: 'var(--buque)',
-        }}>
-          {events.length}
-        </div>
-      </div>
+  // return (
+  //   <div style={{
+  //     position: 'fixed',
+  //     bottom: '20px',
+  //     right: '20px',
+  //     width: '340px',
+  //     maxHeight: '44vh',
+  //     background: 'var(--surface)',
+  //     border: '1px solid var(--border)',
+  //     borderRadius: '14px',
+  //     overflow: 'hidden',
+  //     zIndex: 850,
+  //     display: 'flex',
+  //     flexDirection: 'column',
+  //     boxShadow: '0 8px 40px #00000050',
+  //   }}>
+  //     {/* Header */}
+  //     <div style={{
+  //       padding: '12px 18px',
+  //       borderBottom: '1px solid var(--border)',
+  //       display: 'flex',
+  //       alignItems: 'center',
+  //       justifyContent: 'space-between',
+  //       flexShrink: 0,
+  //       background: 'linear-gradient(90deg, var(--surface2) 0%, var(--surface) 100%)',
+  //     }}>
+  //       <div style={{ fontWeight: 700, fontSize: '15px', color: 'var(--text)' }}>
+  //         {'\uD83D\uDCE1'} Eventos en vivo
+  //       </div>
+  //       <div style={{
+  //         background: 'var(--surface2)',
+  //         border: '1px solid var(--border)',
+  //         borderRadius: '6px',
+  //         padding: '3px 10px',
+  //         fontSize: '12px',
+  //         fontWeight: 600,
+  //         color: 'var(--buque)',
+  //       }}>
+  //         {events.length}
+  //       </div>
+  //     </div>
 
-      {/* Event list  newest on top */}
-      <div ref={listRef} style={{ flex: 1, overflowY: 'auto' }}>
-        {events.length === 0 ? (
-          <div style={{
-            textAlign: 'center', padding: '36px 16px',
-            color: 'var(--text4)', fontSize: '13px',
-          }}>
-            Los eventos apareceran aqui cuando haya actividad
-          </div>
-        ) : (
-          events.map((evt, i) => <EventRow key={i} evt={evt} isNew={i === 0} />)
-        )}
-      </div>
-    </div>
-  )
+  //     {/* Event list  newest on top */}
+  //     <div ref={listRef} style={{ flex: 1, overflowY: 'auto' }}>
+  //       {events.length === 0 ? (
+  //         <div style={{
+  //           textAlign: 'center', padding: '36px 16px',
+  //           color: 'var(--text4)', fontSize: '13px',
+  //         }}>
+  //           Los eventos apareceran aqui cuando haya actividad
+  //         </div>
+  //       ) : (
+  //         events.map((evt, i) => <EventRow key={i} evt={evt} isNew={i === 0} />)
+  //       )}
+  //     </div>
+  //   </div>
+  // )
 }
 
 function EventRow({ evt, isNew }) {

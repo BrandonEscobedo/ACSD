@@ -10,11 +10,11 @@ const CARGO_COLORS = {
 const FALLBACK = ["#E63946","#457B9D","#F4A261","#2A9D8F","#E9C46A","#6A4C93","#e76f51","#264653","#60a5fa","#34d399"]
 const CW = 38, CH = 24, PAD_Y = 2
 
-const CANVAS_W = 360, CANVAS_H = 440
-const Y_COLS = 6
+const CANVAS_W = 500, CANVAS_H = 440
+const Y_COLS = 8
 const YARD_FLOOR_Y = CANVAS_H - 55
 const YARD_START_X = 14
-const YARD_COL_W = 54
+const YARD_COL_W = 56
 
 function drawBox(ctx, x, y, color, glow) {
   ctx.fillStyle = color
@@ -141,14 +141,19 @@ export default function PisoYardView({ containers }) {
 
   useEffect(() => { drawYard() }, [drawYard])
 
+  // use a shared layout base to make this card match heights with other panels
+  const LAYOUT_BASE = 600
+  const pct = (CANVAS_H / LAYOUT_BASE) * 100
+
   return (
     <div style={{
       display: "flex", flexDirection: "column",
-      width: "100%", maxWidth: CANVAS_W,
-      margin: "0 auto",
+      width: "100%",
     }}>
       <div style={{
         width: "100%",
+        position: "relative",
+        paddingBottom: `${pct}%`,
         borderRadius: "12px 12px 0 0",
         overflow: "hidden",
         border: "1px solid var(--border)",
@@ -160,8 +165,10 @@ export default function PisoYardView({ containers }) {
           width={CANVAS_W}
           height={CANVAS_H}
           style={{
-            width: "100%", height: "auto",
-            display: "block",
+            position: "absolute",
+            inset: 0,
+            width: "100%",
+            height: "100%",
           }}
         />
       </div>
