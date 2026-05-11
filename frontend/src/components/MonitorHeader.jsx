@@ -1,16 +1,26 @@
 import { useEffect, useState } from 'react'
+import { startAuto, stopAuto } from '../api/client'
 
-export default function MonitorHeader({ connected, state }) {
+export default function MonitorHeader({ connected, state, onError }) {
   const [time, setTime] = useState(new Date())
+  const [busy, setBusy] = useState(false)
   useEffect(() => {
     const t = setInterval(() => setTime(new Date()), 1000)
     return () => clearInterval(t)
   }, [])
 
-  const buque   = state?.buque.length  ?? 0
-  const piso    = state?.piso.length   ?? 0
-  const patio   = state ? state.patio.flat().filter(Boolean).length : 0
-  const ocupPct = Math.round((patio / 40) * 100)
+  const buque       = state?.buque.length  ?? 0
+  const piso        = state?.piso.length   ?? 0
+  const patio       = state ? state.patio.flat().filter(Boolean).length : 0
+  const ocupPct     = Math.round((patio / 40) * 100)
+  const autoRunning = state?.auto_running ?? false
+
+  async function toggleAuto() {
+    setBusy(true)
+    try { await (autoRunning ? stopAuto() : startAuto()) }
+    catch (e) { onError?.(e.message) }
+    finally { setBusy(false) }
+  }
 
   return (
     <header style={{
@@ -64,6 +74,26 @@ export default function MonitorHeader({ connected, state }) {
           {connected ? 'En línea' : 'Sin conexión'}
         </span>
       </div>
+
+      {/* Auto monitor button */}
+      <button
+        onClick={toggleAuto}
+        disabled={busy || !connected}
+        style={{
+          display: 'flex', alignItems: 'center', gap: '8px',
+          padding: '6px 18px', borderRadius: '10px',
+          fontSize: '14px', fontWeight: 700, cursor: 'pointer',
+          background: autoRunning
+            ? 'linear-gradient(135deg, #052e16, #14532d)'
+            : 'linear-gradient(135deg, #0c1e36, #0c4a6e)',
+          border: `1.5px solid ${autoRunning ? '#16a34a' : '#0284c7'}`,
+          color: autoRunning ? '#4ade80' : '#38bdf8',
+          boxShadow: autoRunning ? '0 0 16px #22c55e22' : '0 0 16px #38bdf822',
+          transition: 'all 0.2s ease',
+        }}>
+        <span style={{ fontSize: '16px' }}>{autoRunning ? '⏹' : '▶'}</span>
+        {autoRunning ? 'Detener Monitoreo' : 'Iniciar Monitoreo'}
+      </button>
 
       <div style={{ flex: 1 }} />
 

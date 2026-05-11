@@ -17,7 +17,7 @@ export default function YardView({ simData, selectedId, onSelect }) {
       <div style={{ flex: 3, minWidth: 0 }}>
         {contsEnPatio.length > 0 && (
           <div style={{ marginBottom: '12px' }}>
-            <div style={{ fontSize: '11px', color: 'var(--color-text-muted)', marginBottom: '6px' }}>
+            <div style={{ fontSize: '12px', color: 'var(--text4)', marginBottom: '6px' }}>
               Selección rápida
             </div>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>

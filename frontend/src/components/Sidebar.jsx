@@ -1,18 +1,16 @@
 import { useEffect, useState } from 'react'
 import {
-  startAuto, stopAuto, addContainer,
+  addContainer,
   resetMonitor, updateConfig,
 } from '../api/client'
-import EventFeed from './EventFeed'
 
-export default function Sidebar({ state, events, onError }) {
+export default function Sidebar({ state, onError, isOpen, onClose }) {
   const [busy, setBusy] = useState(false)
 
   const cfg = state?.config ?? {
     arrival_interval: 5, buque_time: 8, piso_time: 6,
     max_containers: 40, auto_advance: true,
   }
-  const autoRunning = state?.auto_running ?? false
 
   async function run(fn) {
     setBusy(true)
@@ -24,57 +22,52 @@ export default function Sidebar({ state, events, onError }) {
     await run(() => updateConfig({ ...cfg, [key]: value }))
   }
 
-  return (
-    <div style={{
-      display: 'flex', flexDirection: 'column',
-      height: '100%',
-      background: 'var(--surface)',
-      borderRight: '1px solid var(--border)',
-    }}>
-      {/* ── Scrollable controls ─────────────────────────── */}
-      <div style={{ overflowY: 'auto', padding: '20px 18px', flexShrink: 0, userSelect: 'none' }}>
+  if (!isOpen) return null
 
-        {/* ── Auto mode ─────────────────────────────────── */}
-        <div className="section-label">Modo de operación</div>
+  return (
+    <>
+      {/* Backdrop */}
+      <div
+        onClick={onClose}
+        style={{
+          position: 'fixed', inset: 0,
+          background: 'rgba(0,0,0,0.3)',
+          zIndex: 800,
+        }}
+      />
+
+      {/* Panel */}
+      <div style={{
+        position: 'fixed',
+        top: 0, left: 0, bottom: 0,
+        width: '320px',
+        background: 'var(--surface)',
+        borderRight: '1px solid var(--border)',
+        zIndex: 801,
+        display: 'flex',
+        flexDirection: 'column',
+        overflowY: 'auto',
+        padding: '20px 18px',
+        boxShadow: '8px 0 32px #00000060',
+        animation: 'slideInX .25s ease',
+      }}>
+        {/* Close button */}
         <button
-          onClick={() => run(autoRunning ? stopAuto : startAuto)}
-          disabled={busy}
+          onClick={onClose}
           style={{
-            width: '100%', padding: '14px 18px', fontSize: '15px',
-            borderRadius: '10px', justifyContent: 'center',
-            background: autoRunning
-              ? 'linear-gradient(135deg, #052e16, #14532d)'
-              : 'linear-gradient(135deg, #0c1e36, #0c4a6e)',
-            border: `1.5px solid ${autoRunning ? '#16a34a' : '#0284c7'}`,
-            color: autoRunning ? '#4ade80' : '#38bdf8',
-            boxShadow: autoRunning ? '0 0 20px #22c55e20' : '0 0 20px #38bdf820',
+            position: 'absolute', top: '14px', right: '14px',
+            background: 'var(--surface2)', border: '1px solid var(--border)',
+            borderRadius: '8px', width: '32px', height: '32px',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            fontSize: '16px', color: 'var(--text3)', cursor: 'pointer',
+            padding: 0,
           }}
         >
-          <span style={{ fontSize: '18px' }}>{autoRunning ? '⏹' : '▶'}</span>
-          <span>{autoRunning ? 'Detener automático' : 'Iniciar automático'}</span>
+          {'\u2715'}
         </button>
 
-        {autoRunning && (
-          <div style={{
-            marginTop: '10px', padding: '8px 12px',
-            background: '#052e16', border: '1px solid #14532d',
-            borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '8px',
-            fontSize: '13px', color: '#4ade80',
-          }}>
-            <span style={{
-              width: 8, height: 8, borderRadius: '50%',
-              background: '#4ade80', flexShrink: 0,
-              animation: 'pulseDot 1.2s ease-in-out infinite',
-              display: 'inline-block',
-            }} />
-            Generando contenedores automáticamente
-          </div>
-        )}
-
-        <div className="divider" />
-
         {/* ── Config ────────────────────────────────────── */}
-        <div className="section-label">Parámetros de simulación</div>
+        <div className="section-label" style={{ marginTop: 0 }}>Parámetros de simulación</div>
 
         <Slider
           label="Intervalo de llegada"
@@ -88,22 +81,22 @@ export default function Sidebar({ state, events, onError }) {
           value={cfg.buque_time} unit="s"
           min={1} max={60} step={1}
           onCommit={v => handleCfg('buque_time', v)}
-          hint="Cuánto espera antes de pasar a Piso"
+          hint="Cuanto espera antes de pasar a Piso"
         />
         <Slider
           label="Tiempo en Piso"
           value={cfg.piso_time} unit="s"
           min={1} max={60} step={1}
           onCommit={v => handleCfg('piso_time', v)}
-          hint="Cuánto dura la verificación"
+          hint="Cuanto dura la verificacion"
         />
         <Slider
-          label="Máx. contenedores activos"
+          label="Max. contenedores activos"
           value={cfg.max_containers}
           min={0} max={40} step={1}
           onCommit={v => handleCfg('max_containers', v)}
-          note={cfg.max_containers === 0 ? 'Sin límite' : String(cfg.max_containers)}
-          hint={cfg.max_containers === 0 ? 'Genera hasta que el patio esté lleno' : 'El sistema pausará al llegar al límite'}
+          note={cfg.max_containers === 0 ? 'Sin limite' : String(cfg.max_containers)}
+          hint={cfg.max_containers === 0 ? 'Genera hasta que el patio este lleno' : 'El sistema pausara al llegar al limite'}
         />
 
         <label style={{
@@ -119,8 +112,8 @@ export default function Sidebar({ state, events, onError }) {
             onChange={e => handleCfg('auto_advance', e.target.checked)}
           />
           <div>
-            <div style={{ fontWeight: 600 }}>Avance automático</div>
-            <div style={{ fontSize: '12px', color: 'var(--text3)', marginTop: '2px' }}>
+            <div style={{ fontWeight: 600 }}>Avance automatico</div>
+            <div style={{ fontSize: '13px', color: 'var(--text2)', marginTop: '2px' }}>
               Los contenedores progresan solos por las zonas
             </div>
           </div>
@@ -137,7 +130,7 @@ export default function Sidebar({ state, events, onError }) {
             disabled={busy}
             style={{ width: '100%', padding: '12px', fontSize: '14px', justifyContent: 'center' }}
           >
-            <span>＋</span>
+            <span>{'\uff0b'}</span>
             Agregar contenedor al buque
           </button>
           <button
@@ -149,19 +142,12 @@ export default function Sidebar({ state, events, onError }) {
               border: '1.5px solid var(--danger)', color: 'var(--danger)',
             }}
           >
-            <span>↺</span>
+            <span>{'\u21ba'}</span>
             Reiniciar todo el sistema
           </button>
         </div>
-
-        <div className="divider" />
       </div>
-
-      {/* ── Event feed — takes remaining height ─────────── */}
-      <div style={{ flex: 1, overflow: 'hidden', display: 'flex', flexDirection: 'column', minHeight: '200px' }}>
-        <EventFeed events={events} />
-      </div>
-    </div>
+    </>
   )
 }
 
@@ -196,7 +182,7 @@ function Slider({ label, value, unit = '', min, max, step, onCommit, note, hint 
         onKeyUp={() => commit(draft)}
       />
       {hint && (
-        <div style={{ fontSize: '11px', color: 'var(--text4)', marginTop: '4px' }}>{hint}</div>
+        <div style={{ fontSize: '12px', color: 'var(--text3)', marginTop: '4px' }}>{hint}</div>
       )}
     </div>
   )

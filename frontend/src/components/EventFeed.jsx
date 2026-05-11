@@ -6,15 +6,15 @@ const ZONE_COLORS = {
   PATIO:  'var(--patio)',
   MAR:    'var(--text4)',
   SALIDA: 'var(--success)',
-  '—':    'var(--text4)',
+  '':    'var(--text4)',
 }
 
 const ZONE_ICONS = {
-  BUQUE: '🚢',
-  PISO:  '📋',
-  PATIO: '🏭',
-  MAR:   '🌊',
-  SALIDA:'✅',
+  BUQUE: '\uD83D\uDEA2',
+  PISO:  '\uD83D\uDCCB',
+  PATIO: '\uD83C\uDFED',
+  MAR:   '\uD83C\uDF0A',
+  SALIDA:'\u2705',
 }
 
 function relTime(iso) {
@@ -34,10 +34,19 @@ export default function EventFeed({ events = [] }) {
 
   return (
     <div style={{
+      position: 'fixed',
+      bottom: '20px',
+      right: '20px',
+      width: '340px',
+      maxHeight: '44vh',
+      background: 'var(--surface)',
+      border: '1px solid var(--border)',
+      borderRadius: '14px',
+      overflow: 'hidden',
+      zIndex: 850,
       display: 'flex',
       flexDirection: 'column',
-      height: '100%',
-      overflow: 'hidden',
+      boxShadow: '0 8px 40px #00000050',
     }}>
       {/* Header */}
       <div style={{
@@ -47,30 +56,32 @@ export default function EventFeed({ events = [] }) {
         alignItems: 'center',
         justifyContent: 'space-between',
         flexShrink: 0,
+        background: 'linear-gradient(90deg, var(--surface2) 0%, var(--surface) 100%)',
       }}>
-        <div style={{ fontWeight: 700, fontSize: '14px', color: 'var(--text2)' }}>
-          📡 Eventos en vivo
+        <div style={{ fontWeight: 700, fontSize: '15px', color: 'var(--text)' }}>
+          {'\uD83D\uDCE1'} Eventos en vivo
         </div>
         <div style={{
           background: 'var(--surface2)',
           border: '1px solid var(--border)',
           borderRadius: '6px',
-          padding: '2px 8px',
-          fontSize: '11px',
-          color: 'var(--text3)',
+          padding: '3px 10px',
+          fontSize: '12px',
+          fontWeight: 600,
+          color: 'var(--buque)',
         }}>
           {events.length}
         </div>
       </div>
 
-      {/* Event list — newest on top */}
+      {/* Event list  newest on top */}
       <div ref={listRef} style={{ flex: 1, overflowY: 'auto' }}>
         {events.length === 0 ? (
           <div style={{
-            textAlign: 'center', padding: '32px 16px',
+            textAlign: 'center', padding: '36px 16px',
             color: 'var(--text4)', fontSize: '13px',
           }}>
-            Los eventos aparecerán aquí cuando haya actividad
+            Los eventos apareceran aqui cuando haya actividad
           </div>
         ) : (
           events.map((evt, i) => <EventRow key={i} evt={evt} isNew={i === 0} />)
@@ -84,7 +95,7 @@ function EventRow({ evt, isNew }) {
   const isSystem = evt.container_id === 'SYSTEM'
   const srcColor = ZONE_COLORS[evt.origen]  ?? 'var(--text4)'
   const dstColor = ZONE_COLORS[evt.destino] ?? 'var(--text4)'
-  const dstIcon  = ZONE_ICONS[evt.destino]  ?? '→'
+  const dstIcon  = ZONE_ICONS[evt.destino]  ?? ''
 
   return (
     <div
@@ -101,21 +112,21 @@ function EventRow({ evt, isNew }) {
       }}
     >
       {/* Time */}
-      <div style={{ fontSize: '11px', color: 'var(--text4)', textAlign: 'right' }}>
+      <div style={{ fontSize: '12px', color: 'var(--text4)', textAlign: 'right' }}>
         {relTime(evt.timestamp)}
       </div>
 
       {isSystem ? (
         /* System event */
-        <div style={{ fontSize: '12px', color: 'var(--text3)', fontStyle: 'italic' }}>
-          ⚙ {evt.accion}
+        <div style={{ fontSize: '13px', color: 'var(--text3)', fontStyle: 'italic' }}>
+          {'\u2699'} {evt.accion}
         </div>
       ) : (
         /* Container event */
         <div style={{ display: 'flex', flexDirection: 'column', gap: '3px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
             <span style={{
-              fontWeight: 700, fontSize: '12px', color: 'var(--buque)',
+              fontWeight: 700, fontSize: '13px', color: 'var(--buque)',
               background: 'var(--surface2)',
               padding: '1px 7px', borderRadius: '5px',
               border: '1px solid var(--border2)',
@@ -124,14 +135,14 @@ function EventRow({ evt, isNew }) {
             </span>
           </div>
 
-          {/* Flow: ORIGEN → DESTINO */}
+          {/* Flow: ORIGEN  DESTINO */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
             <ZonePill label={evt.origen}  icon={ZONE_ICONS[evt.origen]  ?? ''} color={srcColor} />
-            <span style={{ color: 'var(--text4)', fontSize: '12px' }}>→</span>
+            <span style={{ color: 'var(--text4)', fontSize: '12px' }}>{'\u2192'}</span>
             <ZonePill label={evt.destino} icon={dstIcon} color={dstColor} />
           </div>
 
-          <div style={{ fontSize: '11px', color: 'var(--text4)' }}>
+          <div style={{ fontSize: '12px', color: 'var(--text4)' }}>
             {evt.accion}
           </div>
         </div>
@@ -146,8 +157,8 @@ function ZonePill({ label, icon, color }) {
       display: 'inline-flex', alignItems: 'center', gap: '3px',
       background: `${color}18`,
       color, border: `1px solid ${color}40`,
-      padding: '1px 7px', borderRadius: '5px',
-      fontSize: '11px', fontWeight: 600,
+      padding: '2px 8px', borderRadius: '5px',
+      fontSize: '12px', fontWeight: 600,
     }}>
       {icon && <span>{icon}</span>}
       {label}

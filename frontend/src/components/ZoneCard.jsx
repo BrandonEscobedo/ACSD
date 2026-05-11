@@ -43,7 +43,7 @@ export default function ZoneCard({ zone, label, icon, color, containers, onError
           <span style={{ fontSize: '20px' }}>{icon}</span>
           <div>
             <div style={{ fontWeight: 800, fontSize: '16px', color }}>{label}</div>
-            <div style={{ fontSize: '11px', color: 'var(--text4)', marginTop: '1px' }}>
+            <div style={{ fontSize: '12px', color: 'var(--text3)', marginTop: '2px' }}>
               {meta.hint}
             </div>
           </div>

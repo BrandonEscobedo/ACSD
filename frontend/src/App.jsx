@@ -6,11 +6,13 @@ import ZoneCard from './components/ZoneCard'
 import YardGrid from './components/YardGrid'
 import ContainerDetail from './components/ContainerDetail'
 import AssignmentPanel from './components/AssignmentPanel'
+import EventFeed from './components/EventFeed'
 
 export default function App() {
   const { state, connected } = useWebSocket()
   const [selectedId, setSelectedId] = useState(null)
   const [error, setError] = useState(null)
+  const [sidebarOpen, setSidebarOpen] = useState(false)
 
   const buque      = state?.buque      ?? []
   const piso       = state?.piso       ?? []
@@ -30,17 +32,17 @@ export default function App() {
 
   return (
     <div className="shell">
-      {/* ── Header ───────────────────────────────────────── */}
-      <MonitorHeader connected={connected} state={state} />
+      {/*  Header  */}
+      <MonitorHeader connected={connected} state={state} onError={handleError} />
 
-      <div className="shell__body">
-        {/* ── Sidebar ──────────────────────────────────────── */}
-        <aside className="shell__sidebar">
-          <Sidebar state={state} events={events} onError={handleError} />
-        </aside>
-
-        {/* ── Main ─────────────────────────────────────────── */}
-        <main className="shell__main">
+      <div className="shell__body" style={{ position: 'relative' }}>
+        {/*  Main  takes full width now */}
+        <main style={{
+          flex: 1,
+          overflowY: 'auto',
+          padding: '24px 28px',
+          minWidth: 0,
+        }}>
 
           {/* Zones row */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '16px' }}>
@@ -54,7 +56,7 @@ export default function App() {
             />
             <ZoneCard
               zone="PISO"
-              label="Piso (Verificación)"
+              label="Piso (Verificacion)"
               icon="📋"
               color="var(--piso)"
               containers={piso.filter(Boolean)}
@@ -62,7 +64,6 @@ export default function App() {
             />
           </div>
 
-          {}
           <YardGrid
             patio={patio}
             containers={allContainersList}
@@ -71,7 +72,6 @@ export default function App() {
             onError={handleError}
           />
 
-          {}
           {selectedContainer && (
             <div
               className="fade-up"
@@ -92,17 +92,57 @@ export default function App() {
             </div>
           )}
         </main>
+
+        {/*  Sidebar toggle button */}
+        <button
+          onClick={() => setSidebarOpen(v => !v)}
+          title="Configuracion"
+          style={{
+            position: 'absolute',
+            top: '16px',
+            left: '16px',
+            width: '36px',
+            height: '36px',
+            borderRadius: '10px',
+            background: sidebarOpen ? 'var(--buque)' : 'var(--surface2)',
+            border: `1px solid ${sidebarOpen ? 'var(--buque)' : 'var(--border)'}`,
+            color: sidebarOpen ? '#04111f' : 'var(--text3)',
+            fontSize: '18px',
+            fontWeight: 700,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'pointer',
+            zIndex: 100,
+            padding: 0,
+            transition: 'all 0.2s ease',
+          }}
+        >
+          ⚙
+        </button>
       </div>
 
-      {/* ── Error toast ──────────────────────────────────── */}
+      {/*  Sidebar overlay */}
+      <Sidebar
+        state={state}
+        onError={handleError}
+        isOpen={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+      />
+
+      {/*  Event feed  fixed floating panel */}
+      <EventFeed events={events} />
+
+      {/*  Error toast */}
       {error && (
         <div style={{
-          position: 'fixed', bottom: '28px', right: '28px',
+          position: 'fixed', bottom: '28px', left: '50%',
+          transform: 'translateX(-50%)',
           background: '#7f1d1d', border: '1px solid var(--danger)',
           color: '#fecaca', padding: '12px 20px', borderRadius: '10px',
           fontWeight: 600, fontSize: '14px',
           boxShadow: '0 8px 32px #ef444440',
-          zIndex: 1000, animation: 'fadeUp .25s ease',
+          zIndex: 1100, animation: 'fadeUp .25s ease',
           display: 'flex', alignItems: 'center', gap: '10px',
         }}>
           <span style={{ fontSize: '18px' }}>⚠</span>
@@ -110,7 +150,7 @@ export default function App() {
         </div>
       )}
 
-      {/* ── Disconnected overlay ──────────────────────────── */}
+      {/*  Disconnected overlay */}
       {!connected && (
         <div style={{
           position: 'fixed', inset: 0,
@@ -132,7 +172,7 @@ export default function App() {
               Conectando al servidor
             </div>
             <div style={{ color: 'var(--text3)', fontSize: '14px', textAlign: 'center', marginTop: '6px' }}>
-              Asegúrate de que el backend esté corriendo en :8000
+              Asegurate de que el backend este corriendo en :8000
             </div>
           </div>
         </div>

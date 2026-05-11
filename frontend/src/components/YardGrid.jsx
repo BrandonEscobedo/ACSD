@@ -38,7 +38,7 @@ export default function YardGrid({ patio, containers, selectedId, onSelect, onEr
             <div style={{ fontWeight: 800, fontSize: '16px', color: 'var(--patio)' }}>
               🏭 Patio de Almacenamiento
             </div>
-            <div style={{ fontSize: '12px', color: 'var(--text4)', marginTop: '2px' }}>
+            <div style={{ fontSize: '13px', color: 'var(--text3)', marginTop: '2px' }}>
               Haz clic en un contenedor para seleccionarlo · Haz clic en ✕ para retirarlo
             </div>
           </div>

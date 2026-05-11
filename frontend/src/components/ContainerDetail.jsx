@@ -29,7 +29,7 @@ export default function ContainerDetail({ container }) {
           <div style={{ fontSize: '14px', fontWeight: 600, color: 'var(--text3)', marginBottom: '4px' }}>
             Sin contenedor seleccionado
           </div>
-          <div style={{ fontSize: '12px', lineHeight: 1.5 }}>
+          <div style={{ fontSize: '13px', lineHeight: 1.5 }}>
             Haz clic en un contenedor<br />del patio para ver sus detalles
           </div>
         </div>
