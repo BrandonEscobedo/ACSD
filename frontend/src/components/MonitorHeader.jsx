@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { startAuto, stopAuto } from '../api/client'
+import { startAuto, stopAuto, resetMonitor } from '../api/client'
 
 export default function MonitorHeader({ connected, state, onError }) {
   const [time, setTime] = useState(new Date())
@@ -18,6 +18,13 @@ export default function MonitorHeader({ connected, state, onError }) {
   async function toggleAuto() {
     setBusy(true)
     try { await (autoRunning ? stopAuto() : startAuto()) }
+    catch (e) { onError?.(e.message) }
+    finally { setBusy(false) }
+  }
+
+  async function handleReset() {
+    setBusy(true)
+    try { await resetMonitor() }
     catch (e) { onError?.(e.message) }
     finally { setBusy(false) }
   }
@@ -93,6 +100,22 @@ export default function MonitorHeader({ connected, state, onError }) {
         }}>
         <span style={{ fontSize: '16px' }}>{autoRunning ? '⏹' : '▶'}</span>
         {autoRunning ? 'Detener Monitoreo' : 'Iniciar Monitoreo'}
+      </button>
+
+      <button
+        onClick={handleReset}
+        disabled={busy || !connected}
+        title="Reiniciar todo el sistema"
+        style={{
+          display: 'flex', alignItems: 'center', gap: '6px',
+          padding: '6px 14px', borderRadius: '10px',
+          fontSize: '13px', fontWeight: 700, cursor: 'pointer',
+          background: 'transparent',
+          border: '1.5px solid var(--danger)',
+          color: 'var(--danger)',
+          transition: 'all 0.2s ease',
+        }}>
+        ↺ Reiniciar
       </button>
 
       <div style={{ flex: 1 }} />

@@ -389,8 +389,8 @@ export default function ShipCraneView({ containers, autoPlay }) {
   }, [])
 
   // use a shared layout base to make this card match heights with other panels
-  const LAYOUT_BASE = 600
-  const pct = (CANVAS_H / LAYOUT_BASE) * 100
+  // use the same layout baseline width as PisoYardView (500) so heights match
+  const pct = (CANVAS_H / 500) * 100
 
   return (
     <div style={{

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { assignLine, downloadReport } from '../api/client'
 import RankingTable from './RankingTable'
 
-export default function AssignmentPanel({ container, onError }) {
+export default function AssignmentPanel({ container, onError, onResult }) {
   const [loading,     setLoading]     = useState(false)
   const [result,      setResult]      = useState(null)
   const [downloading, setDownloading] = useState(false)
@@ -13,6 +13,7 @@ export default function AssignmentPanel({ container, onError }) {
     try {
       const data = await assignLine(container)
       setResult(data)
+      onResult?.(data)
     } catch (e) {
       onError?.(e.message)
     } finally {

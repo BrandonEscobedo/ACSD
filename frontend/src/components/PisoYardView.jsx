@@ -1,4 +1,5 @@
 import { useEffect, useRef, useCallback, useState } from "react"
+import { advanceContainer } from "../api/client"
 
 const CARGO_COLORS = {
   'Carga Seca':   '#60a5fa',
@@ -16,7 +17,7 @@ const YARD_FLOOR_Y = CANVAS_H - 55
 const YARD_START_X = 14
 const YARD_COL_W = 56
 
-function drawBox(ctx, x, y, color, glow) {
+function drawBox(ctx, x, y, color, glow, hover) {
   ctx.fillStyle = color
   ctx.fillRect(x, y, CW, CH)
   ctx.strokeStyle = "rgba(0,0,0,0.22)"; ctx.lineWidth = 0.5
@@ -32,6 +33,13 @@ function drawBox(ctx, x, y, color, glow) {
     ctx.shadowColor = color; ctx.shadowBlur = 14
     ctx.fillStyle = "transparent"; ctx.strokeStyle = color
     ctx.lineWidth = 1.5; ctx.strokeRect(x-1, y-1, CW+2, CH+2)
+    ctx.restore()
+  }
+  if (hover) {
+    ctx.save()
+    ctx.shadowColor = "rgba(192,132,252,0.7)"; ctx.shadowBlur = 12
+    ctx.strokeStyle = "#c084fc"; ctx.lineWidth = 2
+    ctx.strokeRect(x-2, y-2, CW+4, CH+4)
     ctx.restore()
   }
 }
@@ -61,9 +69,25 @@ function arrangeContainers(containers) {
   return cols.flat()
 }
 
-export default function PisoYardView({ containers }) {
+function getTopContainerIds(items) {
+  const colMaxRow = {}
+  for (const item of items) {
+    if (colMaxRow[item.col] === undefined || item.row > colMaxRow[item.col]) {
+      colMaxRow[item.col] = item.row
+    }
+  }
+  const top = new Set()
+  for (const item of items) {
+    if (item.row === colMaxRow[item.col]) top.add(item.id)
+  }
+  return top
+}
+
+export default function PisoYardView({ containers, onError }) {
   const canvasRef = useRef(null)
+  const itemsRef = useRef([])
   const [itemCount, setItemCount] = useState(0)
+  const [hoveredId, setHoveredId] = useState(null)
   const prevIdsRef = useRef(new Set())
   const glowIdsRef = useRef(new Set())
 
@@ -125,9 +149,14 @@ export default function PisoYardView({ containers }) {
 
     // stacked containers
     const items = arrangeContainers(conts)
+    itemsRef.current = items
+    const topIds = getTopContainerIds(items)
+
     items.forEach(item => {
       const isNew = glowIdsRef.current.has(item.id)
-      drawBox(ctx, item.x, item.y, item.color, isNew)
+      const isTop = topIds.has(item.id)
+      const isHovered = hoveredId === item.id && isTop
+      drawBox(ctx, item.x, item.y, item.color, isNew, isHovered)
     })
 
     // count badge
@@ -137,13 +166,66 @@ export default function PisoYardView({ containers }) {
       ctx.fillStyle = "#c084fc"; ctx.font = "11px sans-serif"
       ctx.fillText(`${conts.length}`, CANVAS_W - 26, 21)
     }
-  }, [conts])
+  }, [conts, hoveredId])
 
   useEffect(() => { drawYard() }, [drawYard])
 
-  // use a shared layout base to make this card match heights with other panels
-  const LAYOUT_BASE = 600
-  const pct = (CANVAS_H / LAYOUT_BASE) * 100
+  const handleCanvasClick = useCallback(async (e) => {
+    const canvas = canvasRef.current; if (!canvas) return
+    const rect = canvas.getBoundingClientRect()
+    const scaleX = CANVAS_W / rect.width
+    const scaleY = CANVAS_H / rect.height
+    const mx = (e.clientX - rect.left) * scaleX
+    const my = (e.clientY - rect.top) * scaleY
+
+    const items = itemsRef.current
+    const topIds = getTopContainerIds(items)
+
+    for (let i = items.length - 1; i >= 0; i--) {
+      const item = items[i]
+      if (mx >= item.x && mx <= item.x + CW &&
+          my >= item.y && my <= item.y + CH) {
+        if (topIds.has(item.id)) {
+          try {
+            await advanceContainer(item.id)
+          } catch (err) {
+            onError?.(err.message)
+          }
+        }
+        return
+      }
+    }
+  }, [onError])
+
+  const handleCanvasMove = useCallback((e) => {
+    const canvas = canvasRef.current; if (!canvas) return
+    const rect = canvas.getBoundingClientRect()
+    const scaleX = CANVAS_W / rect.width
+    const scaleY = CANVAS_H / rect.height
+    const mx = (e.clientX - rect.left) * scaleX
+    const my = (e.clientY - rect.top) * scaleY
+
+    const items = itemsRef.current
+    const topIds = getTopContainerIds(items)
+
+    let found = null
+    for (let i = items.length - 1; i >= 0; i--) {
+      const item = items[i]
+      if (mx >= item.x && mx <= item.x + CW &&
+          my >= item.y && my <= item.y + CH &&
+          topIds.has(item.id)) {
+        found = item.id
+        break
+      }
+    }
+    setHoveredId(found)
+  }, [])
+
+  const handleCanvasLeave = useCallback(() => {
+    setHoveredId(null)
+  }, [])
+
+  const pct = (CANVAS_H / CANVAS_W) * 100
 
   return (
     <div style={{
@@ -164,11 +246,15 @@ export default function PisoYardView({ containers }) {
           ref={canvasRef}
           width={CANVAS_W}
           height={CANVAS_H}
+          onClick={handleCanvasClick}
+          onMouseMove={handleCanvasMove}
+          onMouseLeave={handleCanvasLeave}
           style={{
             position: "absolute",
             inset: 0,
             width: "100%",
             height: "100%",
+            cursor: hoveredId ? "pointer" : "default",
           }}
         />
       </div>
@@ -179,9 +265,7 @@ export default function PisoYardView({ containers }) {
         border: "1px solid var(--border)", borderTop: "none",
       }}>
         <span style={{ fontSize: 13, color: "var(--text3)", textAlign: "center" }}>
-          {conts.length === 0
-            ? "Sin contenedores en verificacion"
-            : `${conts.length} en verificacion`}
+          {`${conts.length} en verificacion — Click para mover al patio`}
         </span>
       </div>
     </div>

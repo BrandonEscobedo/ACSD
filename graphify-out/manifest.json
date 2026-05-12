@@ -104,8 +104,8 @@
     "hash": "d41d8cd98f00b204e9800998ecf8427e"
   },
   "C:\\Users\\brand\\Desktop\\python\\ACSD\\backend\\app\\infrastructure\\services\\container_monitor.py": {
-    "mtime": 1778539935.7142556,
-    "hash": "23bfcf832529e220fceffd6e81a50236"
+    "mtime": 1778543612.777574,
+    "hash": "b75efb74741d2a89c545360172459b9a"
   },
   "C:\\Users\\brand\\Desktop\\python\\ACSD\\backend\\app\\infrastructure\\services\\pdf_service.py": {
     "mtime": 1778535029.6290548,
@@ -132,8 +132,8 @@
     "hash": "2d6f9b57c56e7d921003e6549a5f1021"
   },
   "C:\\Users\\brand\\Desktop\\python\\ACSD\\frontend\\src\\App.jsx": {
-    "mtime": 1778540492.2189412,
-    "hash": "4e1b126e8fd4349002aabc340cace397"
+    "mtime": 1778544173.348641,
+    "hash": "14673e0fb5532c5022a3f270964a8688"
   },
   "C:\\Users\\brand\\Desktop\\python\\ACSD\\frontend\\src\\main.jsx": {
     "mtime": 1778535029.646838,
@@ -160,36 +160,44 @@
     "hash": "1ea184085ea0b8836ff0c35e7bc0a217"
   },
   "C:\\Users\\brand\\Desktop\\python\\ACSD\\frontend\\src\\components\\EventFeed.jsx": {
-    "mtime": 1778535030.2529993,
-    "hash": "0d10cdf40e15918f24956ed457862616"
+    "mtime": 1778541806.2993019,
+    "hash": "487788a00ee6073b48d575451623d2ea"
   },
   "C:\\Users\\brand\\Desktop\\python\\ACSD\\frontend\\src\\components\\MetricsDashboard.jsx": {
     "mtime": 1778535029.6403074,
     "hash": "14b771f89f4f3e330cacb70afc45aaa7"
   },
   "C:\\Users\\brand\\Desktop\\python\\ACSD\\frontend\\src\\components\\MonitorHeader.jsx": {
-    "mtime": 1778535030.167532,
-    "hash": "481e6cd3db6d42226f30b72603bc08a9"
+    "mtime": 1778542091.6698585,
+    "hash": "b24727126ef2eacc75fece3db1cfb3d6"
   },
   "C:\\Users\\brand\\Desktop\\python\\ACSD\\frontend\\src\\components\\PisoYardView.jsx": {
-    "mtime": 1778539845.248624,
-    "hash": "8e60eb518f32d1673693e39c361eee7a"
+    "mtime": 1778542377.7638104,
+    "hash": "fcc2f0543bb2bd27d18b7df771a8916d"
   },
   "C:\\Users\\brand\\Desktop\\python\\ACSD\\frontend\\src\\components\\RankingTable.jsx": {
     "mtime": 1778535030.168537,
     "hash": "a1308c85a48d6c5f28dbc9765d49257d"
   },
   "C:\\Users\\brand\\Desktop\\python\\ACSD\\frontend\\src\\components\\ShipCraneView.jsx": {
-    "mtime": 1778539822.0563776,
-    "hash": "cd2c7af0fb91be7ef0549adcb7a468f0"
+    "mtime": 1778542499.9861605,
+    "hash": "afdb89cac694ffdfff9f89257f5df099"
   },
   "C:\\Users\\brand\\Desktop\\python\\ACSD\\frontend\\src\\components\\Sidebar.jsx": {
-    "mtime": 1778535029.6430292,
-    "hash": "df39479f3dec0237c9d347b23ff6ce36"
+    "mtime": 1778542022.6637316,
+    "hash": "c9c59aa954ca56f310d52992ca2bd6b0"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\frontend\\src\\components\\SummaryView.jsx": {
+    "mtime": 1778544133.0549512,
+    "hash": "dc822f1ba39f3dc59af4529651ddb57a"
+  },
+  "C:\\Users\\brand\\Desktop\\python\\ACSD\\frontend\\src\\components\\Tabs.jsx": {
+    "mtime": 1778544022.4421055,
+    "hash": "aa200a90d18ef333d033adf7df7bd312"
   },
   "C:\\Users\\brand\\Desktop\\python\\ACSD\\frontend\\src\\components\\YardGrid.jsx": {
-    "mtime": 1778540467.1334515,
-    "hash": "0c7bd6b205a3980cc37dbcf423966d3e"
+    "mtime": 1778540847.7657425,
+    "hash": "e05da8975fc85e8ca167f512a55587c0"
   },
   "C:\\Users\\brand\\Desktop\\python\\ACSD\\frontend\\src\\components\\YardView.jsx": {
     "mtime": 1778535029.6440432,

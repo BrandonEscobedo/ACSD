@@ -53,7 +53,7 @@
       "source_file": "backend/main.py",
       "source_location": "L1",
       "id": "backend_main_py",
-      "community": 2,
+      "community": 3,
       "norm_label": "main.py"
     },
     {
@@ -62,7 +62,7 @@
       "source_file": "backend/main.py",
       "source_location": "L11",
       "id": "backend_main_lifespan",
-      "community": 2,
+      "community": 3,
       "norm_label": "lifespan()"
     },
     {
@@ -80,7 +80,7 @@
       "source_file": "backend/app/api/dependencies.py",
       "source_location": "L1",
       "id": "backend_app_api_dependencies_py",
-      "community": 2,
+      "community": 3,
       "norm_label": "dependencies.py"
     },
     {
@@ -89,7 +89,7 @@
       "source_file": "backend/app/api/dependencies.py",
       "source_location": "L25",
       "id": "api_dependencies_linea_repository",
-      "community": 2,
+      "community": 3,
       "norm_label": "_linea_repository()"
     },
     {
@@ -98,7 +98,7 @@
       "source_file": "backend/app/api/dependencies.py",
       "source_location": "L30",
       "id": "api_dependencies_pdf_service",
-      "community": 2,
+      "community": 3,
       "norm_label": "_pdf_service()"
     },
     {
@@ -107,7 +107,7 @@
       "source_file": "backend/app/api/dependencies.py",
       "source_location": "L34",
       "id": "api_dependencies_get_ws_manager",
-      "community": 2,
+      "community": 3,
       "norm_label": "get_ws_manager()"
     },
     {
@@ -116,7 +116,7 @@
       "source_file": "backend/app/api/dependencies.py",
       "source_location": "L41",
       "id": "api_dependencies_get_monitor",
-      "community": 2,
+      "community": 3,
       "norm_label": "get_monitor()"
     },
     {
@@ -125,7 +125,7 @@
       "source_file": "backend/app/api/dependencies.py",
       "source_location": "L50",
       "id": "api_dependencies_get_lineas",
-      "community": 2,
+      "community": 3,
       "norm_label": "get_lineas()"
     },
     {
@@ -134,7 +134,7 @@
       "source_file": "backend/app/api/dependencies.py",
       "source_location": "L54",
       "id": "api_dependencies_get_assignment_use_case",
-      "community": 2,
+      "community": 0,
       "norm_label": "get_assignment_use_case()"
     },
     {
@@ -143,7 +143,7 @@
       "source_file": "backend/app/api/dependencies.py",
       "source_location": "L58",
       "id": "api_dependencies_get_report_use_case",
-      "community": 2,
+      "community": 3,
       "norm_label": "get_report_use_case()"
     },
     {
@@ -161,7 +161,7 @@
       "source_file": "backend/app/api/routers/assignment.py",
       "source_location": "L1",
       "id": "backend_app_api_routers_assignment_py",
-      "community": 1,
+      "community": 0,
       "norm_label": "assignment.py"
     },
     {
@@ -170,7 +170,7 @@
       "source_file": "backend/app/api/routers/assignment.py",
       "source_location": "L16",
       "id": "routers_assignment_assign_line",
-      "community": 1,
+      "community": 0,
       "norm_label": "assign_line()"
     },
     {
@@ -179,7 +179,7 @@
       "source_file": "backend/app/api/routers/monitor.py",
       "source_location": "L1",
       "id": "backend_app_api_routers_monitor_py",
-      "community": 9,
+      "community": 10,
       "norm_label": "monitor.py"
     },
     {
@@ -188,7 +188,7 @@
       "source_file": "backend/app/api/routers/monitor.py",
       "source_location": "L14",
       "id": "routers_monitor_websocket_endpoint",
-      "community": 9,
+      "community": 10,
       "norm_label": "websocket_endpoint()"
     },
     {
@@ -197,7 +197,7 @@
       "source_file": "backend/app/api/routers/monitor.py",
       "source_location": "L31",
       "id": "routers_monitor_start_auto",
-      "community": 9,
+      "community": 10,
       "norm_label": "start_auto()"
     },
     {
@@ -206,7 +206,7 @@
       "source_file": "backend/app/api/routers/monitor.py",
       "source_location": "L37",
       "id": "routers_monitor_stop_auto",
-      "community": 9,
+      "community": 10,
       "norm_label": "stop_auto()"
     },
     {
@@ -215,7 +215,7 @@
       "source_file": "backend/app/api/routers/monitor.py",
       "source_location": "L43",
       "id": "routers_monitor_update_config",
-      "community": 9,
+      "community": 10,
       "norm_label": "update_config()"
     },
     {
@@ -224,7 +224,7 @@
       "source_file": "backend/app/api/routers/monitor.py",
       "source_location": "L56",
       "id": "routers_monitor_add_container",
-      "community": 9,
+      "community": 10,
       "norm_label": "add_container()"
     },
     {
@@ -233,7 +233,7 @@
       "source_file": "backend/app/api/routers/monitor.py",
       "source_location": "L62",
       "id": "routers_monitor_advance_container",
-      "community": 9,
+      "community": 10,
       "norm_label": "advance_container()"
     },
     {
@@ -242,7 +242,7 @@
       "source_file": "backend/app/api/routers/monitor.py",
       "source_location": "L71",
       "id": "routers_monitor_remove_container",
-      "community": 9,
+      "community": 10,
       "norm_label": "remove_container()"
     },
     {
@@ -251,7 +251,7 @@
       "source_file": "backend/app/api/routers/monitor.py",
       "source_location": "L80",
       "id": "routers_monitor_reset",
-      "community": 9,
+      "community": 10,
       "norm_label": "reset()"
     },
     {
@@ -260,7 +260,7 @@
       "source_file": "backend/app/api/routers/monitor.py",
       "source_location": "L86",
       "id": "routers_monitor_get_state",
-      "community": 9,
+      "community": 10,
       "norm_label": "get_state()"
     },
     {
@@ -269,7 +269,7 @@
       "source_file": "backend/app/api/routers/reports.py",
       "source_location": "L1",
       "id": "backend_app_api_routers_reports_py",
-      "community": 1,
+      "community": 0,
       "norm_label": "reports.py"
     },
     {
@@ -278,7 +278,7 @@
       "source_file": "backend/app/api/routers/reports.py",
       "source_location": "L16",
       "id": "routers_reports_dispatch_report",
-      "community": 1,
+      "community": 0,
       "norm_label": "dispatch_report()"
     },
     {
@@ -440,7 +440,7 @@
       "source_file": "backend/app/application/assignment_use_case.py",
       "source_location": "L1",
       "id": "backend_app_application_assignment_use_case_py",
-      "community": 1,
+      "community": 0,
       "norm_label": "assignment_use_case.py"
     },
     {
@@ -449,7 +449,7 @@
       "source_file": "backend/app/application/assignment_use_case.py",
       "source_location": "L19",
       "id": "application_assignment_use_case_assignmentresult",
-      "community": 1,
+      "community": 0,
       "norm_label": "assignmentresult"
     },
     {
@@ -458,7 +458,7 @@
       "source_file": "backend/app/application/assignment_use_case.py",
       "source_location": "L24",
       "id": "application_assignment_use_case_assignmentusecase",
-      "community": 1,
+      "community": 0,
       "norm_label": "assignmentusecase"
     },
     {
@@ -467,7 +467,7 @@
       "source_file": "backend/app/application/assignment_use_case.py",
       "source_location": "L25",
       "id": "application_assignment_use_case_assignmentusecase_ejecutar",
-      "community": 1,
+      "community": 0,
       "norm_label": ".ejecutar()"
     },
     {
@@ -476,7 +476,7 @@
       "source_file": "backend/app/application/assignment_use_case.py",
       "source_location": "L71",
       "id": "application_assignment_use_case_assignmentusecase_calcular_eir",
-      "community": 1,
+      "community": 0,
       "norm_label": "._calcular_eir()"
     },
     {
@@ -485,7 +485,7 @@
       "source_file": "backend/app/application/report_use_case.py",
       "source_location": "L1",
       "id": "backend_app_application_report_use_case_py",
-      "community": 2,
+      "community": 3,
       "norm_label": "report_use_case.py"
     },
     {
@@ -494,7 +494,7 @@
       "source_file": "backend/app/application/report_use_case.py",
       "source_location": "L7",
       "id": "application_report_use_case_reportusecase",
-      "community": 2,
+      "community": 3,
       "norm_label": "reportusecase"
     },
     {
@@ -503,7 +503,7 @@
       "source_file": "backend/app/application/report_use_case.py",
       "source_location": "L8",
       "id": "application_report_use_case_reportusecase_init",
-      "community": 2,
+      "community": 3,
       "norm_label": ".__init__()"
     },
     {
@@ -512,7 +512,7 @@
       "source_file": "backend/app/application/report_use_case.py",
       "source_location": "L11",
       "id": "application_report_use_case_reportusecase_generar_despacho",
-      "community": 2,
+      "community": 3,
       "norm_label": ".generar_despacho()"
     },
     {
@@ -521,7 +521,7 @@
       "source_file": "backend/app/application/simulation_use_case.py",
       "source_location": "L1",
       "id": "backend_app_application_simulation_use_case_py",
-      "community": 3,
+      "community": 5,
       "norm_label": "simulation_use_case.py"
     },
     {
@@ -530,7 +530,7 @@
       "source_file": "backend/app/application/simulation_use_case.py",
       "source_location": "L10",
       "id": "application_simulation_use_case_simulationresult",
-      "community": 3,
+      "community": 5,
       "norm_label": "simulationresult"
     },
     {
@@ -539,7 +539,7 @@
       "source_file": "backend/app/application/simulation_use_case.py",
       "source_location": "L16",
       "id": "application_simulation_use_case_simulationusecase",
-      "community": 3,
+      "community": 5,
       "norm_label": "simulationusecase"
     },
     {
@@ -548,7 +548,7 @@
       "source_file": "backend/app/application/simulation_use_case.py",
       "source_location": "L17",
       "id": "application_simulation_use_case_simulationusecase_init",
-      "community": 3,
+      "community": 5,
       "norm_label": ".__init__()"
     },
     {
@@ -557,7 +557,7 @@
       "source_file": "backend/app/application/simulation_use_case.py",
       "source_location": "L20",
       "id": "application_simulation_use_case_simulationusecase_ejecutar",
-      "community": 3,
+      "community": 5,
       "norm_label": ".ejecutar()"
     },
     {
@@ -575,7 +575,7 @@
       "source_file": "backend/app/domain/base.py",
       "source_location": "L1",
       "id": "backend_app_domain_base_py",
-      "community": 1,
+      "community": 0,
       "norm_label": "base.py"
     },
     {
@@ -584,7 +584,7 @@
       "source_file": "backend/app/domain/base.py",
       "source_location": "L6",
       "id": "domain_base_entity",
-      "community": 1,
+      "community": 0,
       "norm_label": "entity"
     },
     {
@@ -593,7 +593,7 @@
       "source_file": "",
       "source_location": "",
       "id": "abc",
-      "community": 1,
+      "community": 0,
       "norm_label": "abc"
     },
     {
@@ -602,7 +602,7 @@
       "source_file": "backend/app/domain/base.py",
       "source_location": "L9",
       "id": "domain_base_entity_eq",
-      "community": 1,
+      "community": 0,
       "norm_label": ".__eq__()"
     },
     {
@@ -611,7 +611,7 @@
       "source_file": "backend/app/domain/base.py",
       "source_location": "L14",
       "id": "domain_base_entity_hash",
-      "community": 1,
+      "community": 0,
       "norm_label": ".__hash__()"
     },
     {
@@ -620,7 +620,7 @@
       "source_file": "backend/app/domain/contenedor.py",
       "source_location": "L1",
       "id": "backend_app_domain_contenedor_py",
-      "community": 1,
+      "community": 0,
       "norm_label": "contenedor.py"
     },
     {
@@ -629,7 +629,7 @@
       "source_file": "backend/app/domain/contenedor.py",
       "source_location": "L8",
       "id": "domain_contenedor_contenedor",
-      "community": 1,
+      "community": 0,
       "norm_label": "contenedor"
     },
     {
@@ -638,7 +638,7 @@
       "source_file": "",
       "source_location": "",
       "id": "entity",
-      "community": 1,
+      "community": 0,
       "norm_label": "entity"
     },
     {
@@ -647,7 +647,7 @@
       "source_file": "backend/app/domain/enums.py",
       "source_location": "L1",
       "id": "backend_app_domain_enums_py",
-      "community": 1,
+      "community": 0,
       "norm_label": "enums.py"
     },
     {
@@ -656,7 +656,7 @@
       "source_file": "backend/app/domain/enums.py",
       "source_location": "L4",
       "id": "domain_enums_tipocarga",
-      "community": 1,
+      "community": 0,
       "norm_label": "tipocarga"
     },
     {
@@ -665,7 +665,7 @@
       "source_file": "",
       "source_location": "",
       "id": "str",
-      "community": 11,
+      "community": 13,
       "norm_label": "str"
     },
     {
@@ -674,7 +674,7 @@
       "source_file": "",
       "source_location": "",
       "id": "enum",
-      "community": 1,
+      "community": 0,
       "norm_label": "enum"
     },
     {
@@ -683,7 +683,7 @@
       "source_file": "backend/app/domain/enums.py",
       "source_location": "L12",
       "id": "domain_enums_estadocontenedor",
-      "community": 1,
+      "community": 0,
       "norm_label": "estadocontenedor"
     },
     {
@@ -692,7 +692,7 @@
       "source_file": "backend/app/domain/evento.py",
       "source_location": "L1",
       "id": "backend_app_domain_evento_py",
-      "community": 3,
+      "community": 5,
       "norm_label": "evento.py"
     },
     {
@@ -701,7 +701,7 @@
       "source_file": "backend/app/domain/evento.py",
       "source_location": "L5",
       "id": "domain_evento_eventosimulacion",
-      "community": 3,
+      "community": 5,
       "norm_label": "eventosimulacion"
     },
     {
@@ -710,7 +710,7 @@
       "source_file": "backend/app/domain/linea_transportista.py",
       "source_location": "L1",
       "id": "backend_app_domain_linea_transportista_py",
-      "community": 1,
+      "community": 0,
       "norm_label": "linea_transportista.py"
     },
     {
@@ -719,7 +719,7 @@
       "source_file": "backend/app/domain/linea_transportista.py",
       "source_location": "L6",
       "id": "domain_linea_transportista_lineatransportista",
-      "community": 1,
+      "community": 0,
       "norm_label": "lineatransportista"
     },
     {
@@ -746,7 +746,7 @@
       "source_file": "backend/app/infrastructure/repositories/linea_repository.py",
       "source_location": "L1",
       "id": "backend_app_infrastructure_repositories_linea_repository_py",
-      "community": 1,
+      "community": 0,
       "norm_label": "linea_repository.py"
     },
     {
@@ -755,7 +755,7 @@
       "source_file": "backend/app/infrastructure/repositories/linea_repository.py",
       "source_location": "L8",
       "id": "repositories_linea_repository_lineatransportistarepository",
-      "community": 1,
+      "community": 0,
       "norm_label": "lineatransportistarepository"
     },
     {
@@ -764,7 +764,7 @@
       "source_file": "backend/app/infrastructure/repositories/linea_repository.py",
       "source_location": "L9",
       "id": "repositories_linea_repository_lineatransportistarepository_init",
-      "community": 1,
+      "community": 0,
       "norm_label": ".__init__()"
     },
     {
@@ -773,7 +773,7 @@
       "source_file": "backend/app/infrastructure/repositories/linea_repository.py",
       "source_location": "L12",
       "id": "repositories_linea_repository_lineatransportistarepository_get_all",
-      "community": 1,
+      "community": 0,
       "norm_label": ".get_all()"
     },
     {
@@ -791,7 +791,7 @@
       "source_file": "backend/app/infrastructure/services/container_monitor.py",
       "source_location": "L1",
       "id": "backend_app_infrastructure_services_container_monitor_py",
-      "community": 1,
+      "community": 0,
       "norm_label": "container_monitor.py"
     },
     {
@@ -800,7 +800,7 @@
       "source_file": "backend/app/infrastructure/services/container_monitor.py",
       "source_location": "L19",
       "id": "services_container_monitor_monitorconfig",
-      "community": 1,
+      "community": 0,
       "norm_label": "monitorconfig"
     },
     {
@@ -809,7 +809,7 @@
       "source_file": "backend/app/infrastructure/services/container_monitor.py",
       "source_location": "L27",
       "id": "services_container_monitor_containermonitor",
-      "community": 6,
+      "community": 4,
       "norm_label": "containermonitor"
     },
     {
@@ -818,7 +818,7 @@
       "source_file": "backend/app/infrastructure/services/container_monitor.py",
       "source_location": "L28",
       "id": "services_container_monitor_containermonitor_init",
-      "community": 1,
+      "community": 0,
       "norm_label": ".__init__()"
     },
     {
@@ -827,7 +827,7 @@
       "source_file": "backend/app/infrastructure/services/container_monitor.py",
       "source_location": "L44",
       "id": "services_container_monitor_containermonitor_set_ws_manager",
-      "community": 6,
+      "community": 4,
       "norm_label": ".set_ws_manager()"
     },
     {
@@ -836,7 +836,7 @@
       "source_file": "backend/app/infrastructure/services/container_monitor.py",
       "source_location": "L49",
       "id": "services_container_monitor_containermonitor_get_state",
-      "community": 6,
+      "community": 4,
       "norm_label": ".get_state()"
     },
     {
@@ -845,7 +845,7 @@
       "source_file": "backend/app/infrastructure/services/container_monitor.py",
       "source_location": "L67",
       "id": "services_container_monitor_containermonitor_ser",
-      "community": 6,
+      "community": 4,
       "norm_label": "._ser()"
     },
     {
@@ -854,7 +854,7 @@
       "source_file": "backend/app/infrastructure/services/container_monitor.py",
       "source_location": "L83",
       "id": "services_container_monitor_containermonitor_broadcast",
-      "community": 6,
+      "community": 4,
       "norm_label": "._broadcast()"
     },
     {
@@ -863,7 +863,7 @@
       "source_file": "backend/app/infrastructure/services/container_monitor.py",
       "source_location": "L87",
       "id": "services_container_monitor_containermonitor_log",
-      "community": 6,
+      "community": 4,
       "norm_label": "._log()"
     },
     {
@@ -872,7 +872,7 @@
       "source_file": "backend/app/infrastructure/services/container_monitor.py",
       "source_location": "L96",
       "id": "services_container_monitor_containermonitor_make_container",
-      "community": 6,
+      "community": 4,
       "norm_label": "._make_container()"
     },
     {
@@ -881,7 +881,7 @@
       "source_file": "backend/app/infrastructure/services/container_monitor.py",
       "source_location": "L109",
       "id": "services_container_monitor_containermonitor_place_in_patio",
-      "community": 6,
+      "community": 4,
       "norm_label": "._place_in_patio()"
     },
     {
@@ -890,7 +890,7 @@
       "source_file": "backend/app/infrastructure/services/container_monitor.py",
       "source_location": "L122",
       "id": "services_container_monitor_containermonitor_arrive_in_buque",
-      "community": 6,
+      "community": 4,
       "norm_label": "._arrive_in_buque()"
     },
     {
@@ -899,7 +899,7 @@
       "source_file": "backend/app/infrastructure/services/container_monitor.py",
       "source_location": "L127",
       "id": "services_container_monitor_containermonitor_move_to_piso",
-      "community": 6,
+      "community": 4,
       "norm_label": ".move_to_piso()"
     },
     {
@@ -908,7 +908,7 @@
       "source_file": "backend/app/infrastructure/services/container_monitor.py",
       "source_location": "L139",
       "id": "services_container_monitor_containermonitor_move_to_patio",
-      "community": 6,
+      "community": 4,
       "norm_label": ".move_to_patio()"
     },
     {
@@ -917,7 +917,7 @@
       "source_file": "backend/app/infrastructure/services/container_monitor.py",
       "source_location": "L155",
       "id": "services_container_monitor_containermonitor_remove_from_patio",
-      "community": 6,
+      "community": 4,
       "norm_label": ".remove_from_patio()"
     },
     {
@@ -926,79 +926,79 @@
       "source_file": "backend/app/infrastructure/services/container_monitor.py",
       "source_location": "L170",
       "id": "services_container_monitor_containermonitor_auto_advance",
-      "community": 6,
+      "community": 4,
       "norm_label": "._auto_advance()"
     },
     {
       "label": "._auto_advance_staggered()",
       "file_type": "code",
       "source_file": "backend/app/infrastructure/services/container_monitor.py",
-      "source_location": "L181",
+      "source_location": "L187",
       "id": "services_container_monitor_containermonitor_auto_advance_staggered",
-      "community": 6,
+      "community": 4,
       "norm_label": "._auto_advance_staggered()"
     },
     {
       "label": ".add_container()",
       "file_type": "code",
       "source_file": "backend/app/infrastructure/services/container_monitor.py",
-      "source_location": "L203",
+      "source_location": "L210",
       "id": "services_container_monitor_containermonitor_add_container",
-      "community": 6,
+      "community": 4,
       "norm_label": ".add_container()"
     },
     {
       "label": ".advance_container()",
       "file_type": "code",
       "source_file": "backend/app/infrastructure/services/container_monitor.py",
-      "source_location": "L212",
+      "source_location": "L219",
       "id": "services_container_monitor_containermonitor_advance_container",
-      "community": 6,
+      "community": 4,
       "norm_label": ".advance_container()"
     },
     {
       "label": ".start_auto()",
       "file_type": "code",
       "source_file": "backend/app/infrastructure/services/container_monitor.py",
-      "source_location": "L219",
+      "source_location": "L226",
       "id": "services_container_monitor_containermonitor_start_auto",
-      "community": 6,
+      "community": 4,
       "norm_label": ".start_auto()"
     },
     {
       "label": ".stop_auto()",
       "file_type": "code",
       "source_file": "backend/app/infrastructure/services/container_monitor.py",
-      "source_location": "L251",
+      "source_location": "L245",
       "id": "services_container_monitor_containermonitor_stop_auto",
-      "community": 6,
+      "community": 4,
       "norm_label": ".stop_auto()"
     },
     {
       "label": "._generator_loop()",
       "file_type": "code",
       "source_file": "backend/app/infrastructure/services/container_monitor.py",
-      "source_location": "L261",
+      "source_location": "L255",
       "id": "services_container_monitor_containermonitor_generator_loop",
-      "community": 6,
+      "community": 4,
       "norm_label": "._generator_loop()"
     },
     {
       "label": ".reset()",
       "file_type": "code",
       "source_file": "backend/app/infrastructure/services/container_monitor.py",
-      "source_location": "L274",
+      "source_location": "L268",
       "id": "services_container_monitor_containermonitor_reset",
-      "community": 6,
+      "community": 4,
       "norm_label": ".reset()"
     },
     {
       "label": "Stagger departures so containers don't all move at once when pre-filled.",
       "file_type": "rationale",
       "source_file": "backend/app/infrastructure/services/container_monitor.py",
-      "source_location": "L182",
-      "id": "services_container_monitor_rationale_182",
-      "community": 6,
+      "source_location": "L188",
+      "id": "services_container_monitor_rationale_188",
+      "community": 4,
       "norm_label": "stagger departures so containers don't all move at once when pre-filled."
     },
     {
@@ -1007,7 +1007,7 @@
       "source_file": "backend/app/infrastructure/services/pdf_service.py",
       "source_location": "L1",
       "id": "backend_app_infrastructure_services_pdf_service_py",
-      "community": 2,
+      "community": 3,
       "norm_label": "pdf_service.py"
     },
     {
@@ -1016,7 +1016,7 @@
       "source_file": "backend/app/infrastructure/services/pdf_service.py",
       "source_location": "L14",
       "id": "services_pdf_service_pdfservice",
-      "community": 2,
+      "community": 3,
       "norm_label": "pdfservice"
     },
     {
@@ -1025,7 +1025,7 @@
       "source_file": "backend/app/infrastructure/services/pdf_service.py",
       "source_location": "L15",
       "id": "services_pdf_service_pdfservice_generar_reporte_despacho",
-      "community": 2,
+      "community": 3,
       "norm_label": ".generar_reporte_despacho()"
     },
     {
@@ -1034,7 +1034,7 @@
       "source_file": "backend/app/infrastructure/services/simulation_engine.py",
       "source_location": "L1",
       "id": "backend_app_infrastructure_services_simulation_engine_py",
-      "community": 3,
+      "community": 5,
       "norm_label": "simulation_engine.py"
     },
     {
@@ -1043,7 +1043,7 @@
       "source_file": "backend/app/infrastructure/services/simulation_engine.py",
       "source_location": "L16",
       "id": "services_simulation_engine_simulacionengine",
-      "community": 3,
+      "community": 5,
       "norm_label": "simulacionengine"
     },
     {
@@ -1052,7 +1052,7 @@
       "source_file": "backend/app/infrastructure/services/simulation_engine.py",
       "source_location": "L17",
       "id": "services_simulation_engine_simulacionengine_init",
-      "community": 3,
+      "community": 5,
       "norm_label": ".__init__()"
     },
     {
@@ -1061,7 +1061,7 @@
       "source_file": "backend/app/infrastructure/services/simulation_engine.py",
       "source_location": "L20",
       "id": "services_simulation_engine_simulacionengine_ejecutar",
-      "community": 3,
+      "community": 5,
       "norm_label": ".ejecutar()"
     },
     {
@@ -1070,7 +1070,7 @@
       "source_file": "backend/app/infrastructure/services/simulation_engine.py",
       "source_location": "L29",
       "id": "services_simulation_engine_simulador",
-      "community": 3,
+      "community": 5,
       "norm_label": "_simulador"
     },
     {
@@ -1079,7 +1079,7 @@
       "source_file": "backend/app/infrastructure/services/simulation_engine.py",
       "source_location": "L30",
       "id": "services_simulation_engine_simulador_init",
-      "community": 3,
+      "community": 5,
       "norm_label": ".__init__()"
     },
     {
@@ -1088,7 +1088,7 @@
       "source_file": "backend/app/infrastructure/services/simulation_engine.py",
       "source_location": "L39",
       "id": "services_simulation_engine_simulador_registrar",
-      "community": 3,
+      "community": 5,
       "norm_label": "._registrar()"
     },
     {
@@ -1097,7 +1097,7 @@
       "source_file": "backend/app/infrastructure/services/simulation_engine.py",
       "source_location": "L50",
       "id": "services_simulation_engine_simulador_proceso_contenedor",
-      "community": 3,
+      "community": 5,
       "norm_label": "._proceso_contenedor()"
     },
     {
@@ -1106,7 +1106,7 @@
       "source_file": "backend/app/infrastructure/services/simulation_engine.py",
       "source_location": "L84",
       "id": "services_simulation_engine_simulador_generador",
-      "community": 3,
+      "community": 5,
       "norm_label": "._generador()"
     },
     {
@@ -1115,7 +1115,7 @@
       "source_file": "backend/app/infrastructure/services/simulation_engine.py",
       "source_location": "L98",
       "id": "services_simulation_engine_simulador_colocar_en_patio",
-      "community": 3,
+      "community": 5,
       "norm_label": "._colocar_en_patio()"
     },
     {
@@ -1124,7 +1124,7 @@
       "source_file": "backend/app/infrastructure/services/visual_service.py",
       "source_location": "L1",
       "id": "backend_app_infrastructure_services_visual_service_py",
-      "community": 3,
+      "community": 5,
       "norm_label": "visual_service.py"
     },
     {
@@ -1133,7 +1133,7 @@
       "source_file": "backend/app/infrastructure/services/visual_service.py",
       "source_location": "L9",
       "id": "services_visual_service_visualservice",
-      "community": 3,
+      "community": 5,
       "norm_label": "visualservice"
     },
     {
@@ -1142,7 +1142,7 @@
       "source_file": "backend/app/infrastructure/services/visual_service.py",
       "source_location": "L10",
       "id": "services_visual_service_visualservice_init",
-      "community": 3,
+      "community": 5,
       "norm_label": ".__init__()"
     },
     {
@@ -1151,7 +1151,7 @@
       "source_file": "backend/app/infrastructure/services/visual_service.py",
       "source_location": "L14",
       "id": "services_visual_service_visualservice_load",
-      "community": 3,
+      "community": 5,
       "norm_label": "._load()"
     },
     {
@@ -1160,7 +1160,7 @@
       "source_file": "backend/app/infrastructure/services/visual_service.py",
       "source_location": "L27",
       "id": "services_visual_service_visualservice_get_random",
-      "community": 3,
+      "community": 5,
       "norm_label": ".get_random()"
     },
     {
@@ -1169,7 +1169,7 @@
       "source_file": "backend/app/infrastructure/services/websocket_manager.py",
       "source_location": "L1",
       "id": "backend_app_infrastructure_services_websocket_manager_py",
-      "community": 2,
+      "community": 3,
       "norm_label": "websocket_manager.py"
     },
     {
@@ -1178,7 +1178,7 @@
       "source_file": "backend/app/infrastructure/services/websocket_manager.py",
       "source_location": "L7",
       "id": "services_websocket_manager_websocketmanager",
-      "community": 2,
+      "community": 3,
       "norm_label": "websocketmanager"
     },
     {
@@ -1187,7 +1187,7 @@
       "source_file": "backend/app/infrastructure/services/websocket_manager.py",
       "source_location": "L8",
       "id": "services_websocket_manager_websocketmanager_init",
-      "community": 2,
+      "community": 3,
       "norm_label": ".__init__()"
     },
     {
@@ -1196,7 +1196,7 @@
       "source_file": "backend/app/infrastructure/services/websocket_manager.py",
       "source_location": "L11",
       "id": "services_websocket_manager_websocketmanager_connect",
-      "community": 2,
+      "community": 3,
       "norm_label": ".connect()"
     },
     {
@@ -1205,7 +1205,7 @@
       "source_file": "backend/app/infrastructure/services/websocket_manager.py",
       "source_location": "L15",
       "id": "services_websocket_manager_websocketmanager_disconnect",
-      "community": 2,
+      "community": 3,
       "norm_label": ".disconnect()"
     },
     {
@@ -1214,7 +1214,7 @@
       "source_file": "backend/app/infrastructure/services/websocket_manager.py",
       "source_location": "L19",
       "id": "services_websocket_manager_websocketmanager_broadcast",
-      "community": 2,
+      "community": 3,
       "norm_label": ".broadcast()"
     },
     {
@@ -1223,7 +1223,7 @@
       "source_file": "backend/app/infrastructure/services/websocket_manager.py",
       "source_location": "L30",
       "id": "services_websocket_manager_connection_count",
-      "community": 2,
+      "community": 3,
       "norm_label": "connection_count()"
     },
     {
@@ -1250,16 +1250,16 @@
       "source_file": "frontend/src/App.jsx",
       "source_location": "L1",
       "id": "frontend_src_app_jsx",
-      "community": 0,
+      "community": 2,
       "norm_label": "app.jsx"
     },
     {
       "label": "App()",
       "file_type": "code",
       "source_file": "frontend/src/App.jsx",
-      "source_location": "L12",
+      "source_location": "L14",
       "id": "src_app_app",
-      "community": 0,
+      "community": 2,
       "norm_label": "app()"
     },
     {
@@ -1268,7 +1268,7 @@
       "source_file": "frontend/src/main.jsx",
       "source_location": "L1",
       "id": "frontend_src_main_jsx",
-      "community": 0,
+      "community": 2,
       "norm_label": "main.jsx"
     },
     {
@@ -1277,7 +1277,7 @@
       "source_file": "frontend/src/api/client.js",
       "source_location": "L1",
       "id": "frontend_src_api_client_js",
-      "community": 0,
+      "community": 1,
       "norm_label": "client.js"
     },
     {
@@ -1286,7 +1286,7 @@
       "source_file": "frontend/src/api/client.js",
       "source_location": "L3",
       "id": "api_client_post",
-      "community": 0,
+      "community": 1,
       "norm_label": "post()"
     },
     {
@@ -1295,7 +1295,7 @@
       "source_file": "frontend/src/api/client.js",
       "source_location": "L13",
       "id": "api_client_put",
-      "community": 0,
+      "community": 1,
       "norm_label": "put()"
     },
     {
@@ -1304,7 +1304,7 @@
       "source_file": "frontend/src/api/client.js",
       "source_location": "L23",
       "id": "api_client_del",
-      "community": 0,
+      "community": 1,
       "norm_label": "del()"
     },
     {
@@ -1313,7 +1313,7 @@
       "source_file": "frontend/src/api/client.js",
       "source_location": "L30",
       "id": "api_client_startauto",
-      "community": 0,
+      "community": 1,
       "norm_label": "startauto()"
     },
     {
@@ -1322,7 +1322,7 @@
       "source_file": "frontend/src/api/client.js",
       "source_location": "L31",
       "id": "api_client_stopauto",
-      "community": 0,
+      "community": 1,
       "norm_label": "stopauto()"
     },
     {
@@ -1331,7 +1331,7 @@
       "source_file": "frontend/src/api/client.js",
       "source_location": "L32",
       "id": "api_client_addcontainer",
-      "community": 0,
+      "community": 1,
       "norm_label": "addcontainer()"
     },
     {
@@ -1340,7 +1340,7 @@
       "source_file": "frontend/src/api/client.js",
       "source_location": "L33",
       "id": "api_client_resetmonitor",
-      "community": 0,
+      "community": 1,
       "norm_label": "resetmonitor()"
     },
     {
@@ -1349,7 +1349,7 @@
       "source_file": "frontend/src/api/client.js",
       "source_location": "L34",
       "id": "api_client_advancecontainer",
-      "community": 0,
+      "community": 1,
       "norm_label": "advancecontainer()"
     },
     {
@@ -1358,7 +1358,7 @@
       "source_file": "frontend/src/api/client.js",
       "source_location": "L35",
       "id": "api_client_removecontainer",
-      "community": 0,
+      "community": 1,
       "norm_label": "removecontainer()"
     },
     {
@@ -1367,7 +1367,7 @@
       "source_file": "frontend/src/api/client.js",
       "source_location": "L36",
       "id": "api_client_updateconfig",
-      "community": 0,
+      "community": 1,
       "norm_label": "updateconfig()"
     },
     {
@@ -1376,7 +1376,7 @@
       "source_file": "frontend/src/api/client.js",
       "source_location": "L39",
       "id": "api_client_assignline",
-      "community": 0,
+      "community": 1,
       "norm_label": "assignline()"
     },
     {
@@ -1385,7 +1385,7 @@
       "source_file": "frontend/src/api/client.js",
       "source_location": "L43",
       "id": "api_client_downloadreport",
-      "community": 0,
+      "community": 1,
       "norm_label": "downloadreport()"
     },
     {
@@ -1394,7 +1394,7 @@
       "source_file": "frontend/src/components/animacionGruaTemporal.jsx",
       "source_location": "L1",
       "id": "frontend_src_components_animaciongruatemporal_jsx",
-      "community": 10,
+      "community": 11,
       "norm_label": "animaciongruatemporal.jsx"
     },
     {
@@ -1403,7 +1403,7 @@
       "source_file": "frontend/src/components/animacionGruaTemporal.jsx",
       "source_location": "L10",
       "id": "components_animaciongruatemporal_colors",
-      "community": 10,
+      "community": 11,
       "norm_label": "colors"
     },
     {
@@ -1412,7 +1412,7 @@
       "source_file": "frontend/src/components/animacionGruaTemporal.jsx",
       "source_location": "L13",
       "id": "components_animaciongruatemporal_drawbox",
-      "community": 10,
+      "community": 11,
       "norm_label": "drawbox()"
     },
     {
@@ -1421,7 +1421,7 @@
       "source_file": "frontend/src/components/animacionGruaTemporal.jsx",
       "source_location": "L26",
       "id": "components_animaciongruatemporal_drawcloud",
-      "community": 10,
+      "community": 11,
       "norm_label": "drawcloud()"
     },
     {
@@ -1430,7 +1430,7 @@
       "source_file": "frontend/src/components/animacionGruaTemporal.jsx",
       "source_location": "L44",
       "id": "components_animaciongruatemporal_makeshipcontainers",
-      "community": 10,
+      "community": 11,
       "norm_label": "makeshipcontainers()"
     },
     {
@@ -1439,7 +1439,7 @@
       "source_file": "frontend/src/components/animacionGruaTemporal.jsx",
       "source_location": "L65",
       "id": "components_animaciongruatemporal_getyardslot",
-      "community": 10,
+      "community": 11,
       "norm_label": "getyardslot()"
     },
     {
@@ -1448,7 +1448,7 @@
       "source_file": "frontend/src/components/animacionGruaTemporal.jsx",
       "source_location": "L79",
       "id": "components_animaciongruatemporal_cranecanvas",
-      "community": 10,
+      "community": 11,
       "norm_label": "cranecanvas()"
     },
     {
@@ -1457,7 +1457,7 @@
       "source_file": "frontend/src/components/animacionGruaTemporal.jsx",
       "source_location": "L294",
       "id": "components_animaciongruatemporal_yardpanel",
-      "community": 10,
+      "community": 11,
       "norm_label": "yardpanel()"
     },
     {
@@ -1466,7 +1466,7 @@
       "source_file": "frontend/src/components/animacionGruaTemporal.jsx",
       "source_location": "L365",
       "id": "components_animaciongruatemporal_portscene",
-      "community": 10,
+      "community": 11,
       "norm_label": "portscene()"
     },
     {
@@ -1475,7 +1475,7 @@
       "source_file": "frontend/src/components/AnimationView.jsx",
       "source_location": "L1",
       "id": "frontend_src_components_animationview_jsx",
-      "community": 16,
+      "community": 9,
       "norm_label": "animationview.jsx"
     },
     {
@@ -1484,7 +1484,7 @@
       "source_file": "frontend/src/components/AnimationView.jsx",
       "source_location": "L4",
       "id": "components_animationview_animationview",
-      "community": 16,
+      "community": 9,
       "norm_label": "animationview()"
     },
     {
@@ -1493,7 +1493,7 @@
       "source_file": "frontend/src/components/AssignmentPanel.jsx",
       "source_location": "L1",
       "id": "frontend_src_components_assignmentpanel_jsx",
-      "community": 0,
+      "community": 1,
       "norm_label": "assignmentpanel.jsx"
     },
     {
@@ -1502,7 +1502,7 @@
       "source_file": "frontend/src/components/AssignmentPanel.jsx",
       "source_location": "L5",
       "id": "components_assignmentpanel_assignmentpanel",
-      "community": 0,
+      "community": 1,
       "norm_label": "assignmentpanel()"
     },
     {
@@ -1511,7 +1511,7 @@
       "source_file": "frontend/src/components/AssignmentPanel.jsx",
       "source_location": "L205",
       "id": "components_assignmentpanel_ministat",
-      "community": 0,
+      "community": 1,
       "norm_label": "ministat()"
     },
     {
@@ -1520,7 +1520,7 @@
       "source_file": "frontend/src/components/ContainerDetail.jsx",
       "source_location": "L1",
       "id": "frontend_src_components_containerdetail_jsx",
-      "community": 0,
+      "community": 9,
       "norm_label": "containerdetail.jsx"
     },
     {
@@ -1529,7 +1529,7 @@
       "source_file": "frontend/src/components/ContainerDetail.jsx",
       "source_location": "L1",
       "id": "components_containerdetail_carga_icon",
-      "community": 0,
+      "community": 9,
       "norm_label": "carga_icon"
     },
     {
@@ -1538,7 +1538,7 @@
       "source_file": "frontend/src/components/ContainerDetail.jsx",
       "source_location": "L9",
       "id": "components_containerdetail_zone_meta",
-      "community": 0,
+      "community": 9,
       "norm_label": "zone_meta"
     },
     {
@@ -1547,7 +1547,7 @@
       "source_file": "frontend/src/components/ContainerDetail.jsx",
       "source_location": "L15",
       "id": "components_containerdetail_containerdetail",
-      "community": 0,
+      "community": 9,
       "norm_label": "containerdetail()"
     },
     {
@@ -1556,7 +1556,7 @@
       "source_file": "frontend/src/components/ContainerDetail.jsx",
       "source_location": "L94",
       "id": "components_containerdetail_field",
-      "community": 0,
+      "community": 9,
       "norm_label": "field()"
     },
     {
@@ -1565,7 +1565,7 @@
       "source_file": "frontend/src/components/EventFeed.jsx",
       "source_location": "L1",
       "id": "frontend_src_components_eventfeed_jsx",
-      "community": 13,
+      "community": 2,
       "norm_label": "eventfeed.jsx"
     },
     {
@@ -1574,7 +1574,7 @@
       "source_file": "frontend/src/components/EventFeed.jsx",
       "source_location": "L3",
       "id": "components_eventfeed_zone_colors",
-      "community": 13,
+      "community": 2,
       "norm_label": "zone_colors"
     },
     {
@@ -1583,7 +1583,7 @@
       "source_file": "frontend/src/components/EventFeed.jsx",
       "source_location": "L12",
       "id": "components_eventfeed_zone_icons",
-      "community": 13,
+      "community": 2,
       "norm_label": "zone_icons"
     },
     {
@@ -1592,7 +1592,7 @@
       "source_file": "frontend/src/components/EventFeed.jsx",
       "source_location": "L20",
       "id": "components_eventfeed_reltime",
-      "community": 13,
+      "community": 2,
       "norm_label": "reltime()"
     },
     {
@@ -1601,7 +1601,7 @@
       "source_file": "frontend/src/components/EventFeed.jsx",
       "source_location": "L28",
       "id": "components_eventfeed_eventfeed",
-      "community": 13,
+      "community": 2,
       "norm_label": "eventfeed()"
     },
     {
@@ -1610,7 +1610,7 @@
       "source_file": "frontend/src/components/EventFeed.jsx",
       "source_location": "L94",
       "id": "components_eventfeed_eventrow",
-      "community": 13,
+      "community": 2,
       "norm_label": "eventrow()"
     },
     {
@@ -1619,7 +1619,7 @@
       "source_file": "frontend/src/components/EventFeed.jsx",
       "source_location": "L154",
       "id": "components_eventfeed_zonepill",
-      "community": 13,
+      "community": 2,
       "norm_label": "zonepill()"
     },
     {
@@ -1655,7 +1655,7 @@
       "source_file": "frontend/src/components/MonitorHeader.jsx",
       "source_location": "L1",
       "id": "frontend_src_components_monitorheader_jsx",
-      "community": 0,
+      "community": 1,
       "norm_label": "monitorheader.jsx"
     },
     {
@@ -1664,16 +1664,16 @@
       "source_file": "frontend/src/components/MonitorHeader.jsx",
       "source_location": "L4",
       "id": "components_monitorheader_monitorheader",
-      "community": 0,
+      "community": 1,
       "norm_label": "monitorheader()"
     },
     {
       "label": "StatPill()",
       "file_type": "code",
       "source_file": "frontend/src/components/MonitorHeader.jsx",
-      "source_location": "L128",
+      "source_location": "L151",
       "id": "components_monitorheader_statpill",
-      "community": 0,
+      "community": 1,
       "norm_label": "statpill()"
     },
     {
@@ -1682,61 +1682,70 @@
       "source_file": "frontend/src/components/PisoYardView.jsx",
       "source_location": "L1",
       "id": "frontend_src_components_pisoyardview_jsx",
-      "community": 7,
+      "community": 2,
       "norm_label": "pisoyardview.jsx"
     },
     {
       "label": "CARGO_COLORS",
       "file_type": "code",
       "source_file": "frontend/src/components/PisoYardView.jsx",
-      "source_location": "L3",
+      "source_location": "L4",
       "id": "components_pisoyardview_cargo_colors",
-      "community": 7,
+      "community": 2,
       "norm_label": "cargo_colors"
     },
     {
       "label": "FALLBACK",
       "file_type": "code",
       "source_file": "frontend/src/components/PisoYardView.jsx",
-      "source_location": "L10",
+      "source_location": "L11",
       "id": "components_pisoyardview_fallback",
-      "community": 7,
+      "community": 2,
       "norm_label": "fallback"
     },
     {
       "label": "drawBox()",
       "file_type": "code",
       "source_file": "frontend/src/components/PisoYardView.jsx",
-      "source_location": "L19",
+      "source_location": "L20",
       "id": "components_pisoyardview_drawbox",
-      "community": 7,
+      "community": 2,
       "norm_label": "drawbox()"
     },
     {
       "label": "containerColor()",
       "file_type": "code",
       "source_file": "frontend/src/components/PisoYardView.jsx",
-      "source_location": "L39",
+      "source_location": "L47",
       "id": "components_pisoyardview_containercolor",
-      "community": 7,
+      "community": 2,
       "norm_label": "containercolor()"
     },
     {
       "label": "arrangeContainers()",
       "file_type": "code",
       "source_file": "frontend/src/components/PisoYardView.jsx",
-      "source_location": "L44",
+      "source_location": "L52",
       "id": "components_pisoyardview_arrangecontainers",
-      "community": 7,
+      "community": 2,
       "norm_label": "arrangecontainers()"
+    },
+    {
+      "label": "getTopContainerIds()",
+      "file_type": "code",
+      "source_file": "frontend/src/components/PisoYardView.jsx",
+      "source_location": "L72",
+      "id": "components_pisoyardview_gettopcontainerids",
+      "community": 2,
+      "norm_label": "gettopcontainerids()"
     },
     {
       "label": "PisoYardView()",
       "file_type": "code",
       "source_file": "frontend/src/components/PisoYardView.jsx",
-      "source_location": "L64",
+      "source_location": "L86",
       "id": "components_pisoyardview_pisoyardview",
-      "community": 7,
+      "community": 2,
       "norm_label": "pisoyardview()"
     },
     {
@@ -1745,7 +1754,7 @@
       "source_file": "frontend/src/components/RankingTable.jsx",
       "source_location": "L1",
       "id": "frontend_src_components_rankingtable_jsx",
-      "community": 0,
+      "community": 1,
       "norm_label": "rankingtable.jsx"
     },
     {
@@ -1754,7 +1763,7 @@
       "source_file": "frontend/src/components/RankingTable.jsx",
       "source_location": "L1",
       "id": "components_rankingtable_medals",
-      "community": 0,
+      "community": 1,
       "norm_label": "medals"
     },
     {
@@ -1763,7 +1772,7 @@
       "source_file": "frontend/src/components/RankingTable.jsx",
       "source_location": "L7",
       "id": "components_rankingtable_rankingtable",
-      "community": 0,
+      "community": 1,
       "norm_label": "rankingtable()"
     },
     {
@@ -1772,79 +1781,79 @@
       "source_file": "frontend/src/components/ShipCraneView.jsx",
       "source_location": "L1",
       "id": "frontend_src_components_shipcraneview_jsx",
-      "community": 7,
+      "community": 12,
       "norm_label": "shipcraneview.jsx"
     },
     {
       "label": "CARGO_COLORS",
       "file_type": "code",
       "source_file": "frontend/src/components/ShipCraneView.jsx",
-      "source_location": "L3",
+      "source_location": "L4",
       "id": "components_shipcraneview_cargo_colors",
-      "community": 7,
+      "community": 12,
       "norm_label": "cargo_colors"
     },
     {
       "label": "FALLBACK_COLORS",
       "file_type": "code",
       "source_file": "frontend/src/components/ShipCraneView.jsx",
-      "source_location": "L10",
+      "source_location": "L11",
       "id": "components_shipcraneview_fallback_colors",
-      "community": 7,
+      "community": 12,
       "norm_label": "fallback_colors"
     },
     {
       "label": "containerColor()",
       "file_type": "code",
       "source_file": "frontend/src/components/ShipCraneView.jsx",
-      "source_location": "L26",
+      "source_location": "L27",
       "id": "components_shipcraneview_containercolor",
-      "community": 7,
+      "community": 12,
       "norm_label": "containercolor()"
     },
     {
       "label": "getShipPosition()",
       "file_type": "code",
       "source_file": "frontend/src/components/ShipCraneView.jsx",
-      "source_location": "L31",
+      "source_location": "L32",
       "id": "components_shipcraneview_getshipposition",
-      "community": 7,
+      "community": 12,
       "norm_label": "getshipposition()"
     },
     {
       "label": "drawBox()",
       "file_type": "code",
       "source_file": "frontend/src/components/ShipCraneView.jsx",
-      "source_location": "L43",
+      "source_location": "L44",
       "id": "components_shipcraneview_drawbox",
-      "community": 7,
+      "community": 12,
       "norm_label": "drawbox()"
     },
     {
       "label": "drawCloud()",
       "file_type": "code",
       "source_file": "frontend/src/components/ShipCraneView.jsx",
-      "source_location": "L56",
+      "source_location": "L57",
       "id": "components_shipcraneview_drawcloud",
-      "community": 7,
+      "community": 12,
       "norm_label": "drawcloud()"
     },
     {
       "label": "drawDropZone()",
       "file_type": "code",
       "source_file": "frontend/src/components/ShipCraneView.jsx",
-      "source_location": "L63",
+      "source_location": "L64",
       "id": "components_shipcraneview_drawdropzone",
-      "community": 7,
+      "community": 12,
       "norm_label": "drawdropzone()"
     },
     {
       "label": "ShipCraneView()",
       "file_type": "code",
       "source_file": "frontend/src/components/ShipCraneView.jsx",
-      "source_location": "L73",
+      "source_location": "L74",
       "id": "components_shipcraneview_shipcraneview",
-      "community": 7,
+      "community": 12,
       "norm_label": "shipcraneview()"
     },
     {
@@ -1853,26 +1862,80 @@
       "source_file": "frontend/src/components/Sidebar.jsx",
       "source_location": "L1",
       "id": "frontend_src_components_sidebar_jsx",
-      "community": 0,
+      "community": 1,
       "norm_label": "sidebar.jsx"
     },
     {
       "label": "Sidebar()",
       "file_type": "code",
       "source_file": "frontend/src/components/Sidebar.jsx",
-      "source_location": "L7",
+      "source_location": "L4",
       "id": "components_sidebar_sidebar",
-      "community": 0,
+      "community": 1,
       "norm_label": "sidebar()"
     },
     {
-      "label": "Slider()",
+      "label": "SummaryView.jsx",
       "file_type": "code",
-      "source_file": "frontend/src/components/Sidebar.jsx",
-      "source_location": "L154",
-      "id": "components_sidebar_slider",
-      "community": 0,
-      "norm_label": "slider()"
+      "source_file": "frontend/src/components/SummaryView.jsx",
+      "source_location": "L1",
+      "id": "frontend_src_components_summaryview_jsx",
+      "community": 2,
+      "norm_label": "summaryview.jsx"
+    },
+    {
+      "label": "CARGO_COLORS",
+      "file_type": "code",
+      "source_file": "frontend/src/components/SummaryView.jsx",
+      "source_location": "L1",
+      "id": "components_summaryview_cargo_colors",
+      "community": 2,
+      "norm_label": "cargo_colors"
+    },
+    {
+      "label": "ZONE_COLORS",
+      "file_type": "code",
+      "source_file": "frontend/src/components/SummaryView.jsx",
+      "source_location": "L9",
+      "id": "components_summaryview_zone_colors",
+      "community": 2,
+      "norm_label": "zone_colors"
+    },
+    {
+      "label": "SummaryView()",
+      "file_type": "code",
+      "source_file": "frontend/src/components/SummaryView.jsx",
+      "source_location": "L15",
+      "id": "components_summaryview_summaryview",
+      "community": 2,
+      "norm_label": "summaryview()"
+    },
+    {
+      "label": "MetricCard()",
+      "file_type": "code",
+      "source_file": "frontend/src/components/SummaryView.jsx",
+      "source_location": "L240",
+      "id": "components_summaryview_metriccard",
+      "community": 2,
+      "norm_label": "metriccard()"
+    },
+    {
+      "label": "Tabs.jsx",
+      "file_type": "code",
+      "source_file": "frontend/src/components/Tabs.jsx",
+      "source_location": "L1",
+      "id": "frontend_src_components_tabs_jsx",
+      "community": 2,
+      "norm_label": "tabs.jsx"
+    },
+    {
+      "label": "Tabs()",
+      "file_type": "code",
+      "source_file": "frontend/src/components/Tabs.jsx",
+      "source_location": "L3",
+      "id": "components_tabs_tabs",
+      "community": 2,
+      "norm_label": "tabs()"
     },
     {
       "label": "YardGrid.jsx",
@@ -1880,7 +1943,7 @@
       "source_file": "frontend/src/components/YardGrid.jsx",
       "source_location": "L1",
       "id": "frontend_src_components_yardgrid_jsx",
-      "community": 0,
+      "community": 9,
       "norm_label": "yardgrid.jsx"
     },
     {
@@ -1889,7 +1952,7 @@
       "source_file": "frontend/src/components/YardGrid.jsx",
       "source_location": "L3",
       "id": "components_yardgrid_carga_color",
-      "community": 0,
+      "community": 9,
       "norm_label": "carga_color"
     },
     {
@@ -1898,7 +1961,7 @@
       "source_file": "frontend/src/components/YardGrid.jsx",
       "source_location": "L11",
       "id": "components_yardgrid_yardgrid",
-      "community": 0,
+      "community": 9,
       "norm_label": "yardgrid()"
     },
     {
@@ -1907,7 +1970,7 @@
       "source_file": "frontend/src/components/YardView.jsx",
       "source_location": "L1",
       "id": "frontend_src_components_yardview_jsx",
-      "community": 0,
+      "community": 9,
       "norm_label": "yardview.jsx"
     },
     {
@@ -1916,7 +1979,7 @@
       "source_file": "frontend/src/components/YardView.jsx",
       "source_location": "L5",
       "id": "components_yardview_yardview",
-      "community": 0,
+      "community": 9,
       "norm_label": "yardview()"
     },
     {
@@ -1925,7 +1988,7 @@
       "source_file": "frontend/src/components/ZonaBuquePiso.jsx",
       "source_location": "L1",
       "id": "frontend_src_components_zonabuquepiso_jsx",
-      "community": 16,
+      "community": 9,
       "norm_label": "zonabuquepiso.jsx"
     },
     {
@@ -1934,7 +1997,7 @@
       "source_file": "frontend/src/components/ZonaBuquePiso.jsx",
       "source_location": "L1",
       "id": "components_zonabuquepiso_zonabuquepiso",
-      "community": 16,
+      "community": 9,
       "norm_label": "zonabuquepiso()"
     },
     {
@@ -1943,7 +2006,7 @@
       "source_file": "frontend/src/components/ZoneCard.jsx",
       "source_location": "L1",
       "id": "frontend_src_components_zonecard_jsx",
-      "community": 0,
+      "community": 1,
       "norm_label": "zonecard.jsx"
     },
     {
@@ -1952,7 +2015,7 @@
       "source_file": "frontend/src/components/ZoneCard.jsx",
       "source_location": "L3",
       "id": "components_zonecard_zone_meta",
-      "community": 0,
+      "community": 1,
       "norm_label": "zone_meta"
     },
     {
@@ -1961,7 +2024,7 @@
       "source_file": "frontend/src/components/ZoneCard.jsx",
       "source_location": "L14",
       "id": "components_zonecard_zonecard",
-      "community": 0,
+      "community": 1,
       "norm_label": "zonecard()"
     },
     {
@@ -1970,7 +2033,7 @@
       "source_file": "frontend/src/components/ZoneCard.jsx",
       "source_location": "L103",
       "id": "components_zonecard_containertile",
-      "community": 0,
+      "community": 1,
       "norm_label": "containertile()"
     },
     {
@@ -2015,7 +2078,7 @@
       "source_file": "frontend/src/hooks/useWebSocket.js",
       "source_location": "L1",
       "id": "frontend_src_hooks_usewebsocket_js",
-      "community": 0,
+      "community": 2,
       "norm_label": "usewebsocket.js"
     },
     {
@@ -2024,7 +2087,7 @@
       "source_file": "frontend/src/hooks/useWebSocket.js",
       "source_location": "L6",
       "id": "hooks_usewebsocket_usewebsocket",
-      "community": 0,
+      "community": 2,
       "norm_label": "usewebsocket()"
     },
     {
@@ -2033,7 +2096,7 @@
       "source_file": "scripts/build_obsidian_vault.py",
       "source_location": "L1",
       "id": "scripts_build_obsidian_vault_py",
-      "community": 11,
+      "community": 13,
       "norm_label": "build_obsidian_vault.py"
     },
     {
@@ -2042,7 +2105,7 @@
       "source_file": "scripts/build_obsidian_vault.py",
       "source_location": "L34",
       "id": "scripts_build_obsidian_vault_slug",
-      "community": 11,
+      "community": 13,
       "norm_label": "slug()"
     },
     {
@@ -2051,7 +2114,7 @@
       "source_file": "scripts/build_obsidian_vault.py",
       "source_location": "L39",
       "id": "scripts_build_obsidian_vault_wikilink",
-      "community": 11,
+      "community": 13,
       "norm_label": "wikilink()"
     },
     {
@@ -2060,7 +2123,7 @@
       "source_file": "scripts/build_obsidian_vault.py",
       "source_location": "L46",
       "id": "scripts_build_obsidian_vault_edge_confidence",
-      "community": 11,
+      "community": 13,
       "norm_label": "edge_confidence()"
     },
     {
@@ -2069,7 +2132,7 @@
       "source_file": "scripts/build_obsidian_vault.py",
       "source_location": "L60",
       "id": "scripts_build_obsidian_vault_write_note",
-      "community": 11,
+      "community": 13,
       "norm_label": "write_note()"
     },
     {
@@ -2078,7 +2141,7 @@
       "source_file": "scripts/build_obsidian_vault.py",
       "source_location": "L82",
       "id": "scripts_build_obsidian_vault_main",
-      "community": 11,
+      "community": 13,
       "norm_label": "main()"
     },
     {
@@ -2087,7 +2150,7 @@
       "source_file": "scripts/build_obsidian_vault.py",
       "source_location": "L1",
       "id": "scripts_build_obsidian_vault_rationale_1",
-      "community": 11,
+      "community": 13,
       "norm_label": "build an obsidian vault from graphify-out/graph.json.  the vault lives inside gr"
     },
     {
@@ -2096,7 +2159,7 @@
       "source_file": "src/main.py",
       "source_location": "L1",
       "id": "src_main_py",
-      "community": 12,
+      "community": 14,
       "norm_label": "main.py"
     },
     {
@@ -2105,7 +2168,7 @@
       "source_file": "src/main.py",
       "source_location": "L93",
       "id": "src_main_mostrar_loader_overlay",
-      "community": 12,
+      "community": 14,
       "norm_label": "mostrar_loader_overlay()"
     },
     {
@@ -2114,7 +2177,7 @@
       "source_file": "src/main.py",
       "source_location": "L116",
       "id": "src_main_crear_zona_buque_piso",
-      "community": 12,
+      "community": 14,
       "norm_label": "crear_zona_buque_piso()"
     },
     {
@@ -2123,7 +2186,7 @@
       "source_file": "src/main.py",
       "source_location": "L147",
       "id": "src_main_crear_zona_patio_3d",
-      "community": 12,
+      "community": 14,
       "norm_label": "crear_zona_patio_3d()"
     },
     {
@@ -2132,7 +2195,7 @@
       "source_file": "src/main.py",
       "source_location": "L260",
       "id": "src_main_crear_escena_html_completa",
-      "community": 12,
+      "community": 14,
       "norm_label": "crear_escena_html_completa()"
     },
     {
@@ -2141,7 +2204,7 @@
       "source_file": "src/main.py",
       "source_location": "L272",
       "id": "src_main_animar_simulacion",
-      "community": 12,
+      "community": 14,
       "norm_label": "animar_simulacion()"
     },
     {
@@ -2150,7 +2213,7 @@
       "source_file": "src/main.py",
       "source_location": "L491",
       "id": "src_main_on_click_boton",
-      "community": 12,
+      "community": 14,
       "norm_label": "on_click_boton()"
     },
     {
@@ -2159,7 +2222,7 @@
       "source_file": "src/main.py",
       "source_location": "L511",
       "id": "src_main_on_change_dropdown",
-      "community": 12,
+      "community": 14,
       "norm_label": "on_change_dropdown()"
     },
     {
@@ -2213,7 +2276,7 @@
       "source_file": "README.md",
       "source_location": "L1",
       "id": "readme_md",
-      "community": 14,
+      "community": 15,
       "norm_label": "readme.md"
     },
     {
@@ -2222,7 +2285,7 @@
       "source_file": "README.md",
       "source_location": "L1",
       "id": "acsd_readme_myssd_front",
-      "community": 14,
+      "community": 15,
       "norm_label": "myssd_front"
     },
     {
@@ -2231,7 +2294,7 @@
       "source_file": "README.md",
       "source_location": "L2",
       "id": "acsd_readme_crear_ambiente_con_python_3_10_8",
-      "community": 14,
+      "community": 15,
       "norm_label": "crear ambiente con python 3.10.8"
     },
     {
@@ -2240,7 +2303,7 @@
       "source_file": "README.md",
       "source_location": "L3",
       "id": "acsd_readme_instalar_librerias_de_requirements_txt_pip_install_r_requirements_txt",
-      "community": 14,
+      "community": 15,
       "norm_label": "instalar librerias de requirements.txt (pip install -r .\\requirements.txt)"
     },
     {
@@ -2249,8 +2312,26 @@
       "source_file": "README.md",
       "source_location": "L4",
       "id": "acsd_readme_ejecutar_comando_python_main_py_desde_src_para_iniciar_el_proyecto",
-      "community": 14,
+      "community": 15,
       "norm_label": "ejecutar comando python .\\main.py desde src para iniciar el proyecto"
+    },
+    {
+      "label": "Stagger departures so containers don't all move at once when pre-filled.",
+      "file_type": "rationale",
+      "source_file": "backend/app/infrastructure/services/container_monitor.py",
+      "source_location": "L182",
+      "community": 4,
+      "norm_label": "stagger departures so containers don't all move at once when pre-filled.",
+      "id": "services_container_monitor_rationale_182"
+    },
+    {
+      "label": "Slider()",
+      "file_type": "code",
+      "source_file": "frontend/src/components/Sidebar.jsx",
+      "source_location": "L154",
+      "community": 1,
+      "norm_label": "slider()",
+      "id": "components_sidebar_slider"
     },
     {
       "label": "PyInstaller Build Command",
@@ -2261,7 +2342,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 6,
       "norm_label": "pyinstaller build command",
       "id": "exe_comando_pyinstaller_build"
     },
@@ -2274,7 +2355,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 6,
       "norm_label": "simuladorcontenedores executable",
       "id": "exe_comando_simulador_contenedores_exe"
     },
@@ -2287,7 +2368,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 6,
       "norm_label": "myssd_front project",
       "id": "readme_myssd_front"
     },
@@ -2300,7 +2381,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 6,
       "norm_label": "python 3.10.8 environment",
       "id": "readme_python_310"
     },
@@ -2313,7 +2394,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 6,
       "norm_label": "project setup instructions",
       "id": "readme_setup_instructions"
     },
@@ -2326,7 +2407,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 6,
       "norm_label": "root python requirements",
       "id": "requirements_root"
     },
@@ -2339,7 +2420,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 6,
       "norm_label": "streamlit",
       "id": "requirements_streamlit"
     },
@@ -2352,7 +2433,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 6,
       "norm_label": "pandas",
       "id": "requirements_pandas"
     },
@@ -2365,7 +2446,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 6,
       "norm_label": "requests",
       "id": "requirements_requests"
     },
@@ -2378,7 +2459,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 6,
       "norm_label": "simpy",
       "id": "requirements_simpy"
     },
@@ -2391,7 +2472,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 6,
       "norm_label": "numpy",
       "id": "requirements_numpy"
     },
@@ -2404,7 +2485,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 6,
       "norm_label": "plotly",
       "id": "requirements_plotly"
     },
@@ -2417,7 +2498,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 6,
       "norm_label": "reportlab",
       "id": "requirements_reportlab"
     },
@@ -2430,7 +2511,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 6,
       "norm_label": "backend python requirements",
       "id": "backend_requirements"
     },
@@ -2443,7 +2524,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 6,
       "norm_label": "fastapi",
       "id": "backend_requirements_fastapi"
     },
@@ -2456,7 +2537,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 6,
       "norm_label": "uvicorn[standard]",
       "id": "backend_requirements_uvicorn"
     },
@@ -2469,7 +2550,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 6,
       "norm_label": "python-multipart",
       "id": "backend_requirements_python_multipart"
     },
@@ -2482,7 +2563,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 6,
       "norm_label": "frontend html entry",
       "id": "index_html_frontend_entry"
     },
@@ -2495,7 +2576,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 6,
       "norm_label": "main.jsx module entry",
       "id": "index_html_main_jsx"
     },
@@ -2508,7 +2589,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 6,
       "norm_label": "root mount div",
       "id": "index_html_root_div"
     },
@@ -2521,7 +2602,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 6,
       "norm_label": "lineas_transportistas.json data",
       "id": "exe_comando_lineas_transportistas_data"
     },
@@ -2534,7 +2615,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 6,
       "norm_label": "assets folder",
       "id": "exe_comando_assets_folder"
     },
@@ -2547,7 +2628,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 7,
       "norm_label": "yellow container icon (container-amarillo.svg)",
       "id": "asset:container-amarillo.svg"
     },
@@ -2560,7 +2641,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 7,
       "norm_label": "shipping container icon (ui symbol)",
       "id": "concept:shipping-container-icon"
     },
@@ -2573,7 +2654,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 7,
       "norm_label": "container color-coded status set",
       "id": "concept:container-color-set"
     },
@@ -2586,7 +2667,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 7,
       "norm_label": "yellow/olive fill #aead4b",
       "id": "color:yellow-olive-#AEAD4B"
     },
@@ -2599,7 +2680,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 7,
       "norm_label": "dark olive inner fill #939d41",
       "id": "color:dark-olive-#939D41"
     },
@@ -2612,7 +2693,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 7,
       "norm_label": "vertical ridge color #828e38",
       "id": "color:ridge-#828E38"
     },
@@ -2625,7 +2706,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 7,
       "norm_label": "vertical corrugated ridges (10 bars)",
       "id": "feature:vertical-ridges"
     },
@@ -2638,7 +2719,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 7,
       "norm_label": "top rail / roof edge",
       "id": "feature:top-rail"
     },
@@ -2651,7 +2732,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 7,
       "norm_label": "bottom feet / skids",
       "id": "feature:bottom-feet"
     },
@@ -2664,7 +2745,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 7,
       "norm_label": "acsd (container tracking project)",
       "id": "domain:ACSD"
     },
@@ -2677,7 +2758,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 7,
       "norm_label": "status indicator: warning / in-transit / pending",
       "id": "purpose:status-warning"
     },
@@ -2693,7 +2774,7 @@
       "summary": "SVG icon (96x96) depicting a shipping container in dark/strong blue tones. EXTRACTED.",
       "confidence_score": 1.0,
       "provenance": "EXTRACTED",
-      "community": 5,
+      "community": 7,
       "norm_label": "container-azul fuerte.svg",
       "id": "asset:container-azul-fuerte-svg"
     },
@@ -2709,7 +2790,7 @@
       "summary": "Flat illustration of a shipping container with corrugated vertical ribs (10 ribs) and two bottom feet/supports. EXTRACTED from SVG path structure.",
       "confidence_score": 1.0,
       "provenance": "EXTRACTED",
-      "community": 5,
+      "community": 7,
       "norm_label": "dark blue shipping container icon",
       "id": "image:container-icon-dark-blue"
     },
@@ -2725,7 +2806,7 @@
       "summary": "Uses fills #5247A7 (main body purple-blue), #3C388E (vertical rib shadows), and #221B5E (feet/supports). Indicates a 'strong'/saturated blue-violet variant. EXTRACTED.",
       "confidence_score": 1.0,
       "provenance": "EXTRACTED",
-      "community": 5,
+      "community": 7,
       "norm_label": "strong blue color palette",
       "id": "design:color-palette-strong-blue"
     },
@@ -2741,7 +2822,7 @@
       "summary": "Ten repeating vertical rib paths (translate x=15,23,31,39,47,55,63,71,79) simulate the corrugated metal panels of a real shipping container. EXTRACTED.",
       "confidence_score": 1.0,
       "provenance": "EXTRACTED",
-      "community": 5,
+      "community": 7,
       "norm_label": "corrugated container ribs",
       "id": "design:corrugated-ribs"
     },
@@ -2757,7 +2838,7 @@
       "summary": "Two small darker rectangles at translate(26,72) and translate(60,72) representing the container's base supports/feet. EXTRACTED.",
       "confidence_score": 1.0,
       "provenance": "EXTRACTED",
-      "community": 5,
+      "community": 7,
       "norm_label": "container base feet",
       "id": "design:container-feet"
     },
@@ -2773,7 +2854,7 @@
       "summary": "Likely the 'active/selected/hovered' visual state of a container icon in the ACSD app (the 'fuerte'/strong-blue variant complementing a lighter default container icon). Used to represent containers in the shipping/customs domain UI. INFERRED from filename ('azul fuerte' = strong blue) and ACSD project context.",
       "confidence_score": 0.85,
       "provenance": "INFERRED",
-      "community": 5,
+      "community": 7,
       "norm_label": "acsd container ui asset (selected/active state)",
       "id": "ui:acsd-container-selected-state"
     },
@@ -2789,7 +2870,7 @@
       "summary": "The icon visually represents the real-world shipping/cargo container entity, a core domain object of the ACSD application. INFERRED.",
       "confidence_score": 0.95,
       "provenance": "INFERRED",
-      "community": 5,
+      "community": 7,
       "norm_label": "shipping container (domain concept)",
       "id": "domain:shipping-container-concept"
     },
@@ -2850,7 +2931,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 15,
+      "community": 16,
       "norm_label": "container cafe icon (svg)",
       "id": "img:container-cafe.svg"
     },
@@ -2863,7 +2944,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 15,
+      "community": 16,
       "norm_label": "brown container body (#ae864b / #9d7241)",
       "id": "img:container-cafe.svg:body"
     },
@@ -2876,7 +2957,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 15,
+      "community": 16,
       "norm_label": "vertical corrugation ribs (#8e6338)",
       "id": "img:container-cafe.svg:ribs"
     },
@@ -2889,7 +2970,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 15,
+      "community": 16,
       "norm_label": "container base feet / supports",
       "id": "img:container-cafe.svg:feet"
     },
@@ -2902,7 +2983,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 15,
+      "community": 16,
       "norm_label": "ui icon asset (cafe container)",
       "id": "concept:ui-icon-asset"
     },
@@ -2963,7 +3044,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 7,
       "norm_label": "green container icon (container-verde.svg)",
       "id": "asset:container-verde.svg"
     },
@@ -2976,7 +3057,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 7,
       "norm_label": "green color palette (#4bae4f, #419d45, #388e3c, #1b5e20)",
       "id": "design:green-palette"
     },
@@ -2989,7 +3070,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 7,
       "norm_label": "corrugated vertical panels (container body ridges)",
       "id": "design:container-corrugated-panels"
     },
@@ -3002,7 +3083,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 7,
       "norm_label": "ui indicator: available/empty container status",
       "id": "purpose:available-container-status"
     },
@@ -4666,9 +4747,9 @@
       "source_file": "backend/app/infrastructure/services/container_monitor.py",
       "source_location": "L181",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_container_monitor_containermonitor",
-      "target": "services_container_monitor_containermonitor_auto_advance_staggered",
-      "confidence_score": 1.0
+      "target": "services_container_monitor_containermonitor_auto_advance_staggered"
     },
     {
       "relation": "method",
@@ -4955,9 +5036,9 @@
       "source_file": "backend/app/infrastructure/services/container_monitor.py",
       "source_location": "L230",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_container_monitor_containermonitor_start_auto",
-      "target": "services_container_monitor_containermonitor_make_container",
-      "confidence_score": 1.0
+      "target": "services_container_monitor_containermonitor_make_container"
     },
     {
       "relation": "calls",
@@ -4999,9 +5080,9 @@
       "source_file": "backend/app/infrastructure/services/container_monitor.py",
       "source_location": "L231",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_container_monitor_containermonitor_start_auto",
-      "target": "services_container_monitor_containermonitor_arrive_in_buque",
-      "confidence_score": 1.0
+      "target": "services_container_monitor_containermonitor_arrive_in_buque"
     },
     {
       "relation": "calls",
@@ -5032,9 +5113,9 @@
       "source_file": "backend/app/infrastructure/services/container_monitor.py",
       "source_location": "L191",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_container_monitor_containermonitor_auto_advance_staggered",
-      "target": "services_container_monitor_containermonitor_move_to_piso",
-      "confidence_score": 1.0
+      "target": "services_container_monitor_containermonitor_move_to_piso"
     },
     {
       "relation": "calls",
@@ -5046,6 +5127,17 @@
       "confidence_score": 1.0,
       "source": "services_container_monitor_containermonitor_advance_container",
       "target": "services_container_monitor_containermonitor_move_to_piso"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/infrastructure/services/container_monitor.py",
+      "source_location": "L196",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_container_monitor_containermonitor_advance_container",
+      "target": "services_container_monitor_containermonitor_move_to_patio"
     },
     {
       "relation": "calls",
@@ -5065,19 +5157,8 @@
       "source_file": "backend/app/infrastructure/services/container_monitor.py",
       "source_location": "L195",
       "weight": 1.0,
-      "source": "services_container_monitor_containermonitor_auto_advance_staggered",
-      "target": "services_container_monitor_containermonitor_move_to_patio",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/infrastructure/services/container_monitor.py",
-      "source_location": "L196",
-      "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "services_container_monitor_containermonitor_advance_container",
+      "source": "services_container_monitor_containermonitor_auto_advance_staggered",
       "target": "services_container_monitor_containermonitor_move_to_patio"
     },
     {
@@ -5096,17 +5177,6 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/infrastructure/services/container_monitor.py",
-      "source_location": "L245",
-      "weight": 1.0,
-      "source": "services_container_monitor_containermonitor_start_auto",
-      "target": "services_container_monitor_containermonitor_auto_advance",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/app/infrastructure/services/container_monitor.py",
       "source_location": "L224",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -5118,11 +5188,32 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/app/infrastructure/services/container_monitor.py",
-      "source_location": "L238",
+      "source_location": "L245",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_container_monitor_containermonitor_start_auto",
+      "target": "services_container_monitor_containermonitor_auto_advance"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/infrastructure/services/container_monitor.py",
+      "source_location": "L188",
+      "weight": 1.0,
+      "source": "services_container_monitor_rationale_188",
       "target": "services_container_monitor_containermonitor_auto_advance_staggered",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/app/infrastructure/services/container_monitor.py",
+      "source_location": "L238",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_container_monitor_containermonitor_start_auto",
+      "target": "services_container_monitor_containermonitor_auto_advance_staggered"
     },
     {
       "relation": "rationale_for",
@@ -5130,9 +5221,9 @@
       "source_file": "backend/app/infrastructure/services/container_monitor.py",
       "source_location": "L182",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_container_monitor_rationale_182",
-      "target": "services_container_monitor_containermonitor_auto_advance_staggered",
-      "confidence_score": 1.0
+      "target": "services_container_monitor_containermonitor_auto_advance_staggered"
     },
     {
       "relation": "calls",
@@ -5574,6 +5665,28 @@
       "target": "frontend_src_components_eventfeed_jsx"
     },
     {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/App.jsx",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "frontend_src_app_jsx",
+      "target": "frontend_src_components_tabs_jsx",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/App.jsx",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "frontend_src_app_jsx",
+      "target": "frontend_src_components_summaryview_jsx",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/App.jsx",
@@ -5762,6 +5875,28 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/PisoYardView.jsx",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "frontend_src_components_pisoyardview_jsx",
+      "target": "frontend_src_api_client_js"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/ShipCraneView.jsx",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "frontend_src_components_shipcraneview_jsx",
+      "target": "frontend_src_api_client_js"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "frontend/src/components/Sidebar.jsx",
       "source_location": "L2",
       "weight": 1.0,
@@ -5938,12 +6073,45 @@
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/MonitorHeader.jsx",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "frontend_src_components_monitorheader_jsx",
+      "target": "api_client_resetmonitor"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "frontend/src/components/Sidebar.jsx",
       "source_location": "L2",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "frontend_src_components_sidebar_jsx",
       "target": "api_client_resetmonitor"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/PisoYardView.jsx",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "frontend_src_components_pisoyardview_jsx",
+      "target": "api_client_advancecontainer"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/ShipCraneView.jsx",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "frontend_src_components_shipcraneview_jsx",
+      "target": "api_client_advancecontainer"
     },
     {
       "relation": "imports",
@@ -6392,6 +6560,16 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/components/PisoYardView.jsx",
+      "source_location": "L72",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "frontend_src_components_pisoyardview_jsx",
+      "target": "components_pisoyardview_gettopcontainerids"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/PisoYardView.jsx",
       "source_location": "L64",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -6517,6 +6695,56 @@
       "confidence_score": 1.0,
       "source": "frontend_src_components_sidebar_jsx",
       "target": "components_sidebar_slider"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/SummaryView.jsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "frontend_src_components_summaryview_jsx",
+      "target": "components_summaryview_cargo_colors",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/SummaryView.jsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "frontend_src_components_summaryview_jsx",
+      "target": "components_summaryview_zone_colors",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/SummaryView.jsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "source": "frontend_src_components_summaryview_jsx",
+      "target": "components_summaryview_summaryview",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/SummaryView.jsx",
+      "source_location": "L240",
+      "weight": 1.0,
+      "source": "frontend_src_components_summaryview_jsx",
+      "target": "components_summaryview_metriccard",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/Tabs.jsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "frontend_src_components_tabs_jsx",
+      "target": "components_tabs_tabs",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -7487,5 +7715,5 @@
       "source_file": "exe_comando.txt"
     }
   ],
-  "built_at_commit": "9db91a3c7e5201b3ed08eaed9a266266e6a7c082"
+  "built_at_commit": "3b6d849d183cc8b7ea617b9270bcdc55493fca14"
 }

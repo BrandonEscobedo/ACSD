@@ -169,10 +169,16 @@ class ContainerMonitor:
 
     async def _auto_advance(self, container_id: str) -> None:
         try:
+            # auto-departure will move container from BUQUE -> PISO (verification)
+            # but require explicit user action to move from PISO -> PATIO.
             await asyncio.sleep(self.config.buque_time)
-            await self.move_to_piso(container_id)
-            await asyncio.sleep(self.config.piso_time)
-            await self.move_to_patio(container_id)
+            # Ensure we respect visual/top order: wait until this container
+            # is the top-most in `self.buque` before moving it to PISO.
+            while self.auto_running and container_id in self.buque and self.buque and self.buque[0] != container_id:
+                await asyncio.sleep(0.3)
+            # If still present and auto is running, move it to piso
+            if self.auto_running and container_id in self.buque:
+                await self.move_to_piso(container_id)
         except asyncio.CancelledError:
             pass
         finally:
@@ -185,14 +191,15 @@ class ContainerMonitor:
             await asyncio.sleep(stagger)
             if not self.auto_running:
                 return
+            # Only auto-move to PISO; require user to move from PISO -> PATIO
             await asyncio.sleep(self.config.buque_time)
             if not self.auto_running:
                 return
-            await self.move_to_piso(container_id)
-            await asyncio.sleep(self.config.piso_time)
-            if not self.auto_running:
-                return
-            await self.move_to_patio(container_id)
+            # Wait until this container becomes top-most before moving it
+            while self.auto_running and container_id in self.buque and self.buque and self.buque[0] != container_id:
+                await asyncio.sleep(0.3)
+            if self.auto_running and container_id in self.buque:
+                await self.move_to_piso(container_id)
         except asyncio.CancelledError:
             pass
         finally:
@@ -225,25 +232,12 @@ class ContainerMonitor:
         if not self.containers:
             max_cont = self.config.max_containers if self.config.max_containers > 0 else 40
             self._log("SYSTEM", f"Cargando {max_cont} contenedores en buque", "\u2014", "\u2014")
-            batch = []
             for _ in range(max_cont):
                 cont = self._make_container()
                 self._arrive_in_buque(cont)
-                batch.append(cont.id)
-
             await self._broadcast()
-
-            # Stagger auto-advance so containers don't all move at once
-            for i, cid in enumerate(batch):
-                task = asyncio.create_task(self._auto_advance_staggered(cid, i, max_cont))
-                self._advance_tasks[cid] = task
         else:
             self._log("SYSTEM", "Modo automático iniciado", "\u2014", "\u2014")
-            # Create auto-advance for any existing containers not yet advancing
-            for cid in list(self.buque):
-                if cid not in self._advance_tasks:
-                    task = asyncio.create_task(self._auto_advance(cid))
-                    self._advance_tasks[cid] = task
 
         self._auto_task = asyncio.create_task(self._generator_loop())
         await self._broadcast()

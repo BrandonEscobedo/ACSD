@@ -8,12 +8,15 @@ import YardGrid from './components/YardGrid'
 import ContainerDetail from './components/ContainerDetail'
 import AssignmentPanel from './components/AssignmentPanel'
 import EventFeed from './components/EventFeed'
+import Tabs from './components/Tabs'
+import SummaryView from './components/SummaryView'
 
 export default function App() {
   const { state, connected } = useWebSocket()
   const [selectedId, setSelectedId] = useState(null)
   const [error, setError] = useState(null)
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [assignmentResult, setAssignmentResult] = useState(null)
 
   const buque      = state?.buque      ?? []
   const piso       = state?.piso       ?? []
@@ -58,36 +61,63 @@ export default function App() {
             />
             <PisoYardView
               containers={piso.filter(Boolean)}
+              onError={handleError}
             />
             <YardGrid
               patio={patio}
               containers={allContainersList}
               selectedId={selectedId}
-              onSelect={id => setSelectedId(prev => prev === id ? null : id)}
+              onSelect={id => setSelectedId(prev => {
+                if (prev !== id) setAssignmentResult(null)
+                return prev === id ? null : id
+              })}
               onError={handleError}
               compact
             />
           </div>
 
-          {selectedContainer && (
-            <div
-              className="fade-up"
-              style={{
-                marginTop: '20px',
-                display: 'grid',
-                gridTemplateColumns: '360px 1fr',
-                gap: '16px',
-                alignItems: 'start',
-              }}
-            >
-              <ContainerDetail container={selectedContainer} />
-              <AssignmentPanel
-                container={selectedContainer}
-                key={selectedContainer.id}
-                onError={handleError}
-              />
-            </div>
-          )}
+          {/* Tabs: Asignacion + Resumen */}
+          <div style={{ marginTop: '20px' }}>
+            <Tabs tabs={['🚚 Asignacion de Linea', '📊 Resumen']}>
+              {/* Tab 1: Assignment */}
+              <div style={{ padding: selectedContainer ? 0 : '40px 20px', minHeight: '200px' }}>
+                {selectedContainer ? (
+                  <div style={{
+                    display: 'grid',
+                    gridTemplateColumns: '360px 1fr',
+                    gap: '16px',
+                    alignItems: 'start',
+                    padding: '16px',
+                  }}>
+                    <ContainerDetail container={selectedContainer} />
+                    <AssignmentPanel
+                      container={selectedContainer}
+                      key={selectedContainer.id}
+                      onError={handleError}
+                      onResult={setAssignmentResult}
+                    />
+                  </div>
+                ) : (
+                  <div style={{
+                    display: 'flex', flexDirection: 'column',
+                    alignItems: 'center', justifyContent: 'center',
+                    gap: '10px', color: 'var(--text4)',
+                  }}>
+                    <span style={{ fontSize: '32px', opacity: 0.5 }}>📭</span>
+                    <span style={{ fontSize: '14px', fontWeight: 600 }}>
+                      Selecciona un contenedor del patio para asignar linea de transporte
+                    </span>
+                    <span style={{ fontSize: '12px' }}>
+                      Haz clic en cualquier contenedor del Patio de Almacenamiento
+                    </span>
+                  </div>
+                )}
+              </div>
+
+              {/* Tab 2: Summary */}
+              <SummaryView container={selectedContainer} result={assignmentResult} />
+            </Tabs>
+          </div>
         </main>
 
         {/*  Sidebar toggle button */}
@@ -121,7 +151,6 @@ export default function App() {
 
       {/*  Sidebar overlay */}
       <Sidebar
-        state={state}
         onError={handleError}
         isOpen={sidebarOpen}
         onClose={() => setSidebarOpen(false)}
