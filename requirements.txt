@@ -1,7 +1,0 @@
-streamlit
-pandas
-requests
-simpy
-numpy
-plotly
-reportlab
